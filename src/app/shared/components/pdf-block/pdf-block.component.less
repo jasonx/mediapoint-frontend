@@ -1,0 +1,67 @@
+@import "../../../../assets/styles/core/variables";
+
+.pdf {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid @color-hawkes-blue-3;
+  border-radius: 6px;
+  background-color: @color-white;
+  transition: @animate-200ms;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 6px @color-mercury;
+  }
+
+  &__content {
+    margin: 0 12px;
+    font-size: 12px;
+
+    .name {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: calc(30vw - 245px);
+      font-weight: 500;
+      transition: @animate-200ms;
+    }
+
+    .size {
+      color: @color-heather;
+      line-height: 140%;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 0 auto;
+  }
+
+  &.list {
+    padding: 7px 0;
+    border: none;
+
+    .pdf {
+      &__content {
+        .name {
+          font-weight: 400;
+        }
+      }
+    }
+
+    &:hover {
+      box-shadow: none;
+
+      .pdf {
+        &__content {
+          .name {
+            text-shadow: 0 0 .5px @color-ebony;
+          }
+        }
+      }
+    }
+  }
+}

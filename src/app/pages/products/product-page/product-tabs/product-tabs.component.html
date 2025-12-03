@@ -1,0 +1,151 @@
+<div class="tabs" *ngIf="filteredTabs.length">
+  <div class="tabs_nav">
+    <div
+      class="tabs_nav__item"
+      [class.active]="tab === selectedTab"
+      *ngFor="let tab of filteredTabs"
+      (click)="onSelectTab(tab)">
+      {{ tab }}
+    </div>
+  </div>
+
+  <div class="tabs_content" [ngSwitch]="selectedTab">
+    <div *ngSwitchCase="ProductTabs.ABOUT" class="content">
+      <ng-container *ngIf="productData.about.length">
+        <h2 class="content__title">{{ productData.about[0].title }}</h2>
+        <div
+          class="content__text"
+          [innerHtml]="productData.about[0].content"></div>
+      </ng-container>
+    </div>
+
+    <div *ngSwitchCase="ProductTabs.BENEFITS" class="content">
+      <div class="block-benefits" *ngFor="let block of productData.benefits">
+        <div *ngIf="block.imageUrl" class="block-benefits__img-wrap">
+          <img
+            class="block-benefits__img"
+            [src]="block.imageUrl"
+            [alt]="block.title" />
+        </div>
+        <div class="block-benefits_content">
+          <h3 class="block-benefits_content__title">{{ block.title }}</h3>
+          <div
+            class="block-benefits_content__text content__text"
+            [innerHtml]="block.content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="ProductTabs.SUSTAINABILITY" class="content">
+      <h2 class="content__title">{{ ProductTabs.SUSTAINABILITY }}</h2>
+
+      <div
+        class="block-sustainability"
+        *ngFor="let block of productData.sustainabilities">
+        <div class="block-sustainability__img-wrap" *ngIf="block.imageUrl">
+          <img
+            class="block-sustainability__img"
+            [src]="block.imageUrl"
+            [alt]="block.title" />
+        </div>
+        <div class="block-sustainability_content">
+          <h3 class="block-sustainability_content__title">{{ block.title }}</h3>
+          <div
+            class="block-sustainability_content__text content__text"
+            [innerHtml]="block.content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="ProductTabs.FAQ" class="content">
+      <h2 class="content__title">{{ ProductTabs.FAQ }}</h2>
+
+      <app-faq [data]="productData.faqs"></app-faq>
+    </div>
+
+    <div *ngSwitchCase="ProductTabs.DOWNLOAD" class="content">
+      <h2 class="content__title">{{ ProductTabs.DOWNLOAD }}</h2>
+
+      <div class="block-download" *ngFor="let block of productData.downloads">
+        <h3 class="block-download__title">{{ block.title }}</h3>
+        <div
+          class="block-download__text content__text"
+          [innerHtml]="block.content"></div>
+
+        <div class="block-download__file">
+          <app-pdf-block
+            [file]="block.downloadAttachment[0]"
+            [isDownloadBtn]="true"></app-pdf-block>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div *ngSwitchCase="ProductTabs.SPECIFICATIONS" class="content">
+      <h2 class="content__title">{{ ProductTabs.SPECIFICATIONS }}</h2>
+
+      <div class="block-specifications">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Laminate Aviable</th>
+              <th>Application</th>
+              <th>Adhesive</th>
+              <th>Back Colour</th>
+              <th>Vinyl Thickness</th>
+              <th>Vinyl lifespan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gloss White Economy</td>
+              <td>None</td>
+              <td>Promotions Sold stickers</td>
+              <td>Removable</td>
+              <td>White</td>
+              <td>90ums</td>
+              <td>3 years</td>
+            </tr>
+            <tr>
+              <td>Gloss White Economy</td>
+              <td>None</td>
+              <td>Promotions Sold stickers</td>
+              <td>Removable</td>
+              <td>White</td>
+              <td>90ums</td>
+              <td>3 years</td>
+            </tr>
+            <tr>
+              <td>Gloss White Economy</td>
+              <td>None</td>
+              <td>Promotions Sold stickers</td>
+              <td>Removable</td>
+              <td>White</td>
+              <td>90ums</td>
+              <td>3 years</td>
+            </tr>
+            <tr>
+              <td>Gloss White Economy</td>
+              <td>None</td>
+              <td>Promotions Sold stickers</td>
+              <td>Removable</td>
+              <td>White</td>
+              <td>90ums</td>
+              <td>3 years</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="ProductTabs.TESTIMONIALS" class="content">
+      <h2 class="content__title">{{ ProductTabs.TESTIMONIALS }}</h2>
+
+      <div class="block-testimonials_wrap">
+        <app-testimonial
+          *ngFor="let testimonial of testimonials"
+          [data]="testimonial"></app-testimonial>
+      </div>
+    </div> -->
+  </div>
+</div>

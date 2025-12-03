@@ -1,0 +1,71 @@
+@import "variables";
+
+.status {
+  &-label {
+    display: inline-block;
+    min-height: 25px;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 4px 12px;
+    border-radius: 16px;
+    text-transform: capitalize;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &-label,
+  &-point,
+  &-arrow {
+    &.pending,
+    &.proof-awaiting-approval {
+      color: @color-russet;
+      background-color: @color-macaroni-and-cheese;
+      fill: @color-russet;
+    }
+
+    &.expired,
+    &.not-paid,
+    &.refunded,
+    &.canceled,
+    &.artwork-error {
+      color: @color-medium-carmine;
+      background-color: @color-pippin;
+      fill: @color-medium-carmine;
+    }
+
+    &.accepted,
+    &.paid,
+    &.complete {
+      color: @color-green-pea;
+      background-color: @color-algae-green;
+      fill: @color-green-pea;
+    }
+
+    &.incomplete,
+    &.production,
+    &.proof-approved,
+    &.prepress-ready,
+    &.print-ready,
+    &.finishing-ready,
+    &.ready-for-pickup,
+    &.dispatched {
+      color: @color-chambray;
+      background-color: @color-french-pass;
+      fill: @color-chambray;
+    }
+
+    &.awaiting-delivery-information,
+    &.awaiting-artwork,
+    &.awaiting-payment {
+      color: @color-yukon-gold;
+      background-color: @color-salomie;
+      fill: @color-yukon-gold;
+    }
+
+    &.awaiting-proof {
+      color: @color-gigas;
+      background-color: @color-melrose;
+      fill: @color-gigas;
+    }
+  }
+}

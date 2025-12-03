@@ -1,0 +1,76 @@
+<div class="contact">
+  <div class="main">
+    <div class="main_form">
+      <app-contact-us-form></app-contact-us-form>
+    </div>
+    <div class="main_map">
+      <google-map
+        [center]="center"
+        [zoom]="4"
+        [options]="mapOptions"
+        height="100%"
+        width="100%">
+        <map-marker
+          [position]="center"
+          [options]="{
+            icon: 'assets/images/icons/map-point.svg'
+          }"></map-marker>
+      </google-map>
+    </div>
+  </div>
+
+  <div class="section-contacts">
+    <div class="container">
+      <h2 class="section-contacts__title">Where To Find Us</h2>
+
+      <div class="section-contacts__info">
+        <div class="section-contacts__info-item">
+          <div class="section-contacts__info-title">Address</div>
+          <div class="contacts">
+            <div class="contacts__item">
+              <div class="icon">
+                <img src="assets/images/icons/icon-address.svg" alt="address" />
+              </div>
+              <div class="value">
+                186 Paramount Boulevard <br />
+                Derrimut VIC 3026
+              </div>
+            </div>
+            <div class="contacts__item">
+              <div class="icon">
+                <img src="assets/images/icons/icon-time.svg" alt="time" />
+              </div>
+              <div class="value">
+                Office 8:30am &#8594; 4:00pm (Mon – Fri) <br />
+                Pickups 7:30am &#8594; 9:30pm (Mon – Fri)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-contacts__info-item">
+          <div class="section-contacts__info-title">Contacts</div>
+          <div class="contacts">
+            <div class="contacts__item">
+              <div class="icon">
+                <img src="assets/images/icons/icon-phone.svg" alt="phone" />
+              </div>
+              <div class="value">
+                <a href="tel:1300 66 33 42">1300 66 33 42</a>
+              </div>
+            </div>
+            <div class="contacts__item">
+              <div class="icon">
+                <img src="assets/images/icons/icon-email.svg" alt="email" />
+              </div>
+              <div class="value">
+                <a href="mailto:info@mediapoint.com.au"
+                  >info@mediapoint.com.au</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

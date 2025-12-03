@@ -1,0 +1,208 @@
+@import '../../../../assets/styles/core/variables';
+@import '../../../../assets/styles/core/animations';
+
+.loader {
+  position: absolute;
+  animation: rotate 0.8s linear infinite;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid @color-white;
+    border-top-color: transparent;
+  }
+}
+
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background @animate-300ms, box-shadow @animate-300ms;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+
+    &:hover {
+      cursor: auto;
+      box-shadow: none;
+    }
+  }
+
+  .icon {
+    margin-right: 11px;
+  }
+
+  &.filled {
+    color: @color-white;
+    background: @color-fun-blue;
+    border: 1px solid @color-fun-blue;
+
+    &:hover {
+      box-shadow: 0 5px 20px rgb(27 69 155 / 40%);
+    }
+
+    &:disabled {
+      color: @color-malibu;
+      border-color: @color-malibu;
+      background-color: @color-zumthor;
+      opacity: 1;
+    }
+
+    &-green {
+      color: @color-white;
+      background: @color-ocean-green;
+      border: 1px solid @color-ocean-green;
+
+      &:hover {
+        box-shadow: 0 5px 20px rgb(73 169 124 / 40%);
+      }
+    }
+
+    &-red {
+      color: @color-white;
+      background: @color-alizarin-crimson;
+      border: 1px solid @color-thunderbird;
+
+      &:hover {
+        box-shadow: 0 5px 20px rgb(185 36 23 / 40%);
+      }
+    }
+  }
+
+  &.transparent-white {
+    background: transparent;
+    border: 1px solid @color-white;
+    color: @color-white;
+
+    &:hover {
+      background-color: @color-white;
+      color: @color-fun-blue;
+    }
+  }
+
+  &.transparent-blue {
+    background: transparent;
+    font-size: 14px;
+    border: 1px solid @color-fun-blue;
+    color: @color-fun-blue;
+
+    &:hover {
+      background: @color-zumthor;
+    }
+
+    .loader {
+      &::before {
+        border-color: transparent @color-fun-blue @color-fun-blue;
+      }
+    }
+  }
+
+  &.light-blue {
+    background: @color-zumthor;
+    border: 1px solid @color-fun-blue;
+    color: @color-fun-blue;
+
+    &:hover {
+      background-color: @color-white;
+    }
+
+    .loader {
+      &::before {
+        border-color: transparent @color-fun-blue @color-fun-blue;
+      }
+    }
+  }
+
+  &.light-red {
+    background: @color-pippin;
+    border: 1px solid @color-punch;
+    color: @color-punch;
+
+    &:hover {
+      background-color: @color-white;
+    }
+
+    .loader {
+      &::before {
+        border-color: transparent @color-punch @color-punch;
+      }
+    }
+  }
+
+  &.back {
+    line-height: 21px;
+    border: none;
+    background: url('../../../../assets/images/icons/arrow-back.svg') no-repeat
+      left center;
+
+    &.white {
+      color: @color-white;
+      background: url('../../../../assets/images/icons/arrow-back-white.svg')
+        no-repeat left center;
+    }
+
+    &:hover,
+    &:focus {
+      background-position-x: -4px;
+    }
+  }
+
+  &.link,
+  &.text {
+    height: auto;
+    border: none;
+    background-color: transparent;
+  }
+
+  &.link {
+    text-decoration: underline;
+    color: @color-chetwode-blue;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  &.text {
+    text-decoration: none;
+    color: @color-white;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  &.small {
+    height: 32px;
+    font-size: 12px;
+
+    .icon {
+      width: 16px;
+      margin-right: 4px;
+    }
+  }
+
+  &.border-radius {
+    border-radius: 50px;
+  }
+
+  &.loading {
+    pointer-events: none;
+
+    .text {
+      opacity: 0;
+    }
+  }
+}

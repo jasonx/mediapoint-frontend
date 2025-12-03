@@ -1,0 +1,33 @@
+<div class="breadcrumbs">
+  <a class="breadcrumbs__icon" routerLink="/">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10 15V12.5"
+        stroke="#5A5C81"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M8.42085 2.69024L8.42124 2.68993C9.29383 1.98911 10.7007 1.99255 11.5879 2.69918C11.588 2.69927 11.5881 2.69937 11.5882 2.69946L17.0439 7.064C17.3445 7.30967 17.6091 7.69825 17.7807 8.14732C17.9521 8.59599 18.0144 9.06244 17.9561 9.44607L16.9072 15.7229C16.9071 15.7234 16.907 15.7239 16.9069 15.7244C16.7056 16.8789 15.578 17.8334 14.4165 17.8334H5.58314C4.40366 17.8334 3.30234 16.9027 3.10111 15.7332C3.10105 15.7329 3.10099 15.7325 3.10094 15.7322L2.0513 9.45102L2.05111 9.44988C1.98563 9.06355 2.04394 8.59637 2.21491 8.14804C2.38585 7.69977 2.65366 7.31167 2.96165 7.06594L2.96252 7.06524L8.42085 2.69024Z"
+        stroke="#5A5C81" />
+    </svg>
+  </a>
+
+  <div class="breadcrumbs_item" *ngFor="let item of breadcrumbsData">
+    <img
+      class="breadcrumbs_item__arrow"
+      src="./assets/images/icons/arrow-breadcrumbs.svg"
+      alt="arrow" />
+    <a
+      [routerLink]="item.url === 'back' ? './../..' : item.url"
+      class="breadcrumbs_item__url"
+      [class.disabled]="!item.url"
+      (click)="navigate(item.url)">
+      {{ item.name }}
+    </a>
+  </div>
+</div>

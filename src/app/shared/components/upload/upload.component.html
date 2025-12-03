@@ -1,0 +1,56 @@
+<div
+  [ngClass]="{ hidden: isShowResult, 'mark-required': isMarkAsRequired }"
+  class="container"
+  appDnd
+  (fileDropped)="onFileDropped($event)">
+  <input
+    type="file"
+    #fileDropRef
+    id="fileDropRef"
+    class="no-select"
+    [accept]="accept"
+    (change)="fileBrowseHandler($event)" />
+  <svg
+    width="33"
+    height="26"
+    viewBox="0 0 33 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M26.6768 8.88282L26.7502 9.17525L27.0431 9.2468C29.9457 9.95586 31.9909 12.5527 31.9999 15.5406C32.0109 19.1298 29.1102 22.0483 25.5211 22.0595C25.5209 22.0595 25.5207 22.0595 25.5204 22.0595L22.0224 22.0595V21.0597L25.522 21.0597L25.5245 21.0597C28.2518 21.0461 30.5571 19.0357 30.9416 16.3356L30.4466 16.2651L30.9416 16.3356C31.3697 13.3287 29.2793 10.544 26.2724 10.1158L26.2724 10.1158L26.2677 10.1152C26.0548 10.0869 25.8838 9.92597 25.8427 9.71522L25.8425 9.71419C24.9641 5.25869 21.0548 2.04815 16.5134 2.0527C11.2675 2.05791 7.01892 6.31478 7.02393 11.5607C7.02393 11.8368 6.80015 12.0606 6.52404 12.0606C4.03901 12.0606 2.02447 14.0751 2.02447 16.5602C2.02447 19.0452 4.03901 21.0597 6.52404 21.0597H11.0235V22.0595L6.52404 22.0595L6.52205 22.0595C3.82199 22.0702 1.51353 20.1192 1.07421 17.455L0.580874 17.5364L1.07421 17.455C0.580016 14.4583 2.60875 11.6284 5.6055 11.1342L5.99424 11.07L6.02283 10.6771C6.35163 6.15779 9.54285 2.35931 13.9378 1.25604C19.5617 -0.155691 25.2651 3.25892 26.6768 8.88282Z"
+      fill="#1B469B"
+      stroke="#1B469B" />
+    <path
+      d="M16.8704 13.204L20.5153 16.8489L19.8126 17.5517L17.8764 15.6155L17.0229 14.7619V15.969V25.058H16.0231V15.969V14.7656L15.1703 15.6147L13.2241 17.5524L12.5206 16.8489L16.1655 13.204C16.1657 13.2038 16.1658 13.2037 16.166 13.2035C16.3609 13.0103 16.6751 13.0103 16.87 13.2036C16.8701 13.2037 16.8702 13.2038 16.8704 13.204Z"
+      fill="#1B469B"
+      stroke="#1B469B" />
+  </svg>
+
+  <div class="text">{{ text }}</div>
+  <div *ngIf="isShowRequirement" class="requirement">PDF Files Only</div>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+</div>
+
+<div class="result" *ngIf="isShowResult">
+  <div
+    class="result__img"
+    [ngClass]="{ small: isSmallContainer }"
+    *ngIf="isAsImage; else document">
+    <app-artwork-img
+      [src]="url || file.url"
+      [previewUrl]="file.previewUrl || ''"
+      [rotate]="rotate"
+      (isReady)="isReady($event)"></app-artwork-img>
+  </div>
+
+  <ng-template #document>
+    <div class="document">
+      <app-pdf-block
+        [file]="file"
+        [isReloadBtn]="true"
+        [isDeleteBtn]="true"
+        (deleteFileEvent)="onDeleteFile()"></app-pdf-block>
+    </div>
+  </ng-template>
+</div>

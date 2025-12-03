@@ -1,0 +1,67 @@
+<div class="label-form">
+  <div class="container">
+    <h2 class="label-form__title">
+      Register Your Interest for Labels On Rolls
+    </h2>
+
+    <div class="label-form__form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submitForm()" autocomplete="on">
+        <div class="form_group">
+          <div class="form_field">
+            <app-field formControlName="name" [control]="form.controls['name']" [label]="'First name'"
+              [type]="FIELD_TYPES.Text" [placeholder]="'First name'"></app-field>
+          </div>
+          <div class="form_field">
+            <app-field formControlName="companyName" [control]="form.controls['companyName']" [label]="'Company name'"
+              [type]="FIELD_TYPES.Text" [placeholder]="'Company name'"></app-field>
+          </div>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="email" [control]="form.controls['email']" [label]="'Email'"
+            [type]="FIELD_TYPES.Email" [placeholder]="'Email'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="phoneNumber" [control]="form.controls['phoneNumber']" [label]="'Phone number'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Phone number'" [mask]="phoneMask"></app-field>
+        </div>
+
+        <div class="form__label">Are you currently offering labels & stickers to your customers? *</div>
+        <div class="form_group">
+          <div class="form_field">
+            <app-field formControlName="offeringLabelsAndStickers"
+              [control]="form.controls['offeringLabelsAndStickers']" [label]="'Yes'" [type]="FIELD_TYPES.Radio"
+              [name]="'offering_labels_and_stickers'" [radioValue]="'offering_labels_and_stickers_yes'"></app-field>
+          </div>
+          <div class="form_field">
+            <app-field formControlName="offeringLabelsAndStickers"
+              [control]="form.controls['offeringLabelsAndStickers']" [label]="'No'" [type]="FIELD_TYPES.Radio"
+              [name]="'offering_labels_and_stickers'" [radioValue]="'offering_labels_and_stickers_no'"></app-field>
+          </div>
+        </div>
+
+        <div class="form__label">Do you currently use a trade printer (including Mediapoint)? *</div>
+        <div class="form_group">
+          <div class="form_field">
+            <app-field formControlName="usesTradePrinter" [control]="form.controls['usesTradePrinter']" [label]="'Yes'"
+              [type]="FIELD_TYPES.Radio" [name]="'uses_trade_printer'"
+              [radioValue]="'uses_trade_printer_yes'"></app-field>
+          </div>
+          <div class="form_field">
+            <app-field formControlName="usesTradePrinter" [control]="form.controls['usesTradePrinter']" [label]="'No'"
+              [type]="FIELD_TYPES.Radio" [name]="'uses_trade_printer'"
+              [radioValue]="'uses_trade_printer_no'"></app-field>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <app-field formControlName="estimatedLabelJobs" [control]="form.controls['estimatedLabelJobs']"
+            [label]="'Please Select'" [type]="FIELD_TYPES.Selector" [options]="LABEL_JOBS"></app-field>
+        </div>
+
+        <div class="submit">
+          <app-button [buttonConfig]="buttonSubmitConfig" [isLoaded]="isLoadedBtn"></app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

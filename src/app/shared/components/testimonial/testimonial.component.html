@@ -1,0 +1,53 @@
+<div class="testimonial">
+  <div class="testimonial_top">
+    <a
+      class="user"
+      [href]="data.profileUrl"
+      target="_blank"
+      rel="noopener noreferrer">
+      <img class="user__avatar" [src]="data.authorPhotoUrl" alt="user" />
+      <div class="user_info">
+        <div class="user_info__name">
+          {{ data.authorName }}
+        </div>
+        <div class="rating">
+          <svg
+            *ngFor="let star of NUM_OF_STARS; let i = index"
+            width="14"
+            height="13"
+            viewBox="0 0 14 13"
+            xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient
+                [id]="'grad' + i"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%">
+                <stop offset="0%" stop-color="#FF9500" />
+                <stop
+                  [attr.offset]="getStarFill(i) + '%'"
+                  stop-color="#FF9500" />
+                <stop
+                  [attr.offset]="getStarFill(i) + '%'"
+                  stop-color="#B2BDD0" />
+                <stop offset="100%" stop-color="#B2BDD0" />
+              </linearGradient>
+            </defs>
+
+            <path
+              d="M7 0L9.05725 4.16844L13.6574 4.83688L10.3287 8.08156L11.1145 12.6631L7 10.5L2.8855 12.6631L3.6713 8.08156L0.342604 4.83688L4.94275 4.16844L7 0Z"
+              [attr.fill]="'url(#grad' + i + ')'" />
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <div #content [class.expanded]="isExpanded" class="testimonial_content">
+    {{ data.text }}
+  </div>
+  <button *ngIf="isShowButton" (click)="toggle()" class="btn-more">
+    ...More
+  </button>
+</div>

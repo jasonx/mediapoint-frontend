@@ -1,0 +1,38 @@
+@import "/src/assets/styles/core/variables.less";
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    display: flex;
+
+    path {
+      transition: @animate-200ms;
+    }
+
+    &:hover {
+      path {
+        stroke: @color-ebony;
+      }
+    }
+  }
+
+  &_item {
+    display: flex;
+
+    &__url {
+      margin: 0 2px;
+      color: @color-slate-gray;
+      transition: @animate-200ms;
+
+      &.disabled {
+        pointer-events: none;
+      }
+
+      &:hover {
+        color: @color-ebony;
+      }
+    }
+  }
+}

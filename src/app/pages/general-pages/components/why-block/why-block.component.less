@@ -1,0 +1,44 @@
+@import "/src/assets/styles/core/content-general.less";
+
+.why {
+  padding: 120px 0;
+
+  &__title {
+    max-width: 484px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blocks {
+    display: flex;
+    gap: 12px;
+  }
+
+  .block {
+    flex: 1;
+    text-align: center;
+    padding: 36px 16px;
+    background-color: @color-white;
+    border-radius: 8px;
+
+    &__img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 24px;
+    }
+
+    &__num {
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 46px;
+      line-height: 52px;
+      color: @color-fun-blue;
+    }
+
+    &__text {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+}

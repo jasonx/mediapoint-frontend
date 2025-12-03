@@ -1,0 +1,50 @@
+<div class="app-block">
+  <div class="top">
+    <div class="top__title title-block">New sales dynamics</div>
+    <div class="top__tabs" *ngIf="doughnutChartsTab.length">
+      <app-tabs
+        [tabs]="doughnutChartsTab"
+        [selectedTab]="selectedTab"
+        (selectEvent)="changeDoughnutTab($event)"></app-tabs>
+    </div>
+  </div>
+
+  <div class="doughnut-content">
+    <ng-container *ngIf="doughnutChartsTab.length; else noData">
+      <div class="chart-doughnut">
+        <canvas
+          baseChart
+          [data]="doughnutChartData"
+          [options]="doughnutChartOptions"
+          [plugins]="doughnutChartPlugins"
+          [type]="'doughnut'"
+          (chartHover)="doughnutChartHovered($event)">
+        </canvas>
+      </div>
+
+      <div class="types">
+        <div
+          class="block"
+          *ngFor="let block of doughnutLabels; let i = index"
+          [class.selected]="selectedLabelIndex === i"
+          (mouseover)="setSelectedLabelIndex(i)"
+          (mouseleave)="setSelectedLabelIndex(null)">
+          <img [src]="block['icon']" alt="Icon" />
+          <div class="block__text">
+            <div class="title">{{ block['shortTitle'] }}</div>
+            <div class="value">{{ block['price'] | currency }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noData>
+      <div class="no-data">
+        <div class="no-data__wrap">
+          <img src="./assets/images/icons/no-data.svg" alt="There is no data" />
+          <div class="no-data__text">There is no data</div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

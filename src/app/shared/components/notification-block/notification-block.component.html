@@ -1,0 +1,21 @@
+<div class="notification" [ngClass]="type">
+  <div class="notification__text">
+    <img
+      *ngIf="
+        type === NOTIFICATION_TYPE.Error || type === NOTIFICATION_TYPE.Warning
+      "
+      class="icon"
+      [src]="
+        './assets/images/icons/' +
+        (type === NOTIFICATION_TYPE.Error ? 'warning-red.svg' : 'warning.svg')
+      "
+      alt="error" />
+    {{ text }}
+  </div>
+
+  <div *ngIf="buttonConfig.text" class="notification__btn">
+    <app-button
+      [buttonConfig]="buttonConfig"
+      (clickEvent)="onClickEvent()"></app-button>
+  </div>
+</div>

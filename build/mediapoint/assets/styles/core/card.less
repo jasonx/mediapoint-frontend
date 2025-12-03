@@ -1,0 +1,48 @@
+@import "variables";
+
+.option-card {
+  border-radius: 8px;
+  border: 1px solid @color-athens-gray;
+  overflow: hidden;
+  transition: @animate-200ms;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 5px @color-ghost;
+  }
+
+  &.selected {
+    border-color: @color-fun-blue;
+    pointer-events: none;
+  }
+
+  &_img {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: @color-zumthor;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &_content {
+    padding: 16px 12px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  &__description {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 15.6px;
+    color: @color-slate-gray;
+  }
+}

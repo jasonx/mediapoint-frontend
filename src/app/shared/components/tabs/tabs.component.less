@@ -1,0 +1,49 @@
+@import "../../../../assets/styles/core/variables";
+
+.tabs {
+  position: relative;
+  display: flex;
+  height: 44px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: @color-white;
+  border-radius: 8px;
+  border: 1px solid @color-athens-gray-2;
+
+  .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    color: @color-slate-gray;
+    z-index: 2;
+    transition: @animate-300ms;
+
+    img {
+      transition: @animate-300ms;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.active {
+      color: @color-white;
+
+      img {
+        filter: brightness(5);
+      }
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    height: 100%;
+    background: @color-fun-blue;
+    border: 1px solid @color-chathams-blue;
+    border-radius: 7px;
+    z-index: 1;
+    transition: @animate-300ms;
+  }
+}

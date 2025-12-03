@@ -1,0 +1,57 @@
+<div class="product" *ngIf="productData; else loading">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <div class="main">
+    <div class="gallery">
+      <app-gallery [setImages]="productImages"></app-gallery>
+    </div>
+
+    <div class="data">
+      <h1 class="main__title">{{ productData.title }}</h1>
+      <div class="main_icons">
+          <div 
+            *ngFor="let icon of productData.iconsBar"
+            class="icon" 
+            [style.--icon-color]="icon.color"
+            [style.mask]="'url(' + icon.icon + ') no-repeat center / contain'"
+            [style.webkitMask]="'url(' + icon.icon + ') no-repeat center / contain'"
+            [tooltip]="icon.tooltip">
+          </div>
+      </div>
+      <div class="main_labels">
+        <div
+          class="label"
+          *ngFor="let label of productData.labelsBar"
+          [ngStyle]="{ 'border-color': label.color, color: label.color }">
+          <img class="label__icon" [src]="label.iconUrl" alt="icon" />
+          <div class="label__title">{{ label.title }}</div>
+        </div>
+      </div>
+      <div
+        class="main_description"
+        [innerHtml]="formatText(productData.description)"></div>
+
+      <div class="main_btn">
+        <app-button
+          [buttonConfig]="buttonPricingConfig"
+          [ngxScrollTo]="'#order'"
+          [ngxScrollToOffset]="toNegativeNumber(headerHeight$ | async)">
+        </app-button>
+      </div>
+    </div>
+  </div>
+
+  <div id="order">
+    <app-compose-product [productId]="productData.id"></app-compose-product>
+  </div>
+
+  <app-product-tabs [productData]="productData"></app-product-tabs>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>
+
+<app-scroll-btn></app-scroll-btn>

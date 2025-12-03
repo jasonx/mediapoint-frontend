@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <h3 class="title">Reject artwork</h3>
+  <p class="description">Enter a reason for canceling the artwork</p>
+
+  <div class="input" [formGroup]="form">
+    <app-field
+      formControlName="comment"
+      [control]="form.controls['comment']"
+      [type]="FIELD_TYPES.Textarea"
+      [placeholder]="'Type additional instructions here'"></app-field>
+  </div>
+
+  <div class="actions">
+    <app-button
+      [buttonConfig]="cancelButtonConfig"
+      (click)="close(null)"></app-button>
+
+    <app-button
+      [buttonConfig]="rejectButtonConfig"
+      (click)="rejectArtwork()"></app-button>
+  </div>
+</div>

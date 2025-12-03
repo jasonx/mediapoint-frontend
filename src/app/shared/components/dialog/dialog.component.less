@@ -1,0 +1,167 @@
+@import (less) "/src/assets/styles/core/variables.less";
+
+.wrapper {
+  position: relative;
+  height: 100%;
+
+  .header {
+    height: 142px;
+    position: relative;
+
+    &.blue {
+      background: linear-gradient(95.27deg, #b9d0ff 23.8%, #88acf4 66.31%), #b9d0ff;
+    }
+
+    &.red {
+      background: linear-gradient(95.27deg, #FD8A8A 23.8%, #EB4D73 66.31%), #FD8A8A;
+    }
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .lock {
+      margin-top: 26px;
+    }
+
+    .email {
+      margin-top: 39px;
+    }
+
+    .wallet {
+      margin-top: 42px;
+    }
+  }
+
+  .success-icon {
+    margin: 50px auto 0;
+    width: 100px;
+    height: 100px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .body {
+    height: calc(100% - 142px);
+    padding-top: 78.5px;
+    padding-bottom: 29.5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .content {
+      margin-bottom: 27px;
+
+      .title,
+      .description {
+        text-align: center;
+      }
+
+      .title {
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 120%;
+        color: @color-ebony;
+      }
+
+      .description {
+        margin: 0;
+        padding: 0 28px;
+        line-height: 140%;
+        color: @color-slate-gray;
+      }
+
+      .checkbox {
+        margin-top: 28px;
+        padding: 0 28px;
+      }
+    }
+
+    &.confirmation {
+      padding: 32px;
+
+      .content {
+        margin-bottom: 40px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      width: 80%;
+
+      .btn {
+        width: 100%;
+        max-width: 274px;
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+
+::ng-deep {
+  .wrapper {
+    .body {
+      .checkbox {
+        .checkbox-label {
+          color: @color-fun-blue;
+          font-weight: 700;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .checkbox {
+      a {
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .need-auth {
+    .wrapper {
+      background: url(../../../../assets/images/auth/need-auth-bg.png) 0/cover no-repeat;
+
+      .body {
+        height: 400px !important;
+        justify-content: center !important;
+        background-color: #ffffff1f;
+        backdrop-filter: blur(1px);
+      }
+
+      .title {
+        font-weight: 700 !important;
+      }
+
+      .description {
+        padding: 0  !important;
+        color: @color-cinder  !important;
+      }
+
+      .actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}

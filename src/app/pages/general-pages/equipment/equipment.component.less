@@ -1,0 +1,113 @@
+@import '/src/assets/styles/core/content-general.less';
+
+.equipment-1 {
+  padding: 96px 0;
+
+  &__subtitle {
+    max-width: 722px;
+    margin-bottom: 60px;
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    height: 28vw;
+
+    &_wrap {
+      display: flex;
+      align-items: center;
+    }
+
+    .block {
+      max-width: 400px;
+
+      &-wrap {
+        width: 50%;
+        padding-right: 10%;
+      }
+    }
+
+    &__img {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 50vw;
+      right: 0;
+    }
+  }
+
+  &__img {
+    max-height: 484px;
+    margin-top: 90px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.equipment-2 {
+  padding: 96px 0;
+
+  &_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 90px;
+
+    .block {
+      max-width: 400px;
+    }
+  }
+
+  &__img {
+    height: 65vh;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.equipment-4 {
+  padding: 96px 0;
+
+  &__subtitle {
+    margin-bottom: 48px;
+  }
+
+  .blocks {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 90px;
+  }
+
+  &__img {
+    position: relative;
+    right: 0;
+    display: block;
+    margin: 0 0 0 auto;
+    width: calc(100% - (100% - 1300px + 60px) / 2);
+    max-width: calc(100% - 30px);
+    height: 80vh;
+    object-fit: cover;
+  }
+}
+
+::ng-deep {
+  .equipment {
+    h1.hero {
+      &__title {
+        max-width: 545px;
+      }
+    }
+  }
+}

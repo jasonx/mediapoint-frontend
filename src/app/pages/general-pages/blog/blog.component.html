@@ -1,0 +1,29 @@
+<div class="blog" *ngIf="articles; else loading">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <h1 class="blog__title">Blog</h1>
+  <div class="blog_blocks">
+    <a [routerLink]="'/' + article.blogPostCategory.name + '/' + article.slug" class="block"
+      *ngFor="let article of articles">
+      <div class="block__img">
+        <img [src]="article.imageUrl" [alt]="article.title" />
+      </div>
+
+      <div class="block_content">
+        <div class="block__date">{{ article.publishedAt | date: 'MMMM dd, yyy'}}</div>
+        <div class="block__title">{{ article.title }}</div>
+        <div class="block__descr" [innerHtml]="article.previewContent"></div>
+      </div>
+    </a>
+  </div>
+
+  <mat-paginator *ngIf="blogData.totalItems > blogData.perPage" [length]="blogData.totalItems"
+    [pageSize]="blogData.perPage" [hidePageSize]="true" [pageIndex]="blogData.currentPage - 1"
+    (page)="onChangePage($event)"></mat-paginator>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

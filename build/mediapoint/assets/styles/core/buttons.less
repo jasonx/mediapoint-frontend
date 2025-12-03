@@ -1,0 +1,47 @@
+@import "variables";
+
+.btn {
+  &.circle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid;
+    transition: @animate-200ms;
+    cursor: pointer;
+
+    img {
+      width: 15px;
+      height: 15px;
+    }
+
+    &-blue {
+      background-color: @color-zumthor;
+      border-color: @color-hawkes-blue-3;
+
+      &:hover {
+        background-color: darken(@color-zumthor, 5%);
+      }
+    }
+
+    &-red {
+      background-color: @color-chablis;
+      border-color: @color-your-pink;
+
+      &:hover {
+        background-color: darken(@color-chablis, 5%);
+      }
+    }
+  }
+
+  &-delete {
+    transition: @animate-300ms;
+
+    &:hover {
+      cursor: pointer;
+      filter: contrast(2);
+    }
+  }
+}

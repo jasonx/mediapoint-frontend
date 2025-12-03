@@ -1,0 +1,87 @@
+<div class="address wrap">
+  <div class="top">
+    <div class="top__search">
+      <app-search
+        [placeholder]="'Type address here...'"
+        (searchEvent)="searchByText($event)"></app-search>
+    </div>
+    <div class="top__button">
+      <app-button
+        [buttonConfig]="addAddressButtonConfig"
+        (clickEvent)="addAddress()"></app-button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="isDataLoaded; else loading">
+    <ng-container *ngIf="dataSource.filteredData.length; else noResults">
+      <div class="table-wrap">
+        <table
+          class="table"
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+          (matSortChange)="sortData($event)">
+          <ng-container matColumnDef="main">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Address name
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="wrapper__information">
+                <span class="title">{{ element.companyName }}</span>
+                <span class="content">{{ element.address1 }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Type of address
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.type | titleCase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="wrapper__actions">
+                <button
+                  class="btn circle circle-blue"
+                  (click)="edit(element.id)">
+                  <img src="./assets/images/icons/edit.svg" alt="Edit" />
+                </button>
+                <button
+                  class="btn circle circle-red"
+                  (click)="delete(element.id)">
+                  <img src="./assets/images/icons/trash-red.svg" alt="Delete" />
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          *ngIf="isDisplayPaginator"
+          [length]="totalItems"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageIndex]="params.currentPage - 1"
+          (page)="onChangePage($event)"></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <app-no-results
+        [isSearch]="isSearch"
+        [noResultsText]="'You don\'t have addresses yet'"></app-no-results>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

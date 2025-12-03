@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif !important;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #111729;
+}
+
+table {
+  width: 100%;
+}
+
+.pdf {
+  padding: 26px 40px;
+}
+
+p {
+  margin: 0;
+}
+
+.row {
+  display: flex;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.top p {
+  color: #677489;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 140%;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 10px;
+}
+
+.details-title {
+  margin-bottom: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.details-info {
+  line-height: 130%;
+}
+
+.details-row {
+  justify-content: space-between;
+  line-height: 16px;
+}
+
+.details .row-title {
+  margin-right: 37px;
+  color: #677489;
+}
+
+.details .row-value {
+  font-weight: 500;
+}
+
+.label {
+  padding: 12px 20px;
+  margin-bottom: 32px;
+  background: #edf2fe;
+  border-radius: 6px;
+  font-size: 9px;
+  line-height: 160%;
+}
+
+.table {
+  margin-bottom: 22px;
+}
+
+.table-header {
+  background-color: #d4e1ff;
+}
+
+.table-header th {
+  padding: 5px 13px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  border-bottom: 1px solid #dbe4f6;
+}
+
+.table-row td {
+  padding: 7px 13px;
+  color: #677489;
+  font-size: 12px;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price-row {
+  margin-bottom: 7px;
+  line-height: 14px;
+}
+
+.price .row-title {
+  color: #677489;
+  font-size: 8px;
+}
+
+.price .row-value {
+  width: 75px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 9px;
+}
+
+.method {
+  width: 200px;
+  padding: 12px 20px;
+  margin: 30px 0 24px auto;
+  background: #edf2fe;
+  border-radius: 6px;
+  font-size: 8px;
+  line-height: 10px;
+}
+
+.method-title {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.method .row {
+  justify-content: space-between;
+  margin-top: 8px;
+}

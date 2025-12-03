@@ -1,0 +1,15 @@
+<div class="no-results">
+  <img
+    class="no-results__img"
+    [src]="
+      './assets/images/icons/' + (isSearch ? 'search.svg' : 'no-files.svg')
+    "
+    alt="No results" />
+  <div class="no-results__text">
+    {{
+      isSearch
+        ? "Sorry, we couldn't find anything according to your request"
+        : noResultsText
+    }}
+  </div>
+</div>

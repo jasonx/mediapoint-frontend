@@ -1,0 +1,113 @@
+@import "/src/assets/styles/core/variables.less";
+
+.settings {
+  &__title {
+    margin-bottom: 24px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31.2px;
+  }
+
+  &_wrap {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    grid-gap: 40px;
+  }
+
+  &_navigation,
+  &_main {
+    background: @color-white;
+    box-shadow: 0 2px 2px @color-mercury;
+    border-radius: 6px;
+  }
+
+  &_navigation {
+    padding: 16px 12px;
+    height: fit-content;
+
+    .list {
+      flex-direction: column;
+
+      .item {
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: @animate-200ms;
+
+        &:not(:last-child) {
+          margin-bottom: 12px;
+        }
+
+        &__title {
+          margin-left: 8px;
+          color: @color-cadet-blue;
+          transition: @animate-200ms;
+        }
+
+        &__icon {
+          path {
+            stroke: @color-cadet-blue;
+            transition: @animate-200ms;
+          }
+        }
+
+        &_wrap {
+          display: flex;
+          align-items: center;
+        }
+
+        &:hover {
+          cursor: pointer;
+          opacity: 1;
+
+          .item {
+            &__title {
+              color: @color-cinder;
+            }
+
+            &__icon {
+              path {
+                stroke: @color-cinder;
+              }
+            }
+          }
+        }
+
+        &.active {
+          cursor: default;
+          background-color: @color-athens-gray;
+
+          .item {
+            &__title {
+              color: @color-cinder;
+            }
+
+            &__icon {
+              path {
+                stroke: @color-cinder;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &_main {
+    padding: 24px;
+    height: fit-content;
+    overflow-x: auto;
+
+    &.users {
+      padding-bottom: 0;
+    }
+
+    &.delivery {
+      overflow-x: visible;
+    }
+  }
+}
+
+.loader-wrap {
+  position: relative;
+  min-height: 50vh;
+}

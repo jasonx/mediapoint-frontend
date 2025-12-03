@@ -1,0 +1,54 @@
+<div class="app-block" [class.block-disabled]="!isLoaded">
+  <div class="top">
+    <div class="top__title title-block">New sales dynamics</div>
+
+    <div class="top__tabs" *ngIf="barChartsTab.length">
+      <app-tabs
+        [tabs]="barChartsTab"
+        [selectedTab]="selectedTab"
+        (selectEvent)="changeBarTab($event)"></app-tabs>
+    </div>
+
+    <div class="date">
+      <mat-form-field appearance="fill" (click)="picker.open()">
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate [(ngModel)]="startDate" placeholder="From" />
+          <input
+            matEndDate
+            [(ngModel)]="endDate"
+            (dateChange)="changeDateRange()"
+            placeholder="To" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+      </mat-form-field>
+
+      <img
+        *ngIf="endDate"
+        class="date__clear"
+        (click)="clearDate()"
+        src="./assets/images/icons/close-blue.svg"
+        alt="clear" />
+    </div>
+  </div>
+
+  <ng-container *ngIf="barChartsTab.length; else noData">
+    <div class="chart-bar">
+      <canvas
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="'bar'">
+      </canvas>
+    </div>
+  </ng-container>
+
+  <ng-template #noData>
+    <div class="no-data">
+      <div class="no-data__wrap">
+        <img src="./assets/images/icons/no-data.svg" alt="There is no data" />
+        <div class="no-data__text">There is no data</div>
+      </div>
+    </div>
+  </ng-template>
+</div>

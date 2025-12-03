@@ -1,0 +1,106 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:import/recommended",
+        "airbnb-typescript/base",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "no-new-object": "error",
+        "object-shorthand": ["error", "always"],
+        "no-prototype-builtins": "error",
+        "prefer-object-spread": "error",
+        "prefer-destructuring": ["error", {"object": true, "array": false}],
+        "prefer-rest-params": "error",
+        "prefer-spread": "error",
+        "prefer-arrow-callback": "error",
+        "no-iterator": "error",
+        "guard-for-in": "error",
+        "one-var": ["error", "never"],
+        "no-case-declarations": "error",
+        "no-unneeded-ternary": "error",
+        "no-mixed-operators": "error",
+        "no-else-return": "error",
+        "no-new-wrappers": "error",
+        "camelcase": ["warn", {
+          "properties": "never",
+          "ignoreDestructuring": true,
+          "ignoreGlobals": true,
+          "ignoreImports": true
+        }],
+        "lines-between-class-members" : "off",
+        "@typescript-eslint/no-use-before-define": ["error", { 
+          "functions": false, 
+          "classes": false
+        }],
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@typescript-eslint/no-unused-expressions": ["error", {
+          "allowTernary": true,
+          "allowShortCircuit": true
+        }],
+        "padding-line-between-statements": [
+          "error",
+          { "blankLine": "always", "prev": "if", "next": "*" },
+          { "blankLine": "always", "prev": "*", "next": "if" },
+          { "blankLine": "always", "prev": "*", "next": "return" },
+          { "blankLine": "always", "prev": "const", "next": "*" },
+          { "blankLine": "never", "prev": "const", "next": ["const", "let"] }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.component.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {}
+    },
+    {
+      "files": [
+        "index.html",
+        "./src/assets/documents/*.html"
+      ],
+      "plugins": ["@html-eslint"],
+      "parser": "@html-eslint/parser",
+      "extends": [
+        "plugin:@html-eslint/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}

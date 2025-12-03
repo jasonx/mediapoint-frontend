@@ -1,0 +1,47 @@
+@import "/src/assets/styles/core/variables.less";
+
+.scroll-btn {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: @color-white;
+  border: 1px solid @color-zumthor;
+  border-radius: 50%;
+  box-shadow: 0 3px 5px #d9d9d9;
+  z-index: 999;
+  transition: @animate-200ms;
+
+  &.hide {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  svg {
+    path {
+      transition: @animate-200ms;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: @color-fun-blue;
+
+    svg {
+      path {
+        stroke: @color-white;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .scroll-btn {
+    right: 10px;
+    bottom: 10px;
+  }
+}

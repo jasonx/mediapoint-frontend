@@ -1,0 +1,240 @@
+<div class="home-page">
+  <app-hero-banner
+    [data]="heroData"
+    [isButtonVisible]="!authorizationService.isLoggedIn"></app-hero-banner>
+
+  <div class="clients">
+    <h2 class="clients__title">Trusted by <b>1000+</b> print resellers</h2>
+
+    <div class="swiper-wrap">
+      <swiper-container #swiperEl>
+        <swiper-slide *ngFor="let review of reviews">
+          <app-testimonial [data]="review"></app-testimonial>
+        </swiper-slide>
+      </swiper-container>
+
+      <img
+        class="nav-button-prev-cust"
+        (click)="navigate('prev')"
+        src="./assets/images/icons/arrow-right.svg"
+        alt="arrow" />
+      <img
+        class="nav-button-next-cust"
+        (click)="navigate('next')"
+        src="./assets/images/icons/arrow-right.svg"
+        alt="arrow" />
+    </div>
+
+    <div class="clients_info">
+      {{ rating }}
+      <div class="rating">
+        <svg
+          *ngFor="let star of NUM_OF_STARS; let i = index"
+          width="14"
+          height="13"
+          viewBox="0 0 14 13"
+          xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient [id]="'grad' + i" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FF9500" />
+              <stop [attr.offset]="getStarFill(i) + '%'" stop-color="#FF9500" />
+              <stop [attr.offset]="getStarFill(i) + '%'" stop-color="#B2BDD0" />
+              <stop offset="100%" stop-color="#B2BDD0" />
+            </linearGradient>
+          </defs>
+
+          <path
+            d="M7 0L9.05725 4.16844L13.6574 4.83688L10.3287 8.08156L11.1145 12.6631L7 10.5L2.8855 12.6631L3.6713 8.08156L0.342604 4.83688L4.94275 4.16844L7 0Z"
+            [attr.fill]="'url(#grad' + i + ')'" />
+        </svg>
+      </div>
+      <span>{{ reviewCount }} Google reviews</span>
+    </div>
+  </div>
+
+  <div class="how-it-works">
+    <div class="container">
+      <h2 class="how-it-works__title title">
+        Your Print Partner in 3 Simple Steps
+      </h2>
+
+      <div class="blocks">
+        <div class="block">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/print-partner-1.svg"
+            alt="Register & Access Trade Pricing" />
+          <div class="block__title-1">Register & Access Trade Pricing</div>
+          <p class="block__text text">
+            ABN-holding resellers can register <br />
+            and upload artwork to our specs.<br />
+            Access instant trade pricing in minutes.
+          </p>
+        </div>
+
+        <div class="block">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/print-partner-2.svg"
+            alt="Quote, Order & Approve Online" />
+          <div class="block__title-1">Quote, Order & Approve Online</div>
+          <p class="block__text text">
+            View live pricing, place orders anytime,<br />
+            and approve proofs with our<br />
+            free automated tools.
+          </p>
+        </div>
+
+        <div class="block">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/print-partner-3.svg"
+            alt="Print, Dispatch & Deliver" />
+          <div class="block__title-1">Print, Dispatch & Deliver</div>
+          <p class="block__text text">
+            We print, pack, and blind-ship<br />
+            your orders under your brand<br />
+            with full tracking nationwide.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="printmanagment">
+    <div class="container">
+      <h2 class="printmanagment__title title">
+        Explore Our Trusted Print Range
+      </h2>
+
+      <div class="blocks">
+        <a
+          class="block"
+          routerLink="/rigid-boards/corrugated-plastic-print-only">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/corrugated-plastic.png"
+            alt="Corrugated Plastic" />
+          <div class="block__title-1">Corrugated Plastic - Print Only</div>
+        </a>
+
+        <a
+          class="block"
+          routerLink="/banners/fixed-height-mesh-all-edge-finish">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/fixed-height-mesh.png"
+            alt="Fixed Height Mesh" />
+          <div class="block__title-1">Fixed Height Mesh – All Edge Finish</div>
+        </a>
+
+        <a class="block" routerLink="/labels/labels-on-roll">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/labels-on-roll.png"
+            alt="Labels on Roll" />
+          <div class="block__title-1">Labels on Roll</div>
+        </a>
+
+        <a class="block" routerLink="/display/pull-up-banners">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/pull-up-banners.png"
+            alt="Pull Up Banners" />
+          <div class="block__title-1">Pull Up Banners</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="range">
+    <div class="range_wrap">
+      <div class="container">
+        <div class="range__img-wrap">
+          <img
+            src="./assets/images/home-page/range.jpg"
+            alt="range"
+            class="range__img" />
+        </div>
+
+        <div class="range_content">
+          <h2 class="range__title">We’ve invested so you don’t have to</h2>
+          <p class="range__subtitle">
+            Leverage our 2,200 sqm production facility<br />
+            powered by world-class Durst and Canon technology.
+          </p>
+
+          <ul class="range_list">
+            <li class="range__item">Durst P5 D4 Flatbed Printer</li>
+            <li class="range__item">Durst 512R LED 5 m Roll-to-Roll Printer</li>
+            <li class="range__item">Durst Tau RSC Label Printer</li>
+            <li class="range__item">Canon Colorados</li>
+          </ul>
+
+          <app-button
+            *ngIf="!authorizationService.isLoggedIn"
+            [buttonConfig]="buttonRequestConfig2"
+            [routerLink]="
+              '/authorization/registration/personal-information'
+            "></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="benefit">
+    <div class="container">
+      <div class="benefit_top">
+        <div class="benefit__subtitle info">Built for print resellers</div>
+        <h2 class="benefit__title title">Trusted by Businesses Nationwide</h2>
+      </div>
+
+      <div class="blocks">
+        <div class="block">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/benefit-1.png"
+            alt="benefit" />
+          <h3 class="block__title-2">Protect your customers</h3>
+          <p class="block__text text">
+            We don’t compete for your customers. Our systems are built with
+            safeguards to keep it that way. Unlike other suppliers, we’ll never
+            target or sell directly to your clients.
+          </p>
+        </div>
+        <div class="block">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/benefit-2.png"
+            alt="benefit" />
+          <h3 class="block__title-2">Protect your brand</h3>
+          <p class="block__text text">
+            Every order ships under your name, never ours. With full white-label
+            options, your brand stays front and centre while we work quietly
+            behind the scenes.
+          </p>
+        </div>
+        <div class="block">
+          <img
+            class="block__img"
+            src="./assets/images/home-page/benefit-3.png"
+            alt="benefit" />
+          <h3 class="block__title-2">Award-Winning Reputation</h3>
+          <p class="block__text text">
+            Since 2006, we’ve built a strong track record of trust and
+            consistency, earning recognition in the
+            <strong>ProPrint Top 50</strong> strong/> as one of Australia’s
+            leading trade printers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-registration-form></app-registration-form>
+</div>
+
+<app-scroll-btn></app-scroll-btn>
+<div class="block-disabled loader-wrap" *ngIf="!isLoaded">
+  <app-loader></app-loader>
+</div>

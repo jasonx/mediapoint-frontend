@@ -1,0 +1,9 @@
+<div class="dialog">
+  <div class="dialog__title">Edit company</div>
+
+  <div class="dialog__main">
+    <app-company-details
+      [customerId]="data"
+      (closeEvent)="close($event)"></app-company-details>
+  </div>
+</div>

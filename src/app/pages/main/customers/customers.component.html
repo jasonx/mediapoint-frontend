@@ -1,0 +1,124 @@
+<div class="customers wrap">
+  <div class="top">
+    <div class="top__search">
+      <app-search
+        [placeholder]="'Type Company name or any other data...'"
+        (searchEvent)="searchByText($event)"></app-search>
+    </div>
+  </div>
+
+  <div class="info" *ngIf="selection.selected.length">
+    <div class="selected-item">
+      Selected items: {{ selection.selected.length }}
+    </div>
+    <div class="buttons">
+      <img
+        (click)="onDeleteSelectedItem()"
+        src="./assets/images/icons/trash-black.svg"
+        alt="Delete" />
+    </div>
+  </div>
+
+  <ng-container *ngIf="isDataLoaded; else loading">
+    <ng-container *ngIf="dataSource.data.length; else noResults">
+      <div class="table-wrap">
+        <table
+          mat-table
+          matSort
+          class="table"
+          [dataSource]="dataSource"
+          (matSortChange)="sortData($event)">
+          <!--        <ng-container matColumnDef="select">-->
+          <!--          <th mat-header-cell *matHeaderCellDef>-->
+          <!--            <mat-checkbox-->
+          <!--              (change)="$event ? toggleAllRows() : null"-->
+          <!--              [checked]="selection.hasValue() && isAllSelected()"-->
+          <!--              [indeterminate]="selection.hasValue() && !isAllSelected()">-->
+          <!--            </mat-checkbox>-->
+          <!--          </th>-->
+          <!--          <td mat-cell *matCellDef="let row">-->
+          <!--            <mat-checkbox-->
+          <!--              (click)="$event.stopPropagation()"-->
+          <!--              (change)="$event ? selection.toggle(row.id) : null"-->
+          <!--              [checked]="selection.isSelected(row.id)">-->
+          <!--            </mat-checkbox>-->
+          <!--          </td>-->
+          <!--        </ng-container>-->
+
+          <ng-container matColumnDef="companyName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Company</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.companyName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="mainContact">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Main Contact
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.mainContact }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Phone</th>
+            <td mat-cell *matCellDef="let element">
+              {{ phoneMask(element.phone) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="capitalize">{{ fromSnakeCase(element.type) }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="menu">
+                <app-options-menu
+                  [nameItem]="'customer'"
+                  [listOfOptions]="listOfOptions"
+                  (editEvent)="onEdit(element.id)"
+                  (deleteEvent)="onDelete(element.id)"></app-options-menu>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{ selected: selection.isSelected(row.id) }"
+            (mouseup)="goToDetailsPage($event, row.id, './company')"></tr>
+        </table>
+
+        <mat-paginator
+          *ngIf="isDisplayPaginator"
+          [length]="totalItems"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageIndex]="params.currentPage - 1"
+          (page)="onChangePage($event)"></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <app-no-results
+        [isSearch]="isSearch"
+        [noResultsText]="'There are no customers here yet'"></app-no-results>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

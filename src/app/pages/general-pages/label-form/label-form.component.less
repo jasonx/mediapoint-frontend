@@ -1,0 +1,50 @@
+@import "/src/assets/styles/core/content-general.less";
+
+.label-form {
+  padding: 48px 0 68px;
+  margin: 0 auto 72px;
+
+  &__title {
+    margin-bottom: 32px;
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 54px;
+  }
+
+  .form {
+    &__label {
+      margin-bottom: 4px;
+      font-size: 12px;
+      line-height: 15.6px;
+      color: @color-ebony;
+    }
+
+    &_field {
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    &_group {
+      display: flex;
+      gap: 16px;
+    }
+
+    .submit {
+      margin-top: 32px;
+    }
+  }
+}
+
+::ng-deep {
+  .label-form {
+    .form {
+      .field {
+        .radio {
+          &:not(:checked) + label {
+            background-color: @color-white;
+          }
+        }
+      }
+    }
+  }
+}

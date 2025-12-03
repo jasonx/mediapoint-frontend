@@ -1,0 +1,108 @@
+@import "../../../../../assets/styles/core/variables";
+
+.order {
+  .top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .title-main {
+    margin-right: 8px;
+  }
+
+  .app-block {
+    padding: 16px 24px;
+    margin-bottom: 32px;
+    flex-grow: 1;
+    order: 1;
+
+    &.freight {
+      padding-bottom: 0;
+      margin-bottom: 0;
+
+      &.first {
+        order: 0;
+      }
+    }
+  }
+
+  .track {
+    display: flex;
+    align-items: flex-end;
+    column-gap: 16px;
+    margin-top: 4px;
+
+    .form {
+      flex-grow: 1;
+    }
+
+    .button-wrap {
+      margin-bottom: 3px;
+    }
+  }
+
+  .title-block {
+    margin-bottom: 20px;
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .grid-container {
+    &__main {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .sidebar {
+    &__title {
+      margin-bottom: 16px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    &_block {
+      &:not(.price) {
+        padding-bottom: 24px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid @color-hawkes-blue-3;
+      }
+    }
+
+    &-list {
+      &__link {
+        color: @color-persian-blue;
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: none;
+        }
+      }
+    }
+
+    &-status {
+      margin-top: -6px;
+    }
+  }
+}
+
+&::ng-deep {
+  .order {
+    .sidebar-status {
+      .status-label {
+        height: 36px;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+
+      .list {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import "/src/assets/styles/core/variables.less";
+
+.widgets {
+  position: relative;
+
+  .widget {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+
+    &-group {
+      width: calc(50% - 8px);
+    }
+  }
+
+  .error-block {
+    flex: 1;
+    margin-top: 24px;
+  }
+
+  &_btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+}
+
+.loading {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255 255 255 / 40%);
+    z-index: 9;
+  }
+}

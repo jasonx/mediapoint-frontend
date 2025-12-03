@@ -1,0 +1,19 @@
+@import "/src/assets/styles/core/variables.less";
+
+.main {
+  padding: 40px 100px 40px 48px;
+}
+
+::ng-deep {
+  .main {
+    .breadcrumbs {
+      margin-bottom: 32px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .main {
+    padding: 30px;
+  }
+}

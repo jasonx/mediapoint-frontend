@@ -1,0 +1,115 @@
+@import "/src/assets/styles/core/variables.less";
+
+.cart-summary {
+  &__title {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .main {
+    border-bottom: 1px solid @color-hawkes-blue-3;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+
+    &__row {
+      margin-bottom: 9.5px;
+    }
+
+    &__title {
+      width: 50%;
+      margin-right: 10px;
+    }
+
+    &__value {
+      width: 50%;
+      text-align: right;
+      color: @color-slate-gray;
+    }
+  }
+
+  .pdf {
+    margin-top: 24px;
+  }
+}
+
+&::ng-deep {
+  .cart-summary {
+    .mat-expansion {
+      &-panel {
+        margin-top: 24px !important;
+
+        &:not([class*="mat-elevation-z"]) {
+          box-shadow: none;
+        }
+
+        .mat-expansion-panel {
+          &-header {
+            height: 48px;
+            padding: 0 16px 0 8px;
+            background: @color-zumthor !important;
+            transition: @animate-200ms;
+
+            &:not(.mat-expanded) {
+              &:hover {
+                background: @color-lavender;
+              }
+            }
+          }
+
+          &-body {
+            padding: 12px 8px;
+            background: @color-zumthor;
+
+            .panel {
+              &_row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 16px;
+              }
+
+              &__text {
+                margin-top: 24px;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 15.6px;
+              }
+            }
+          }
+
+          &-content {
+            font-family: Poppins, sans-serif;
+          }
+        }
+
+        &-header-title {
+          font-size: 16px;
+          font-weight: 600;
+          font-family: Poppins, sans-serif;
+        }
+      }
+
+      &-indicator {
+        &::after {
+          color: @color-cinder;
+          border-width: 0 1px 1px 0;
+          padding: 2px;
+        }
+      }
+    }
+
+    .pdf {
+      &__content {
+        .name {
+          width: 165px !important;
+        }
+      }
+    }
+  }
+}

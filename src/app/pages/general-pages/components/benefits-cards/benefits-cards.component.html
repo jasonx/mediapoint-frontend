@@ -1,0 +1,22 @@
+<div class="benefits">
+  <div class="container">
+    <h2 class="benefits__title title">{{ data.title }}</h2>
+
+    <div class="blocks">
+      <div class="block" *ngFor="let card of data.cards">
+        <a class="block__link" [routerLink]="data.btn.link">{{ data.btn.title }}</a>
+        <div class="block__icon">
+          <img [src]="card.icon" alt="icon" />
+        </div>
+        <h4 class="block__title">{{ card.title }}</h4>
+        <p class="block__text">{{ card.text }}</p>
+      </div>
+    </div>
+
+    <div class="benefits__btn" *ngIf="!authorizationService.isLoggedIn">
+      <a [routerLink]="data.btn.link">
+        <app-button [buttonConfig]="buttonConfig"></app-button>
+      </a>
+    </div>
+  </div>
+</div>

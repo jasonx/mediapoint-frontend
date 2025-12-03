@@ -1,0 +1,20 @@
+<div class="widget radio-image">
+  <ng-container *ngFor="let card of properties[0].options">
+    <div
+      *ngIf="!card.disabled"
+      class="option-card"
+      [class.selected]="isSelected(card.id)"
+      (click)="onSelectOption($event, card)">
+      <div class="option-card_img">
+        <img [src]="card.imageUrl" [alt]="card.title" />
+      </div>
+
+      <div class="option-card_content">
+        <div class="option-card__title">{{ card.title }}</div>
+        <div
+          class="option-card__description"
+          [innerHtml]="card.description"></div>
+      </div>
+    </div>
+  </ng-container>
+</div>

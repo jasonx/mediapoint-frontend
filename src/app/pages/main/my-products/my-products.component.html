@@ -1,0 +1,126 @@
+<div class="my-products wrap">
+  <div class="title-main">My products</div>
+
+  <div class="top">
+    <div class="top__search">
+      <app-search
+        [placeholder]="'Type product name, type or any other data...'"
+        (searchEvent)="searchByText($event)"></app-search>
+    </div>
+    <!-- <div class="top__filter">
+      <app-filter
+        [setFilterConfig]="filterConfig"
+        (searchEvent)="searchByFilters($event)"></app-filter>
+    </div> -->
+  </div>
+
+  <!-- <app-filter-labels
+    [setFilterLabels]="filterLabels"
+    (clearLabelsEvent)="searchByFilters($event)">
+  </app-filter-labels> -->
+
+  <div class="table_tabs">
+    <div
+      class="tab"
+      [class.active]="!selectedCategoryId.length"
+      (click)="selectCategory('')">
+      All
+    </div>
+    <div
+      class="tab"
+      *ngFor="let tab of filterConfig?.categories"
+      [class.active]="+selectedCategoryId === tab.id"
+      (click)="selectCategory(tab.id.toString())">
+      {{ tab.label }}
+    </div>
+  </div>
+
+  <ng-container *ngIf="isDataLoaded; else loading">
+    <ng-container *ngIf="dataSource.data.length; else noResults">
+      <div class="table-wrap">
+        <table
+          mat-table
+          matSort
+          class="table"
+          [dataSource]="dataSource"
+          (matSortChange)="sortData($event)">
+          <ng-container matColumnDef="productName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Product name
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.productName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="productType">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Product type
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.productType }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Created by
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdBy }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Created</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdAt | date: 'dd/MM/YY' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="actions">
+                <button
+                  class="btn circle circle-blue"
+                  (click)="openEditDialog(element)">
+                  <img src="./assets/images/icons/edit.svg" alt="Edit" />
+                </button>
+                <button
+                  class="btn circle circle-red"
+                  (click)="openDeleteDialog(element.id)">
+                  <img src="./assets/images/icons/trash-red.svg" alt="Delete" />
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            class="no-hover"
+            *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+          *ngIf="isDisplayPaginator"
+          [length]="totalItems"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageIndex]="params.currentPage - 1"
+          (page)="onChangePage($event)"></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <app-no-results
+        [isSearch]="isSearch"
+        [noResultsText]="'You don\'t have products yet'"></app-no-results>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

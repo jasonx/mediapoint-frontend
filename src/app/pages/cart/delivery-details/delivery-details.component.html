@@ -1,0 +1,73 @@
+<div class="delivery">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <div class="grid-container" *ngIf="deliveryDetails; else loading">
+    <div class="grid-container__main">
+      <div class="delivery-block app-block">
+        <form class="form__po" [formGroup]="form">
+          <div class="delivery-field">
+            <app-field formControlName="poNumber" [control]="form.controls['poNumber']" [label]="'PO Number'"
+              [placeholder]="'PO Number'" [type]="FIELD_TYPES.Text"></app-field>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="deliveryDetails.deliveryType === DELIVERY_TYPE.Pickup" class="delivery-block app-block">
+        <h2 class="title-main">Pickup details</h2>
+
+        <app-pickup-form [deliveryDetails]="deliveryDetails"
+          (fillFormEvent)="fillDeliveryDetailsForm($event)"></app-pickup-form>
+      </div>
+
+      <div *ngIf="deliveryDetails.deliveryType === DELIVERY_TYPE.Delivery" class="delivery-block app-block">
+        <h2 class="title-main">Delivery details</h2>
+
+        <div class="delivery_tabs">
+          <app-tabs [tabs]="deliveryAddressTabs" [selectedTab]="deliveryAddressTabs[isNewAddressType ? 0 : 1]"
+            (selectEvent)="onSelectDeliveryTab($event)"></app-tabs>
+        </div>
+
+        <app-enter-address-form *ngIf="isNewAddressType; else fromAddressBook" [deliveryDetails]="deliveryDetails"
+          (fillFormEvent)="fillDeliveryDetailsForm($event)">
+        </app-enter-address-form>
+        <ng-template #fromAddressBook>
+          <app-address-from-book-form [deliveryDetails]="deliveryDetails"
+            (fillFormEvent)="fillDeliveryDetailsForm($event)">
+          </app-address-from-book-form>
+        </ng-template>
+      </div>
+
+      <div class="delivery-block app-block">
+        <h2 class="title-main">Box label</h2>
+
+        <div class="box-label">
+          <div class="box-label__file">
+            <app-upload [text]="'Upload PDF'" [isShowRequirement]="false" [maxSize]="10" [file]="boxLabel"
+              [accept]="'application/pdf,application/vnd.ms-excel'" (loadedFileEvent)="loadFile($event)"
+              (deleteFileEvent)="deleteFile()"></app-upload>
+          </div>
+          <img src="./assets/images/cart/box-label-mockup.png" class="box-label__img" alt="Box label" />
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container__sidebar receipt fixed">
+      <app-cart-summary [cartData]="cartData">
+        <div class="btn">
+          <app-button [buttonConfig]="buttonContinueConfig" [isLoaded]="isLoadedBtn"
+            (clickEvent)="saveData()"></app-button>
+        </div>
+        <div class="btn">
+          <app-button [buttonConfig]="buttonSaveConfig" [isLoaded]="!isLoadingSaveBtn"
+            (clickEvent)="saveAsQuote()"></app-button>
+        </div>
+      </app-cart-summary>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

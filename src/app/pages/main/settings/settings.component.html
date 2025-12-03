@@ -1,0 +1,185 @@
+<div class="settings">
+  <h2 class="settings__title">Settings</h2>
+
+  <div class="settings_wrap">
+    <div class="settings_navigation">
+      <ul class="list">
+        <li
+          class="item"
+          routerLink="personal-information"
+          routerLinkActive="active"
+          *ngIf="!isAdmin">
+          <div class="item_wrap">
+            <svg
+              class="item__icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7.99996 7.9987C9.84091 7.9987 11.3333 6.50631 11.3333 4.66536C11.3333 2.82442 9.84091 1.33203 7.99996 1.33203C6.15901 1.33203 4.66663 2.82442 4.66663 4.66536C4.66663 6.50631 6.15901 7.9987 7.99996 7.9987Z"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M13.7268 14.6667C13.7268 12.0867 11.1601 10 8.0001 10C4.8401 10 2.27344 12.0867 2.27344 14.6667"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+
+            <span class="item__title">Personal information</span>
+          </div>
+        </li>
+        <li
+          class="item"
+          routerLink="company-details"
+          routerLinkActive="active"
+          *ngIf="!isAdmin && !isEmployee">
+          <div class="item_wrap">
+            <svg
+              class="item__icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M2.00684 7.48047V10.4738C2.00684 13.4671 3.20684 14.6671 6.20017 14.6671H9.7935C12.7868 14.6671 13.9868 13.4671 13.9868 10.4738V7.48047"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M7.99999 7.9987C9.21999 7.9987 10.12 7.00536 9.99999 5.78536L9.55999 1.33203H6.44666L5.99999 5.78536C5.87999 7.00536 6.77999 7.9987 7.99999 7.9987Z"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M12.2065 7.9987C13.5532 7.9987 14.5399 6.90536 14.4065 5.56536L14.2199 3.73203C13.9799 1.9987 13.3132 1.33203 11.5665 1.33203H9.5332L9.99987 6.00536C10.1132 7.10536 11.1065 7.9987 12.2065 7.9987Z"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M3.75992 7.9987C4.85992 7.9987 5.85325 7.10536 5.95992 6.00536L6.10659 4.53203L6.42659 1.33203H4.39326C2.64659 1.33203 1.97992 1.9987 1.73992 3.73203L1.55992 5.56536C1.42659 6.90536 2.41326 7.9987 3.75992 7.9987Z"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M7.99967 11.332C6.88634 11.332 6.33301 11.8854 6.33301 12.9987V14.6654H9.66634V12.9987C9.66634 11.8854 9.11301 11.332 7.99967 11.332Z"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <span class="item__title">Company details</span>
+          </div>
+        </li>
+        <li
+          class="item"
+          routerLink="delivery-settings"
+          routerLinkActive="active"
+          *ngIf="!isAdmin && !isEmployee">
+          <div class="item_wrap">
+            <svg
+              class="item__icon"
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.4997 1.83398V8.50065C10.4997 9.23398 9.89967 9.83398 9.16634 9.83398H1.83301V4.50065C1.83301 3.02732 3.02634 1.83398 4.49967 1.83398H10.4997Z"
+                stroke="#5A5C81"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M15.1663 9.83398V11.834C15.1663 12.9407 14.273 13.834 13.1663 13.834H12.4997C12.4997 13.1007 11.8997 12.5007 11.1663 12.5007C10.433 12.5007 9.83301 13.1007 9.83301 13.834H7.16634C7.16634 13.1007 6.56634 12.5007 5.83301 12.5007C5.09967 12.5007 4.49967 13.1007 4.49967 13.834H3.83301C2.72634 13.834 1.83301 12.9407 1.83301 11.834V9.83398H9.16634C9.89967 9.83398 10.4997 9.23398 10.4997 8.50065V3.83398H11.7263C12.2063 3.83398 12.6463 4.09399 12.8863 4.50732L14.0263 6.50065H13.1663C12.7997 6.50065 12.4997 6.80065 12.4997 7.16732V9.16732C12.4997 9.53398 12.7997 9.83398 13.1663 9.83398H15.1663Z"
+                stroke="#5A5C81"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M5.83333 15.1667C6.56971 15.1667 7.16667 14.5697 7.16667 13.8333C7.16667 13.097 6.56971 12.5 5.83333 12.5C5.09695 12.5 4.5 13.097 4.5 13.8333C4.5 14.5697 5.09695 15.1667 5.83333 15.1667Z"
+                stroke="#5A5C81"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M11.1663 15.1667C11.9027 15.1667 12.4997 14.5697 12.4997 13.8333C12.4997 13.097 11.9027 12.5 11.1663 12.5C10.43 12.5 9.83301 13.097 9.83301 13.8333C9.83301 14.5697 10.43 15.1667 11.1663 15.1667Z"
+                stroke="#5A5C81"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M15.1667 8.5V9.83333H13.1667C12.8 9.83333 12.5 9.53333 12.5 9.16667V7.16667C12.5 6.8 12.8 6.5 13.1667 6.5H14.0267L15.1667 8.5Z"
+                stroke="#5A5C81"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <span class="item__title">Delivery settings</span>
+          </div>
+        </li>
+        <li
+          class="item"
+          routerLink="users"
+          routerLinkActive="active"
+          *ngIf="!isAdmin">
+          <div class="item_wrap">
+            <svg
+              class="item__icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7.99996 7.9987C9.84091 7.9987 11.3333 6.50631 11.3333 4.66536C11.3333 2.82442 9.84091 1.33203 7.99996 1.33203C6.15901 1.33203 4.66663 2.82442 4.66663 4.66536C4.66663 6.50631 6.15901 7.9987 7.99996 7.9987Z"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M13.7268 14.6667C13.7268 12.0867 11.1601 10 8.0001 10C4.8401 10 2.27344 12.0867 2.27344 14.6667"
+                stroke="#020203"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <span class="item__title">Users</span>
+          </div>
+        </li>
+        <li
+          class="item"
+          routerLink="notifications"
+          routerLinkActive="active"
+          *ngIf="!isAdmin">
+          <div class="item_wrap">
+            <svg
+              class="item__icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M8.01339 1.94141C5.80673 1.94141 4.01339 3.73474 4.01339 5.94141V7.86807C4.01339 8.27474 3.84006 8.89474 3.63339 9.24141L2.86673 10.5147C2.39339 11.3014 2.72006 12.1747 3.58673 12.4681C6.46006 13.4281 9.56006 13.4281 12.4334 12.4681C13.2401 12.2014 13.5934 11.2481 13.1534 10.5147L12.3867 9.24141C12.1867 8.89474 12.0134 8.27474 12.0134 7.86807V5.94141C12.0134 3.74141 10.2134 1.94141 8.01339 1.94141Z"
+                stroke="#020203"
+                stroke-miterlimit="10"
+                stroke-linecap="round" />
+              <path
+                d="M9.24694 2.13297C9.04027 2.07297 8.82694 2.0263 8.60694 1.99964C7.96694 1.91964 7.35361 1.9663 6.78027 2.13297C6.97361 1.63964 7.45361 1.29297 8.01361 1.29297C8.57361 1.29297 9.05361 1.63964 9.24694 2.13297Z"
+                stroke="#020203"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M10.0137 12.707C10.0137 13.807 9.11367 14.707 8.01367 14.707C7.46701 14.707 6.96034 14.4804 6.60034 14.1204C6.24034 13.7604 6.01367 13.2537 6.01367 12.707"
+                stroke="#020203"
+                stroke-miterlimit="10" />
+            </svg>
+            <span class="item__title">Notifications</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="settings_main" [ngClass]="{ delivery: isDeliveryPage }">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

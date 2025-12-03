@@ -1,0 +1,78 @@
+<div class="wrapper">
+  <h3 class="title" [innerText]="(isEdit ? 'Edit' : 'Add') + ' address'"></h3>
+  <form class="form" (ngSubmit)="submitForm()" [formGroup]="form" autocomplete="off">
+    <div class="body">
+      <div class="row">
+        <div class="field">
+          <app-field formControlName="companyName" [control]="form.controls['companyName']" [label]="'Company name'"
+            [placeholder]="'Company name'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+        <div class="field">
+          <app-field formControlName="contactName" [control]="form.controls['contactName']" [label]="'Contact name'"
+            [placeholder]="'Contact name'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <app-field formControlName="address1" [control]="form.controls['address1']" [label]="'Address Line 1'"
+            [placeholder]="'Address Line 1'" [type]="FIELD_TYPES.SearchByText" [isAutocomplete]="false"
+            (inputEvent)="searchAddress($event)" (selectedEvent)="selectAddress($event)"
+            [setOptionsBySearch]="listOfAddressString" [isNotFound]="isNotFound"></app-field>
+        </div>
+        <div class="field">
+          <app-field formControlName="address2" [control]="form.controls['address2']" [label]="'Address Line 2'"
+            [placeholder]="'Address Line 2'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <app-field formControlName="dispatchEmail" [control]="form.controls['dispatchEmail']"
+            [label]="'Dispatch email'" [placeholder]="'Dispatch email'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+        <div class="field">
+          <app-field formControlName="dispatchEmail2" [control]="form.controls['dispatchEmail2']"
+            [label]="'Dispatch email 2'" [placeholder]="'Dispatch email 2'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <app-field formControlName="phone" [control]="form.controls['phone']" [label]="'Phone'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Phone'" [mask]="phoneMask"></app-field>
+        </div>
+        <div class="field">
+          <app-field formControlName="state" [control]="form.controls['state']" [label]="'State'"
+            [placeholder]="'State'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <app-field formControlName="postcode" [control]="form.controls['postcode']" [label]="'Postcode'"
+            [placeholder]="'Postcode'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+        <div class="field">
+          <app-field formControlName="suburb" [control]="form.controls['suburb']" [label]="'Suburb'"
+            [placeholder]="'Suburb'" [type]="FIELD_TYPES.Text"></app-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <app-field formControlName="type" [control]="form.controls['type']" [label]="'Type of address'"
+            [placeholder]="'Type of address'" [type]="FIELD_TYPES.Selector" [options]="ADDRESS_TYPES"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <div class="button">
+        <app-button [isLoaded]="isLoadedBtn" [buttonConfig]="buttonSubmitConfig"></app-button>
+      </div>
+      <div class="button">
+        <app-button (click)="action(Action.Close)" [buttonConfig]="buttonCancelConfig"></app-button>
+      </div>
+    </div>
+  </form>
+</div>

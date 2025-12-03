@@ -1,0 +1,32 @@
+<div class="contact-us">
+  <div class="container">
+    <h2 class="contact-us__title">{{ title }}</h2>
+
+    <div class="contact-us__form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submitForm()" autocomplete="on">
+        <div class="form_group">
+          <div class="form_field">
+            <app-field formControlName="firstName" [control]="form.controls['firstName']" [label]="'First name'"
+              [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'First name'"></app-field>
+          </div>
+          <div class="form_field">
+            <app-field formControlName="lastName" [control]="form.controls['lastName']" [label]="'Last name'"
+              [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'Last name'"></app-field>
+          </div>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="email" [control]="form.controls['email']" [label]="'Email'" [labelColor]="'white'"
+            [type]="FIELD_TYPES.Email" [placeholder]="'Email'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="message" [control]="form.controls['message']" [label]="'Message'"
+            [labelColor]="'white'" [type]="FIELD_TYPES.Textarea" [placeholder]="'Message'"></app-field>
+        </div>
+
+        <div class="submit">
+          <app-button [buttonConfig]="buttonSubmitConfig" [isLoaded]="isLoadedBtn"></app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

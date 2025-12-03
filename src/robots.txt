@@ -1,0 +1,5 @@
+User-agent: SiteAuditBot
+Allow: /
+
+User-agent: *
+Disallow: /

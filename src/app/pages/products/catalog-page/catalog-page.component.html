@@ -1,0 +1,16 @@
+<div class="catalog" *ngIf="categoryList; else loading">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <h1 class="catalog__title">{{ title }}</h1>
+  <div class="catalog_blocks">
+    <div class="block" *ngFor="let category of cardData">
+      <app-card [data]="category"></app-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

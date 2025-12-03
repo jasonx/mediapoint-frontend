@@ -1,0 +1,31 @@
+<div class="careers">
+  <app-hero-banner [data]="heroData"></app-hero-banner>
+
+  <div class="roles">
+    <div class="container">
+      <h2 class="roles__title title">Open Roles</h2>
+      <div class="roles__subtitle subtitle">
+        Roles that we are actively looking to fill will be outlined below. If
+        the are no roles showing we still encourage you to submit an application
+        via the link above. We'll review your submission and keep the
+        application on file so you'll be the first to know about any open roles.
+      </div>
+
+      <app-faq [data]="rolesContent"></app-faq>
+    </div>
+  </div>
+
+  <div class="form">
+    <div class="form_main">
+      <app-contact-us-form
+        [title]="'Have a question?'"
+        [formType]="formType"></app-contact-us-form>
+    </div>
+    <div class="form_img"></div>
+  </div>
+</div>
+
+<app-scroll-btn></app-scroll-btn>
+<div class="block-disabled loader-wrap" *ngIf="!isLoaded">
+  <app-loader></app-loader>
+</div>

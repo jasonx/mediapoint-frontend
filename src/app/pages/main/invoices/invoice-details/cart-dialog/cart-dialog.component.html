@@ -1,0 +1,80 @@
+<div class="cart-dialog" [class.error]="generalError">
+  <div class="wrap" [class.block-disabled]="!isPayLoaded || !isCartLoaded">
+    <div class="cart-dialog__top">
+      <div class="title">Credit Card</div>
+      <img
+        mat-button
+        mat-dialog-close
+        class="close-btn"
+        src="./assets/images/icons/close.svg"
+        alt="Close" />
+    </div>
+
+    <div id="payment-form">
+      <div id="eway-secure-panel"></div>
+    </div>
+
+    <div class="form-errors">
+      <div class="error-field name" [class.error]="fieldsError.name">
+        <div class="error-field__input"></div>
+        <div class="error-field__text">
+          {{ fieldsError.name }}
+        </div>
+      </div>
+      <div class="error-field number" [class.error]="fieldsError.number">
+        <div class="error-field__input">
+          <div class="cards">
+            <div class="card">
+              <img
+                src="assets/images/icons/cards/visa.svg"
+                alt="Visa"
+                class="icon"
+                id="visa" />
+            </div>
+            <div class="card">
+              <img
+                src="assets/images/icons/cards/mastercard.svg"
+                alt="Mastercard"
+                class="icon"
+                id="mastercard" />
+            </div>
+            <div class="card">
+              <img
+                src="assets/images/icons/cards/amex.svg"
+                alt="Amex"
+                class="icon"
+                id="amex" />
+            </div>
+          </div>
+        </div>
+        <div class="error-field__text">
+          {{ fieldsError.number }}
+        </div>
+      </div>
+      <div class="error-field expiry" [class.error]="fieldsError.expiry">
+        <div class="error-field__input"></div>
+        <div class="error-field__text">
+          {{ fieldsError.expiry }}
+        </div>
+      </div>
+      <div class="error-field cvn" [class.error]="fieldsError.cvn">
+        <div class="error-field__input"></div>
+        <div class="error-field__text">
+          {{ fieldsError.cvn }}
+        </div>
+      </div>
+    </div>
+
+    <div class="general-error" *ngIf="generalError">{{ generalError }}</div>
+
+    <div class="cart__btn">
+      <app-button
+        [buttonConfig]="buttonConfig"
+        (clickEvent)="onPay()"></app-button>
+    </div>
+  </div>
+
+  <div class="loader" *ngIf="!isPayLoaded || !isCartLoaded">
+    <app-loader></app-loader>
+  </div>
+</div>

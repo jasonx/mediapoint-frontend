@@ -1,0 +1,140 @@
+<div class="header-wrap" #header>
+  <div class="general-message" *ngIf="generalInfo && generalInfo.stickyBar?.turnBar">
+    <div class="general-message__text">
+      {{ generalInfo.stickyBar.textBar }}
+    </div>
+  </div>
+
+  <div class="top-bar">
+    <div class="top-bar_wrap wrap" *ngIf="generalInfo?.header1">
+      <div class="top-bar_text">
+        <p *ngIf="generalInfo?.header1">{{ generalInfo.header1 }}</p>
+        <p *ngIf="generalInfo?.header2">{{ generalInfo.header2 }}</p>
+        <p *ngIf="generalInfo?.header3">{{ generalInfo.header3 }}</p>
+      </div>
+
+      <div class="top-bar_timer" *ngIf="headerService.timer">
+        <span class="top-bar_timer__title">Time until next cut off:</span>
+        <span class="top-bar_timer__time">{{ headerService.timer }}</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="header_wrap wrap">
+      <a class="header_logo" routerLink="./">
+        <img src="./assets/images/logo.svg" alt="Mediapoint" />
+      </a>
+
+      <div class="header_search" (clickOutside)="isInpunOnFocus = false">
+        <input #input class="header_search__input" [class.focus]="isInpunOnFocus" type="text" placeholder="Search"
+          (input)="onSearch(input.value)" (focus)="isInpunOnFocus = true" (click)="isInpunOnFocus = true" />
+        <img class="header_search__icon" src="./assets/images/icons/search-icon.svg" alt="search" />
+
+        <img class="clear" *ngIf="input.value" (click)="clearGlobalSearch()" src="./assets/images/icons/close.svg"
+          alt="Clear" />
+
+        <div class="result" *ngIf="searchResult && isInpunOnFocus">
+          <div class="result_block" *ngIf="searchResult?.products">
+            <div class="result__title">Products</div>
+            <div class="list">
+              <a class="item product" *ngFor="let product of searchResult.products"
+                [routerLink]="product.categorySlug + '/' + product.slug" (click)="clearGlobalSearch()">
+                <img [src]="product.imageUrl" class="item__img" [alt]="" />
+                <div class="item_info">
+                  <div class="item_info__title">{{ product.title }}</div>
+                  <div class="item_info__descr">
+                    {{ product.shortDescription }}
+                  </div>
+                </div>
+              </a>
+
+              <div class="list_button" [class.hide]="
+                  isShowAllProducts ||
+                  wholeProductsResult.length <= DISPLAYED_PRODUCTS_NUM
+                ">
+                <app-button [buttonConfig]="buttonShowAllProducts" (clickEvent)="showAllProducts()"></app-button>
+              </div>
+
+              <div class="no-result" *ngIf="!searchResult?.products?.length">
+                Products not found
+              </div>
+            </div>
+          </div>
+
+          <div class="result_block" *ngIf="searchResult?.categories">
+            <div class="result__title">Categories</div>
+            <a class="item category" *ngFor="let category of searchResult.categories"
+              [routerLink]="category.slug" (click)="clearGlobalSearch()">
+              {{ category.title }}
+            </a>
+
+            <div class="no-result" *ngIf="!searchResult?.categories?.length">
+              Categories not found
+            </div>
+          </div>
+
+          <div *ngIf="searchResult?.message" class="no-result">
+            {{ searchResult.message }}
+          </div>
+        </div>
+      </div>
+
+      <div class="header_buttons">
+        <a class="button contact" routerLink="/contact">
+          <img class="icon" src="/assets/images/icons/menu-envelope-icon.svg" alt="envelope" />
+          <img class="icon active" src="/assets/images/icons/menu-envelope-icon-active.svg" alt="envelope-active" />
+        </a>
+
+        <div class="button">
+          <app-notifications></app-notifications>
+        </div>
+
+        <a class="button"
+          [routerLink]="userData ? './cart' : '/authorization/login'"
+          [queryParams]="userData ? { redirect: true } : null">
+          <img class="icon" src="/assets/images/icons/menu-cart-icon.svg" alt="cart" />
+          <img class="icon active" src="/assets/images/icons/menu-cart-icon-active.svg" alt="cart" />
+
+          <span class="counter" *ngIf="headerService.cartCounter > 0">
+            {{ headerService.cartCounter }}
+          </span>
+        </a>
+        <div (clickOutside)="isShowUserMenu = false">
+          <a class="button" [class.active]="isShowUserMenu" (click)="onClickUserMenu()">
+            <img class="icon" src="/assets/images/icons/menu-user-icon.svg" alt="user" />
+            <img class="icon active" src="/assets/images/icons/menu-user-icon-active.svg" alt="user" />
+          </a>
+
+          <div class="user-menu drop-block" *ngIf="isShowUserMenu">
+            <a class="user" routerLink="./settings/personal-information">
+              <div class="user__icon">{{ getFirstLetter }}</div>
+
+              <div class="user__name" *ngIf="userData">
+                {{ userData.firstName }} {{ userData.lastName }}
+              </div>
+            </a>
+
+            <ul class="user-menu_list">
+              <li>
+                <a (click)="isShowUserMenu = false" class="user-menu__item"
+                  routerLink="./settings/personal-information">
+                  <img src="./assets/images/icons/settings.svg" alt="Settings" />
+                  Settings
+                </a>
+              </li>
+              <li>
+                <a class="user-menu__item logout" (click)="logout()">
+                  <img src="./assets/images/icons/logout.svg" alt="Log out" />
+                  Log out
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <app-products-menu></app-products-menu>
+</div>

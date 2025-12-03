@@ -1,0 +1,71 @@
+<div class="confirm">
+  <div class="confirm__title">Confirmation of changes</div>
+  <div class="confirm__subtitle">You made changes to the statuses</div>
+
+  <div class="order" *ngIf="data.order?.newStatus">
+    <div class="order__title block-title">Order</div>
+
+    <div class="block">
+      <div class="block__id">Order #{{ data.order?.id }}</div>
+      <div class="block__statuses">
+        <div
+          class="status-label"
+          [ngClass]="toKebabCase(data.order?.oldStatus || '')">
+          {{ data.order?.oldStatus }}
+        </div>
+        <span class="arrow">&#8594;</span>
+        <div
+          class="status-label"
+          [ngClass]="toKebabCase(data.order?.newStatus || '')">
+          {{ data.order?.newStatus }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order" *ngIf="data.orders?.length">
+    <div class="block" *ngFor="let order of data.orders">
+      <div class="block__id">Order #{{ order.id }}</div>
+      <div class="block__statuses">
+        <div
+          class="status-label"
+          [ngClass]="toKebabCase(order.oldStatus || '')">
+          {{ order.oldStatus }}
+        </div>
+        <span class="arrow">&#8594;</span>
+        <div
+          class="status-label"
+          [ngClass]="toKebabCase(order.newStatus || '')">
+          {{ order.newStatus }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="jobs" *ngIf="isShowJobs">
+    <div class="jobs__title block-title">Jobs</div>
+
+    <div class="block" *ngFor="let job of data.jobs">
+      <div class="block__id">Job #{{ job.id }}</div>
+      <div class="block__statuses">
+        <div class="status-label" [ngClass]="toKebabCase(job.oldStatus || '')">
+          {{ job.oldStatus }}
+        </div>
+        <span class="arrow">&#8594;</span>
+        <div class="status-label" [ngClass]="toKebabCase(job.newStatus || '')">
+          {{ job?.newStatus }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <app-button
+      mat-button
+      mat-dialog-close
+      [buttonConfig]="cancelButtonConfig"></app-button>
+    <app-button
+      [buttonConfig]="confirmButtonConfig"
+      (clickEvent)="onConfirm()"></app-button>
+  </div>
+</div>

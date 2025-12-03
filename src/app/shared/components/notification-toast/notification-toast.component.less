@@ -1,0 +1,57 @@
+@import (less) "/src/assets/styles/core/variables.less";
+
+::ng-deep {
+  @keyframes hotToastExitAnimationNegative {
+    100% {
+      opacity: 0;
+      transform: translateX(0) scale(.5);
+    }
+  }
+}
+
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  width: 366px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .icon {
+    display: flex;
+    margin-right: 12px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-right: 26px;
+
+    .title {
+      margin-bottom: 4px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 130%;
+      letter-spacing: .015em;
+      color: @color-ebony;
+    }
+
+    .body {
+      font-size: 14px;
+      line-height: 140%;
+      color: @color-heather;
+    }
+  }
+
+  .close {
+    margin: 0 0 auto;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}

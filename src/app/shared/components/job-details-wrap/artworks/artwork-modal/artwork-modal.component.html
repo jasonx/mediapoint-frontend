@@ -1,0 +1,116 @@
+<div class="dialog">
+  <img
+    mat-button
+    mat-dialog-close
+    class="close-btn"
+    src="./assets/images/icons/close-circle.svg"
+    alt="Close" />
+
+  <div class="main">
+    <app-upload
+      [isAsImage]="true"
+      [file]="data.artwork"
+      [rotate]="rotate"
+      (loadedFileEvent)="uploadFile($event)"
+      [accept]="'application/pdf,application/vnd.ms-excel'"></app-upload>
+  </div>
+
+  <div class="bar" [class.error]="isError">
+    <ng-container *ngIf="!isAdmin; else admin">
+      <div class="bar_info" *ngIf="isRejectComment && !newFile">
+        <div class="status">
+          <span class="status-label canceled">Artwork error</span>
+        </div>
+        {{ data.artwork.rejectComment }}
+      </div>
+
+      <ng-container *ngIf="isError; else noError">
+        <div class="bar_main">
+          <div class="buttons">
+            <div class="bar_actions" (click)="onDownload()">
+              <div class="bar_actions__btn">
+                <img src="./assets/images/icons/download.svg" alt="download" />
+              </div>
+              <div class="bar_actions__text">Download</div>
+            </div>
+            <div class="bar_actions" (click)="onTrimbox()">
+              <div class="bar_actions__btn">
+                <img
+                  *ngIf="loadedBtn.trimbox"
+                  src="./assets/images/icons/trimbox.svg"
+                  alt="trimbox" />
+                <div *ngIf="!loadedBtn.trimbox" class="loader"></div>
+              </div>
+              <div class="bar_actions__text">Auto fix trimbox</div>
+            </div>
+            <div class="bar_actions" (click)="onScale()">
+              <div class="bar_actions__btn">
+                <img
+                  *ngIf="loadedBtn.scale"
+                  src="./assets/images/icons/auto-scale.svg"
+                  alt="Auto scale" />
+                <div *ngIf="!loadedBtn.scale" class="loader"></div>
+              </div>
+              <div class="bar_actions__text">Auto scale</div>
+            </div>
+            <div class="bar_actions" (click)="onRotate()">
+              <div class="bar_actions__btn">
+                <img
+                  *ngIf="loadedBtn.rotate"
+                  src="./assets/images/icons/rotation.svg"
+                  alt="Rotate" />
+                <div *ngIf="!loadedBtn.rotate" class="loader"></div>
+              </div>
+              <div class="bar_actions__text">Rotate 90°</div>
+            </div>
+            <div class="bar_actions" (click)="onReload()">
+              <div class="bar_actions__btn">
+                <img src="./assets/images/icons/reload.svg" alt="Reload" />
+              </div>
+              <div class="bar_actions__text">Upload new PDF</div>
+            </div>
+          </div>
+
+          <div class="bar__button">
+            <app-button
+              [buttonConfig]="saveButtonConfig"
+              [isLoaded]="isLoadedBtn"
+              (click)="saveArtwork()"></app-button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #noError>
+        <div class="bar_buttons">
+          <div class="bar__button" *ngIf="!isAdminApproved">
+            <app-button
+              [buttonConfig]="uploadButtonConfig"
+              (click)="uploadProof()"></app-button>
+          </div>
+
+          <div class="bar__button">
+            <app-button
+              [buttonConfig]="rejectButtonConfig"
+              (click)="rejectProof()"></app-button>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-template #admin>
+      <div class="bar_buttons">
+        <div class="bar__button">
+          <app-button
+            [buttonConfig]="uploadButtonConfig"
+            (click)="uploadProof()"></app-button>
+        </div>
+
+        <div class="bar__button">
+          <app-button
+            [buttonConfig]="rejectButtonConfig"
+            (click)="rejectProof()"></app-button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

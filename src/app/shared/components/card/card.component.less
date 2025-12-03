@@ -1,0 +1,43 @@
+@import '/src/assets/styles/core/variables.less';
+
+.block {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid @color-athens-gray;
+  background-color: @color-white;
+  overflow: hidden;
+  transition: @animate-200ms;
+
+  &:hover {
+    box-shadow: 0 0 10px 5px #d2e2f366;
+  }
+
+  &__img {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &_content {
+    padding: 16px 12px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    font-weight: 500;
+    line-height: 19.6px;
+    color: @color-cinder;
+  }
+
+  &__descr {
+    color: @color-slate-gray;
+    font-size: 12px;
+    line-height: 15.6px;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,38 @@
+<div class="hero">
+  <div class="hero_content">
+    <div *ngIf="data.info" class="hero__info info">{{ data.info }}</div>
+    <h1 class="hero__title">{{ data.title }}</h1>
+    <p class="hero__subtitle" [innerHtml]="data.subtitle"></p>
+
+    <a
+      *ngIf="data.btnLink && isButtonVisible"
+      [routerLink]="data.btnLink"
+      target="_blank">
+      <app-button [buttonConfig]="buttonConfig"></app-button>
+    </a>
+    <a *ngIf="data.href" [href]="data.href" target="_blank">
+      <app-button [buttonConfig]="buttonConfig"></app-button>
+    </a>
+  </div>
+
+  <div class="img-wrap">
+    <img
+      *ngIf="data.img"
+      [src]="'./assets/images/' + data.img"
+      alt="hero"
+      class="hero__img" />
+  </div>
+
+  <div *ngIf="data.video" class="video">
+    <video #videoElement class="hero__img" controls>
+      <source [src]="'./assets/images/' + data.video" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <img
+      *ngIf="isBtnPlayVisible"
+      src="/assets/images/icons/play-btn.svg"
+      alt="play"
+      class="video__btn"
+      (click)="playVideo(videoElement)" />
+  </div>
+</div>

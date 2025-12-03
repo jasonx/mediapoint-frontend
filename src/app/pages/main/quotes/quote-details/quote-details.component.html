@@ -1,0 +1,75 @@
+<div class="quote" *ngIf="quoteData; else loading">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-container__main quote">
+      <div class="quote_top">
+        <div class="title">
+          <div class="title-main">Quote #{{ quoteData.id }}</div>
+          <div class="status-label" [ngClass]="toKebabCase(quoteData.status)">
+            {{ quoteData.status }}
+          </div>
+        </div>
+
+        <div class="term" *ngIf="!isAdmin; else menu">
+          Valid Until:
+          <span>{{ quoteData.validUntil | date: 'dd/MM/YY' }}</span>
+        </div>
+
+        <ng-template #menu>
+          <app-options-menu
+            [nameItem]="'quote'"
+            [listOfOptions]="listOfOptions"
+            (deleteEvent)="deleteQuote()"></app-options-menu>
+        </ng-template>
+      </div>
+
+      <div class="app-block">
+        <app-job-details-wrap
+          *ngFor="let job of quoteData.jobs"
+          [job]="job"
+          [price]="job.price"
+          [isShowMenu]="!isAdmin"
+          [listOfOptions]="listOfOptions"
+          (editEvent)="editJob($event)"
+          (duplicateEvent)="duplicateJob($event)"
+          (deleteEvent)="deleteJob($event)"></app-job-details-wrap>
+
+        <form class="form" [formGroup]="form" (ngSubmit)="saveReference()">
+          <div class="field" [class.disabled]="isAdmin">
+            <app-field
+              formControlName="reference"
+              [control]="form.controls['reference']"
+              [label]="'Quote Reference'"
+              [type]="FIELD_TYPES.Text"
+              [placeholder]="'GU81739UUN'"
+              (blurEvent)="saveReference()"></app-field>
+          </div>
+        </form>
+
+        <div class="pdf" *ngIf="file">
+          <app-pdf-block [file]="file" [isDownloadBtn]="true"></app-pdf-block>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container__sidebar price fixed">
+      <app-price-data
+        [title]="'Price'"
+        [priceDetails]="quoteData.priceDetails"></app-price-data>
+
+      <div class="button" *ngIf="!isAdmin">
+        <app-button
+          [buttonConfig]="buttonConfig"
+          [isLoaded]="isLoaded"
+          (clickEvent)="onCreateOrder()"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

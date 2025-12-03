@@ -1,0 +1,109 @@
+<div class="dashboard" *ngIf="isDataLoaded; else loading">
+  <div class="grid-container">
+    <div class="grid-container__main" *ngIf="!isAdmin; else adminContent">
+      <div class="app-block quotes">
+        <div class="top">
+          <div class="title-block">Recent Quotes</div>
+          <app-button
+            [routerLink]="'../quotes'"
+            [buttonConfig]="buttonConfig"></app-button>
+        </div>
+
+        <div class="blocks">
+          <div
+            class="quotes__block block"
+            *ngFor="let quote of recentQuotes"
+            [routerLink]="'/quotes/' + quote.id">
+            <div class="block_icon">
+              <img src="./assets/images/icons/quote-icon.svg" alt="Quote" />
+            </div>
+            <div class="block_main">
+              <div class="block_main__title">{{ quote.id }}</div>
+              <div class="block_main__data">
+                Created on {{ quote.createdAt | date: 'dd MMM YYYY; hh:mma' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-block products">
+        <div class="title-block">Products</div>
+
+        <div class="blocks">
+          <a
+            class="block"
+            *ngFor="let product of products"
+            [routerLink]="'/' + product.categorySlug + '/' + product.slug">
+            <div class="block_img-wrap">
+              <img
+                class="block__content"
+                [src]="product.imageUrl"
+                alt="Product" />
+            </div>
+            <div class="block__title">{{ product.title }}</div>
+            <div
+              *ngIf="product.description"
+              class="block__info"
+              [tooltip]="product.description"
+              [maxWidth]="207">
+              <img src="assets/images/icons/icon-info.svg" alt="Info" />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #adminContent>
+      <div class="grid-container__main admin">
+        <ng-container *ngIf="chartBarData">
+          <app-chart-bar
+            [setChartData]="chartBarData"
+            (selectDateRangeEvent)="getDashboardData($event)"></app-chart-bar>
+          <app-chart-doughnut
+            [chartsData]="chartDoughnutData"></app-chart-doughnut>
+        </ng-container>
+      </div>
+    </ng-template>
+
+    <div class="grid-container__sidebar orders">
+      <div class="top">
+        <div class="orders__title">Recent Orders</div>
+        <app-button
+          [routerLink]="'../orders'"
+          [buttonConfig]="buttonConfig"></app-button>
+      </div>
+
+      <div class="blocks">
+        <div
+          class="block"
+          *ngFor="let order of recentOrders"
+          [routerLink]="'/orders/order/' + order.id">
+          <div class="block_top">
+            <div class="block_top__id">#{{ order.id }}</div>
+            <div
+              class="block_top__status status-label"
+              [ngClass]="toKebabCase(order.status)">
+              {{ order.status }}
+            </div>
+          </div>
+
+          <div class="block_main">
+            <div class="left">
+              <div class="name" *ngIf="isAdmin">{{ order.companyName }}</div>
+              <div class="name" *ngIf="!isAdmin">{{ order.creatorName }}</div>
+              <div class="date">
+                {{ order.createdAt | date: 'dd MMM YYYY; hh:mma' }}
+              </div>
+            </div>
+
+            <div class="price">{{ order.price | currency }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

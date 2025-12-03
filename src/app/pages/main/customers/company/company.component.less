@@ -1,0 +1,108 @@
+@import "../../../../../assets/styles/core/variables";
+
+.company {
+  &.hide {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+  }
+
+  .app-block {
+    position: relative;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .sidebar-list {
+    margin-bottom: 16px;
+  }
+
+  .menu {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+
+  .title-main {
+    margin-bottom: 4px;
+  }
+
+  .links {
+    margin-bottom: 24px;
+    color: @color-slate-gray;
+    font-size: 12px;
+  }
+
+  .info {
+    width: 400px;
+
+    &__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    &__title {
+      color: @color-slate-gray;
+      font-size: 12px;
+    }
+
+    &__value {
+      text-align: right;
+    }
+  }
+
+  .content {
+    padding-top: 30px;
+  }
+
+  &::ng-deep {
+    .no-results {
+      min-height: 275px;
+    }
+
+    .table-wrap {
+      box-shadow: none;
+
+      .mat-table tbody .mat-row:not(.expanded-row) {
+        &::after {
+          display: block;
+        }
+      }
+    }
+
+    .mat-tab-header {
+      border-bottom: 0;
+    }
+
+    .mat-tab-label {
+      height: auto;
+      min-width: auto;
+      padding: 0 5px;
+      margin-right: 24px;
+      color: @color-heather;
+      font-family: Poppins, sans-serif !important;
+      opacity: 1;
+
+      &-active {
+        color: @color-fun-blue;
+      }
+    }
+
+    .mat-tab-group.mat-primary .mat-ink-bar {
+      height: 1px;
+      background-color: @color-fun-blue;
+    }
+
+    .mat-ripple-element {
+      display: none;
+    }
+
+    @media screen and (max-width: @screen-lg) {
+      .table-wrap {
+        max-width: 55vw;
+      }
+    }
+  }
+}

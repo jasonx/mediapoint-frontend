@@ -1,0 +1,73 @@
+<ng-container *ngIf="isDataLoaded; else loading">
+  <h5 class="title">Delivery settings</h5>
+
+  <form
+    class="form"
+    *ngIf="deliveryDetails"
+    [formGroup]="form"
+    autocomplete="off">
+    <div class="fields">
+      <div class="field">
+        <app-field
+          formControlName="deliveryType"
+          [control]="form.controls['deliveryType']"
+          [label]="'Default delivery type'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="[
+            DELIVERY_TYPE.Delivery | titleCase,
+            DELIVERY_TYPE.Pickup | titleCase
+          ]"
+          [placeholder]="'Choose option'"></app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="addLogoToBox"
+          [control]="form.controls['addLogoToBox']"
+          [label]="'Adding the logo to the box'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="[ANSWER_YES_NO.Yes, ANSWER_YES_NO.No]"
+          [placeholder]="'Choose option'"></app-field>
+      </div>
+    </div>
+
+    <div class="fields">
+      <div class="field">
+        <app-field
+          formControlName="addressOptions"
+          [control]="form.controls['addressOptions']"
+          [label]="'Default address line'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="deliveryDetails.addressOptions"
+          [isDisabled]="isAddressOptionsDisabled"
+          [placeholder]="'Choose option'"></app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="deliveryUsersOptions"
+          [control]="form.controls['deliveryUsersOptions']"
+          [label]="'Default delivery user'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="deliveryDetails.deliveryUsersOptions"
+          [placeholder]="'Choose option'"></app-field>
+      </div>
+    </div>
+
+    <div class="submit">
+      <app-button
+        [buttonConfig]="buttonCancelConfig"
+        (clickEvent)="cancel()"></app-button>
+      <app-button
+        [buttonConfig]="buttonSubmitConfig"
+        [isLoaded]="isLoadedBtn"
+        (clickEvent)="submitForm()"></app-button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader-wrap">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

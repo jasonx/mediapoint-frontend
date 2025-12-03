@@ -1,0 +1,44 @@
+<menu class="menu">
+  <li class="menu__item" *ngFor="let menuItem of categoriesMenu">
+    <a class="item-title" [routerLink]="menuItem.slug">
+      {{ menuItem.name }}
+    </a>
+
+    <div class="content drop-block">
+      <div class="content_wrap">
+        <div class="content_list" *ngFor="let subcategory of menuItem.subcategories; let i = index">
+          <div class="content_list__title">{{ subcategory.name }}</div>
+
+          <ul class="list">
+            <li *ngFor="let product of subcategory.products; let i = index">
+              <a
+                class="list__item"
+                [routerLink]="menuItem.slug + '/' + product.slug"
+                (mouseenter)="selectedProduct = product"
+                (mouseleave)="selectedProduct = null"
+                >
+                {{ product.title }}
+
+                <span class="promo"
+                  *ngFor="let promo of product.promoLabels"
+                  [style.color]="promo.color">
+                  {{ promo.title }}
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-wrap">
+        <div class="content_info" *ngIf="selectedProduct">
+          <img [src]="selectedProduct.imageUrl" alt="product" class="content_info__img" />
+          <div class="content_info__title">
+            {{ selectedProduct.title }}
+          </div>
+          <div class="content_info__descr">{{ selectedProduct.shortDescription }}</div>
+        </div>
+      </div>
+    </div>
+  </li>
+</menu>

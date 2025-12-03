@@ -1,0 +1,23 @@
+<div class="trade">
+  <app-hero-banner
+    [data]="heroData"
+    [isButtonVisible]="isNotLoggedIn"></app-hero-banner>
+  <app-benefits-cards></app-benefits-cards>
+
+  <div class="faq">
+    <div class="container">
+      <h2 class="faq__title title">FAQ</h2>
+
+      <app-faq [data]="faqContent"></app-faq>
+    </div>
+  </div>
+
+  <app-why-block
+    [title]="'Why Use Mediapoint for Trade Printer Services'"></app-why-block>
+  <app-contact-us-form></app-contact-us-form>
+</div>
+
+<app-scroll-btn></app-scroll-btn>
+<div class="block-disabled loader-wrap" *ngIf="!isLoaded">
+  <app-loader></app-loader>
+</div>

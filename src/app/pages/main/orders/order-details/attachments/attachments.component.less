@@ -1,0 +1,31 @@
+@import "../../../../../../assets/styles/core/variables";
+
+.attachments {
+  margin-bottom: 16px;
+
+  .title-summary {
+    margin-bottom: 15px;
+  }
+
+  .button-wrap {
+    margin-top: 15px;
+  }
+}
+
+pdf-viewer {
+  display: block;
+  height: 100vh;
+  width: 10rem;
+  position: absolute;
+  opacity: 0;
+  z-index: -999;
+}
+
+::ng-deep {
+  .print-pdf {
+    opacity: 0;
+    position: absolute;
+    z-index: -999;
+    top: -999px;
+  }
+}

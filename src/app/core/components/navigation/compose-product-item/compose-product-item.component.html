@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div
+    class="item"
+    [class.jobs]="jobs.length"
+    routerLink="compose-a-product"
+    routerLinkActive="active">
+    <span class="title">1. Compose a product</span>
+  </div>
+
+  <div class="jobs" *ngIf="jobs.length">
+    <ol class="line">
+      <li class="line__item" *ngFor="let job of jobs">
+        <a
+          class="line__button"
+          [class.active]="isJobActive(job)"
+          [routerLink]="['/create-order/compose-a-product/', job]"
+          routerLinkActive="active">
+          Job #{{ job }}
+        </a>
+      </li>
+    </ol>
+  </div>
+</div>

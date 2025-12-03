@@ -1,0 +1,444 @@
+@import '../../../../assets/styles/core/variables';
+
+.field {
+  position: relative;
+
+  &_title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+    line-height: 15.6px;
+  }
+
+  .input {
+    width: 100%;
+    padding: 10.5px 45px 10.5px 12px;
+    font-size: 14px;
+    line-height: 100%;
+    border: 1px solid @color-mystic;
+    color: @color-ebony;
+    border-radius: 6px;
+    transition: @animate-300ms;
+
+    &:hover,
+    &:focus {
+      border-color: @color-persian-blue;
+      background-color: @color-zumthor;
+    }
+
+    &::placeholder {
+      color: @color-cadet-blue;
+    }
+
+    &.error {
+      border-color: @color-punch;
+
+      &:focus {
+        border-color: @color-punch;
+      }
+    }
+
+    &-wrap {
+      display: flex;
+      align-items: center;
+
+      .dimension {
+        position: absolute;
+        right: 13px;
+        font-size: 12px;
+        font-weight: 300;
+        pointer-events: none;
+      }
+
+      &.disabled {
+        input {
+          background-color: @color-athens-gray;
+          border-color: @color-athens-gray-2;
+          pointer-events: none;
+
+          &.radio {
+            & + label {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &__eye {
+    position: absolute;
+    top: 31px;
+    right: 13px;
+    cursor: pointer;
+  }
+
+  .radio {
+    position: absolute;
+    height: 48px;
+    opacity: 0;
+    z-index: 9;
+
+    & + label {
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+      height: 48px;
+      width: 100%;
+      padding-left: 18px;
+      border: 1px solid @color-mystic;
+      border-radius: 6px;
+      transition: @animate-300ms;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 1px solid @color-ebony;
+        border-radius: 50%;
+        margin-right: 10px;
+        box-sizing: border-box;
+        transition: @animate-300ms;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        left: 22px;
+        top: 21px;
+        background-color: transparent;
+        border-radius: 50%;
+        transition: @animate-300ms;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      & + label {
+        border-color: @color-persian-blue;
+        background-color: @color-zumthor;
+
+        &::before {
+          border-color: @color-persian-blue;
+          background-color: @color-zumthor;
+        }
+      }
+    }
+
+    &:checked + label {
+      border-color: @color-persian-blue;
+      background-color: @color-zumthor;
+
+      &::before {
+        border-color: @color-persian-blue;
+        background-color: @color-zumthor;
+      }
+
+      &::after {
+        background-color: @color-persian-blue;
+      }
+    }
+
+    &:not(:checked) {
+      & + label {
+        color: @color-ebony;
+      }
+    }
+
+    &-input {
+      position: absolute;
+      top: 0;
+      max-width: calc(100% - 56px);
+      height: 100%;
+      left: 42px;
+      border: none;
+      font-size: 14px;
+      color: @color-ebony;
+      background: transparent;
+
+      &:not(:disabled) {
+        z-index: 9;
+      }
+    }
+  }
+
+  .options {
+    position: absolute;
+    top: 100%;
+    left: 1px;
+    width: calc(100% - 2px);
+    max-height: 135px;
+    padding: 4px 0;
+    background: @color-white;
+    box-shadow: 0 0 6px @color-mercury;
+    border-radius: 0 0 6px 6px;
+    z-index: 99;
+    overflow: auto;
+
+    &__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 16px;
+      transition: @animate-300ms;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        height: 1px;
+        background-color: @color-hawkes-blue;
+      }
+
+      span {
+        padding: 10px 0;
+      }
+
+      &:last-child {
+        &::after {
+          display: none;
+        }
+      }
+
+      &:hover,
+      &.selected {
+        cursor: pointer;
+        background-color: @color-zumthor;
+      }
+    }
+
+    .no-options {
+      padding: 10px 16px;
+      color: @color-slate-gray;
+    }
+  }
+
+  .selector {
+    &-wrap {
+      position: relative;
+      width: 100%;
+
+      & + .dimension {
+        right: 36px;
+      }
+    }
+
+    &_main {
+      position: relative;
+
+      .input {
+        padding-right: 70px;
+
+        &:read-only {
+          cursor: pointer;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
+      &.open {
+        .input {
+          border-color: @color-fun-blue;
+          background: @color-zumthor;
+          border-radius: 6px 6px 0 0;
+        }
+
+        & + .options {
+          display: block;
+        }
+
+        .arrow {
+          transform: translateY(-50%) rotate(-180deg);
+        }
+      }
+
+      &.free {
+        &::after {
+          left: 80px;
+          top: 9px;
+        }
+      }
+    }
+
+    div.options {
+      display: none;
+    }
+
+    &.disabled {
+      .input {
+        background-color: @color-athens-gray;
+        border-color: @color-athens-gray-2;
+        pointer-events: none;
+
+        &:read-only {
+          cursor: auto;
+        }
+      }
+
+      .selector {
+        &_main {
+          &:hover {
+            cursor: auto;
+          }
+        }
+      }
+
+      .arrow {
+        display: none;
+      }
+    }
+  }
+
+  .checkbox {
+    &-label {
+      display: block;
+      position: relative;
+      padding-left: 26px;
+      font-size: 12px;
+      line-height: 16px;
+      cursor: pointer;
+      user-select: none;
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 16px;
+        width: 16px;
+        border: 1px solid @color-cadet-blue;
+        background-color: @color-athens-gray;
+        border-radius: 0.25em;
+        transition: 0.3s ease-out;
+
+        &::after {
+          content: '';
+          display: none;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 0.25em;
+          background: @color-hawkes-blue url('/assets/images/icons/check.svg')
+            50% no-repeat;
+        }
+      }
+
+      &:hover .checkbox ~ .checkmark {
+        background-color: @color-hawkes-blue;
+        border-color: @color-chathams-blue;
+      }
+
+      .checkbox {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .checkmark {
+          border-color: @color-chathams-blue;
+
+          &::after {
+            display: block;
+          }
+        }
+
+        &.error {
+          & ~ .checkmark {
+            border-color: @color-punch;
+            box-shadow: 0 0 5px 3px #c10d0d26;
+          }
+        }
+      }
+    }
+  }
+
+  .textarea {
+    height: 105px;
+    padding-top: 12px;
+    resize: none;
+  }
+
+  &.text,
+  &.selector {
+    .tooltip-btn {
+      display: inline-block;
+      height: 16px;
+      margin-left: 8px;
+
+      img {
+        filter: brightness(0);
+      }
+    }
+  }
+
+  &.radio,
+  &.radio-input {
+    .tooltip-btn {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      filter: invert(35%);
+      z-index: 999;
+
+      &.active {
+        filter: none;
+      }
+    }
+
+    &:hover {
+      .tooltip-btn {
+        filter: none;
+      }
+    }
+  }
+
+  .free {
+    cursor: auto !important;
+
+    &::after {
+      content: 'Free';
+      position: absolute;
+      background: @color-iceberg;
+      color: @color-ocean-green;
+      font-size: 10px;
+      line-height: 13px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      left: calc(100% + 8px);
+    }
+  }
+}
+
+.errors {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 5px 6px;
+  border-radius: 2px;
+  font-size: 12px;
+  line-height: 100%;
+  color: @color-persimmon;
+  background-color: @color-chablis;
+}

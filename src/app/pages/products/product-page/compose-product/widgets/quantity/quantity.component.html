@@ -1,0 +1,21 @@
+<div class="quantity-widget" [class.loading]="!isLoaded">
+  <app-numeric-input
+    [properties]="properties"
+    [widgetKey]="widgetKey"
+    [isCombinedWidget]="true"
+    (changeEvent)="changeData($event)"></app-numeric-input>
+
+  <div class="error-block" *ngIf="errorText">
+    <app-notification-block
+      [type]="NOTIFICATION_TYPE.Error"
+      [text]="errorText"></app-notification-block>
+  </div>
+
+  <div class="error-block">
+    <app-notification-block
+      *ngIf="cheaperConfig?.label"
+      [text]="cheaperConfig.description"
+      [buttonText]="cheaperConfig.label"
+      (clickEvent)="onChangePreviousData()"></app-notification-block>
+  </div>
+</div>

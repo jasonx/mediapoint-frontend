@@ -1,0 +1,84 @@
+@import "/src/assets/styles/core/content-general.less";
+
+.contact {
+  .main {
+    display: flex;
+
+    &_form {
+      width: 50vw;
+    }
+
+    &_map {
+      width: 100%;
+      flex: 1;
+    }
+  }
+
+  .section-contacts {
+    padding: 86px 0;
+
+    .container {
+      display: flex;
+    }
+
+    &__title {
+      width: 50%;
+      text-align: left;
+      font-size: 38px;
+      line-height: normal;
+      font-weight: 500;
+    }
+
+    &__info {
+      display: flex;
+      gap: 32px;
+      width: 50%;
+
+      &-title {
+        margin-bottom: 12px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 26px;
+        text-transform: uppercase;
+        color: @color-fun-blue;
+      }
+
+      .contacts {
+        &__item {
+          display: flex;
+          margin-bottom: 10px;
+        }
+
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 20px;
+          height: 25px;
+          margin-right: 10px;
+        }
+
+        .value {
+          min-height: 44px;
+          color: @color-mine-shaft;
+
+          a {
+            color: @color-mine-shaft;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &::ng-deep {
+    .contact-us {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  }
+}

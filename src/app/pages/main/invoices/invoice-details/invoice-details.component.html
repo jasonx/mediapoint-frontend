@@ -1,0 +1,120 @@
+<div class="invoice" *ngIf="invoiceData; else loading">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-container__main invoice">
+      <div class="invoice_top">
+        <div class="title-main">Tax Invoice</div>
+        <div class="status-label" [ngClass]="toKebabCase(invoiceData.status)">
+          {{ invoiceData.status }}
+        </div>
+      </div>
+
+      <div class="app-block">
+        <div class="main">
+          <div class="main__title">Invoice # {{ invoiceData.id }}</div>
+          <div class="main_row">
+            <div class="date">
+              <div class="date_row">
+                <div class="date__title">Date:</div>
+                <div class="date__value">
+                  {{ invoiceData.createdAt | date: 'dd/MM/YY' }}
+                </div>
+              </div>
+              <div class="date_row">
+                <div class="date__title">Due Date:</div>
+                <div class="date__value">
+                  {{ invoiceData.dueDate | date: 'dd/MM/YY' }}
+                </div>
+              </div>
+              <div class="date_row">
+                <div class="date__title">Customer PO:</div>
+                <div class="date__value">
+                  {{ invoiceData.poNumber }}
+                </div>
+              </div>
+              <div class="date_row">
+                <div class="date__title">Order Number:</div>
+                <div class="date__value">
+                  #{{ invoiceData.orderId }}
+                </div>
+              </div>
+            </div>
+            <div class="address">
+              <p *ngFor="let item of invoiceData.general">{{ item }}</p>
+            </div>
+          </div>
+          <div class="main_row">
+            <div class="address-to" *ngIf="invoiceData.billTo">
+              <div class="main_row__title">Bill to:</div>
+              <p>{{ invoiceData.billTo.companyName }}</p>
+              <p>{{ invoiceData.billTo.address1 }}</p>
+              <p>{{ invoiceData.billTo.address2 }}</p>
+              <p>{{ invoiceData.billTo.suburb }}</p>
+              <p>{{ invoiceData.billTo.state }}</p>
+              <p>{{ invoiceData.billTo.postcode }}</p>
+            </div>
+            <div class="address-to" *ngIf="invoiceData.shipTo">
+              <div class="main_row__title">Ship to:</div>
+              <p>{{ invoiceData.shipTo.address1 }}</p>
+              <p>{{ invoiceData.shipTo.address2 }}</p>
+              <p>{{ invoiceData.shipTo.suburb }}</p>
+              <p>{{ invoiceData.shipTo.state }}</p>
+              <p>{{ invoiceData.shipTo.postcode }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary">
+          <div class="title-block">Order summary</div>
+
+          <div class="table-simple">
+            <table class="table">
+              <tr class="table__header">
+                <th>Job number</th>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Kind</th>
+                <th>Total quantity</th>
+                <th>Price</th>
+              </tr>
+              <tr class="table__row" *ngFor="let job of invoiceData.jobs">
+                <td>#{{ job.id }}</td>
+                <td>{{ job.typeOfPrint }}</td>
+                <td>{{ job.size }}</td>
+                <td>{{ job.quantity }}</td>
+                <td>{{ job.numberOfKinds }}</td>
+                <td>{{ job.totalQuantity }}</td>
+                <td>{{ job.price | currency }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="pdf" *ngIf="file">
+          <app-pdf-block [file]="file" [isDownloadBtn]="true"></app-pdf-block>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container__sidebar price fixed">
+      <app-price-data
+        [title]="'Price'"
+        [isInvoice]="true"
+        [priceDetails]="invoiceData.priceDetails"></app-price-data>
+
+      <div class="button" *ngIf="isShowPayBtn">
+        <app-button
+          [buttonConfig]="buttonPaymentConfig"
+          (clickEvent)="onPayment()"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,0 +1,172 @@
+@import "../../../../../../assets/styles/core/variables";
+
+.company-orders {
+  table {
+    border-spacing: 0;
+
+    td {
+      &:first-child {
+        padding-left: 18px;
+      }
+
+      .hover {
+        color: @color-fun-blue;
+        transition: @animate-200ms;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .td {
+      &_icons {
+        display: flex;
+        align-items: center;
+        height: 39px;
+      }
+    }
+
+    th {
+      &:last-child {
+        width: 90px;
+      }
+    }
+
+    &.mat-table {
+      th {
+        &.mat-header-cell {
+          &:first-child {
+            padding-left: 18px;
+          }
+        }
+      }
+
+      .mat-header-row,
+      .mat-row {
+        &::after {
+          width: calc(100% - 2px);
+        }
+      }
+    }
+
+    &.jobs-table {
+      th {
+        &:first-child {
+          width: 57px;
+        }
+      }
+    }
+  }
+
+  .expanded {
+    &_details {
+      overflow: hidden;
+      display: flex;
+    }
+  }
+
+  tr {
+    &.open {
+      transition: none;
+
+      &:hover {
+        background-color: @color-white;
+      }
+
+      td {
+        color: @color-ebony;
+        background-color: @color-selago-2;
+
+        &:first-child,
+        &:last-child {
+          background: @color-white url("../../../../../../assets/images/orders/table-bg.png") no-repeat;
+        }
+
+        &:last-child {
+          background-position-x: 100%;
+        }
+      }
+
+      & + .expanded-row {
+        &:hover {
+          background-color: @color-white;
+        }
+
+        .expanded {
+          &_details {
+            box-shadow: inset 2px -1px 9px rgb(23 53 108 / 10%);
+            border-radius: 0 0 8px 8px;
+            border: 1px solid @color-seashell;
+            border-top: 0;
+            padding-bottom: 8px;
+          }
+        }
+      }
+    }
+
+    &.expanded-row {
+      height: 0;
+
+      td.mat-cell {
+        padding: 0;
+        border: 0;
+      }
+
+      .table {
+        &__header {
+          background-color: @color-selago;
+          box-shadow: inset 2px 2px 6px rgb(23 53 108 / 10%);
+
+          th {
+            padding: 5px 0;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 500;
+            border-bottom: 1px solid @color-link-water;
+            color: @color-ebony;
+          }
+        }
+
+        &__row {
+          transition: @animate-300ms;
+
+          &:hover {
+            background-color: @color-alice-blue;
+          }
+
+          td {
+            padding: 7px 25px 7px 0;
+            color: @color-slate-gray;
+            font-size: 12px;
+            border-bottom: 1px solid @color-link-water;
+          }
+
+          &:last-child {
+            td {
+              border-bottom: none;
+            }
+          }
+
+          .icon {
+            margin-left: 18px;
+
+            &-product {
+              max-width: 16px;
+              max-height: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .arrow {
+    display: flex;
+    padding: 0 20px;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}

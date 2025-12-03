@@ -1,0 +1,69 @@
+@import "./core/variables.less";
+
+.tooltip {
+  position: fixed;
+  padding: 20px 18px;
+  background: @color-ebony;
+  color: @color-white;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 130%;
+  border-radius: 6px;
+  z-index: 999;
+  opacity: 0;
+  transition: @animate-300ms;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 14px);
+    width: 27px;
+    height: 11px;
+    background: url("../../assets/images/icons/triangle.svg") 0 0/contain no-repeat;
+  }
+
+  a {
+    color: @color-white;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &.show {
+    animation: tooltip-slide .2s ease-out .5s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .tooltip {
+    max-height: 150px;
+
+    div {
+      overflow: auto;
+      max-height: 110px;
+      display: block;
+      padding-right: 5px;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+        background-color: @color-chambray;
+      }
+    }
+  }
+}
+
+@keyframes tooltip-slide {
+  0% {
+    opacity: 0;
+    transform: translateY(30%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

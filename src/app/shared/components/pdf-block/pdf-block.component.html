@@ -1,0 +1,27 @@
+<div class="pdf" [ngClass]="customClass" (click)="openPdf()">
+  <img class="pdf__icon" [src]="'./assets/images/icons/' + svg" alt="PDF" />
+  <div class="pdf__content">
+    <div class="name">{{ file.name }}</div>
+    <div class="size">{{ fileSize }}</div>
+  </div>
+  <div class="pdf__buttons">
+    <div
+      class="btn circle circle-blue reload"
+      *ngIf="isReloadBtn"
+      (click)="onReloadFile($event)">
+      <img src="./assets/images/icons/reload.svg" alt="Reload" />
+    </div>
+    <div
+      class="btn circle circle-red trash"
+      *ngIf="isDeleteBtn"
+      (click)="onDeleteFile($event)">
+      <img src="./assets/images/icons/trash-red.svg" alt="Delete" />
+    </div>
+    <div
+      class="btn circle circle-blue download"
+      *ngIf="isDownloadBtn"
+      (click)="onDownloadFile($event)">
+      <img src="./assets/images/icons/download.svg" alt="Download" />
+    </div>
+  </div>
+</div>

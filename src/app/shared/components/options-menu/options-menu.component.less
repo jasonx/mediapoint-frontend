@@ -1,0 +1,60 @@
+@import "../../../../assets/styles/core/variables";
+
+.menu {
+  position: relative;
+
+  &__btn {
+    display: flex;
+    cursor: pointer;
+
+    &.hover {
+      filter: brightness(.5) opacity(.4);
+      transition: @animate-300ms;
+
+      &:hover {
+        filter: none;
+      }
+    }
+
+    &.open {
+      &.hover {
+        filter: none;
+      }
+    }
+  }
+
+  &__block {
+    position: absolute;
+    padding: 12px 10px;
+    background-color: @color-ebony;
+    box-shadow: 0 1px 4px @color-mercury;
+    border-radius: 6px;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 998;
+
+    &.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      padding: 7px 47px 7px 16px;
+      color: @color-white;
+      font-weight: 300;
+      border-radius: 4px;
+      transition: @animate-300ms;
+
+      &:hover {
+        cursor: pointer;
+        background: @color-persian-blue;
+      }
+
+      svg {
+        margin-right: 8px;
+      }
+    }
+  }
+}

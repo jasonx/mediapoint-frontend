@@ -1,0 +1,38 @@
+<ng-container *ngIf="isDataLoaded; else loading">
+  <div class="header">
+    <h5 class="header__title">Notifications</h5>
+    <div class="header__text">Notify me when:</div>
+  </div>
+
+  <div class="body">
+    <form *ngIf="form" class="form" [formGroup]="form" autocomplete="off">
+      <ng-container *ngIf="settings.controls" formArrayName="settings">
+        <ng-container *ngFor="let child of settings.controls; let i = index">
+          <ng-container [formGroupName]="i">
+            <app-field
+              formControlName="enabled"
+              [label]="child.get('title')?.value"
+              [labelColor]="'#111729'"
+              [type]="FIELD_TYPES.Checkbox"></app-field>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </form>
+  </div>
+
+  <div class="footer">
+    <app-button
+      [buttonConfig]="buttonCancelConfig"
+      (clickEvent)="cancel()"></app-button>
+    <app-button
+      [buttonConfig]="buttonSubmitConfig"
+      [isLoaded]="isLoadedBtn"
+      (clickEvent)="submitForm()"></app-button>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader-wrap">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

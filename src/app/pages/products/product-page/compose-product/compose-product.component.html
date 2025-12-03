@@ -1,0 +1,107 @@
+<div class="compose-product" [class.edit-modal]="isEditMode">
+  <ng-container *ngIf="widgets.length; else loading">
+    <div class="main">
+      <div class="container">
+        <mat-accordion>
+          <ng-container *ngFor="let widget of widgets; let i = index">
+            <mat-expansion-panel
+              *ngIf="widget.key !== WidgetsKey.ProductType"
+              hideToggle
+              [expanded]="indexExpanded === i">
+              <mat-expansion-panel-header (click)="indexExpanded = i">
+                <mat-panel-title>
+                  <div class="panel__title" #widgetsTitle>{{ widget.title }}</div>
+                  <div class="panel__value" *ngIf="widget.valueLabel">
+                    {{ widget.valueLabel }}
+                  </div>
+                </mat-panel-title>
+
+                <div class="toggle">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.0495 3.00002L4.2078 10.2417C3.94947 10.5167 3.69947 11.0584 3.64947 11.4334L3.34114 14.1333C3.2328 15.1083 3.9328 15.775 4.89947 15.6084L7.5828 15.15C7.9578 15.0834 8.4828 14.8083 8.74114 14.525L15.5828 7.28335C16.7661 6.03335 17.2995 4.60835 15.4578 2.86668C13.6245 1.14168 12.2328 1.75002 11.0495 3.00002Z"
+                      stroke="#A3A4BD"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M9.90845 4.20801C10.2668 6.50801 12.1334 8.26634 14.4501 8.49967"
+                      stroke="#A3A4BD"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path
+                      d="M2.5 18.333H17.5"
+                      stroke="#A3A4BD"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </mat-expansion-panel-header>
+
+              <div class="panel_content">
+                <div class="panel_content__descr">{{ widget?.contentTitle }}</div>
+
+                <div class="widgets">
+                  <app-widgets
+                    [properties]="widget.properties"
+                    [widgetKey]="widget.key"
+                    [jobId]="jobId"></app-widgets>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </ng-container>
+        </mat-accordion>
+      </div>
+    </div>
+
+    <div class="summary fixed" *ngIf="!isEditMode || myProductId">
+      <app-job-summary [summary]="summary"></app-job-summary>
+
+      <div class="summary_buttons" *ngIf="!myProductId">
+        <ng-container *ngIf="isLoggedIn; else loginButtons">
+          <div class="btn">
+            <app-button
+              [buttonConfig]="buttonCartConfig"
+              [isLoaded]="isLoadedAddToCartBtn"
+              (clickEvent)="addToCart()"></app-button>
+          </div>
+          <div class="btn">
+            <app-button
+              [buttonConfig]="buttonSaveConfig"
+              [isLoaded]="isLoadedSaveBtn"
+              (clickEvent)="saveParameters()"></app-button>
+          </div>
+          <div class="btn">
+            <app-button
+              [buttonConfig]="buttonResetConfig"
+              (clickEvent)="resetParameters()"></app-button>
+          </div>
+        </ng-container>
+
+        <ng-template #loginButtons>
+          <div class="btn">
+            <app-button
+              [buttonConfig]="buttonLoginConfig"
+              (clickEvent)="goToLogin()"></app-button>
+          </div>
+          <div class="btn">
+            <app-button
+              [buttonConfig]="buttonRegisterConfig"
+              (clickEvent)="goToLogin(true)"></app-button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

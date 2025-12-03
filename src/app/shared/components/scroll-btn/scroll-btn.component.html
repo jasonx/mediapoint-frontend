@@ -1,0 +1,57 @@
+<div
+  *ngIf="isToDown"
+  class="scroll-btn"
+  [class.hide]="!isShowBtn"
+  [style.transform]="'rotate(180deg)'"
+  [ngxScrollTo]="'#secondBlock'"
+  [ngxScrollToOffset]="toNegativeNumber(headerHeight$ | async)">
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 22 22"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.2349 8.90432L10.9995 3.66895L5.76416 8.90432"
+      stroke="#1B469B"
+      stroke-width="1.15"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+    <path
+      d="M11 18.3313V3.81543"
+      stroke="#1B469B"
+      stroke-width="1.15"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+</div>
+
+<div
+  *ngIf="!isToDown"
+  class="scroll-btn"
+  [class.hide]="!isShowBtn"
+  (click)="onScroll()">
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 22 22"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.2349 8.90432L10.9995 3.66895L5.76416 8.90432"
+      stroke="#1B469B"
+      stroke-width="1.15"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+    <path
+      d="M11 18.3313V3.81543"
+      stroke="#1B469B"
+      stroke-width="1.15"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+</div>

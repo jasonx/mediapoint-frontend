@@ -1,0 +1,20 @@
+<div class="big-image" [class.center]="data.isCenter">
+  <div class="container">
+    <div class="big-image_top">
+      <div class="left">
+        <h2 class="big-image__title title">
+          {{ data.title }}
+        </h2>
+        <div class="big-image__subtitle subtitle">
+          {{ data.subtitle }}
+        </div>
+      </div>
+
+      <a *ngIf="data.button" [routerLink]="data.button.url" class="big-image__btn">
+        <app-button [buttonConfig]="buttonConfig"></app-button>
+      </a>
+    </div>
+  </div>
+
+  <img class="big-image__img" [src]="data.img" alt="printer" />
+</div>

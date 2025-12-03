@@ -1,0 +1,104 @@
+<div class="title-summary" *ngIf="title">{{ title }}</div>
+
+<div class="jobs" *ngIf="jobs">
+  <div class="job" *ngFor="let job of jobs">
+    <img [src]="job.productImageUrl" class="job__img" alt="Product" />
+    <div class="job__main">
+      <div class="job__title">Job #{{ job.id }}</div>
+
+      <div class="item">
+        <div class="item__title">Type of print:</div>
+        <div class="item__value">{{ job.productType }}</div>
+      </div>
+      <div class="item">
+        <div class="item__title">Label size:</div>
+        <div class="item__value">{{ job.labelSize }}</div>
+      </div>
+      <div class="item">
+        <div class="item__title">Total quantity:</div>
+        <div class="item__value">{{ job.totalQuantity }}</div>
+      </div>
+      <div class="item">
+        <div class="item__title">Price:</div>
+        <div class="item__value">{{ job.price | currency }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="price">
+  <div class="price__row row" *ngIf="priceDetails?.numberOfJobs">
+    <div class="price__title">Number of jobs</div>
+    <div class="price__value">
+      {{ priceDetails?.numberOfJobs }}
+    </div>
+  </div>
+
+  <div class="price__row row">
+    <div class="price__title">Sub total</div>
+    <div class="price__value" *ngIf="priceDetails?.subTotal; else noValue">
+      {{ priceDetails?.subTotal | currency }}
+    </div>
+    <ng-template #noValue><span class="no-value">$—.—</span></ng-template>
+  </div>
+  <div class="price__row row" *ngIf="priceDetails?.package || priceDetails?.package === 0">
+    <div class="price__title">Packaging</div>
+    <div class="price__value" *ngIf="priceDetails?.package; else noValue">
+      {{ priceDetails?.package | currency }}
+    </div>
+    <ng-template #noValue><span class="no-value">$—.—</span></ng-template>
+  </div>
+  <div class="price__row row" *ngIf="priceDetails?.shipping || priceDetails?.shipping === 0">
+    <div class="price__title">Shipping</div>
+    <div class="price__value" *ngIf="priceDetails?.shipping; else noValue">
+      {{ priceDetails?.shipping | currency }}
+    </div>
+    <ng-template #noValue><span class="no-value">$—.—</span></ng-template>
+  </div>
+  <div class="price__row row" *ngIf="!isInvoice">
+    <div class="price__title">GST</div>
+    <div class="price__value" *ngIf="priceDetails?.gst; else noValue">
+      {{ priceDetails?.gst | currency }}
+    </div>
+    <ng-template #noValue><span class="no-value">$—.—</span></ng-template>
+  </div>
+  <div class="price__row row red" *ngIf="priceDetails?.voucher">
+    <div class="price__title">Voucher used</div>
+    <div class="price__value">
+      {{ priceDetails?.voucher | currency }}
+    </div>
+  </div>
+  <div class="price__row row" *ngIf="isInvoice">
+    <div class="price__title">Total GST 10%</div>
+    <div class="price__value" *ngIf="priceDetails?.gst; else noValue">
+      {{ priceDetails?.gst | currency }}
+    </div>
+    <ng-template #noValue><span class="no-value">$—.—</span></ng-template>
+  </div>
+  <div class="price__row row" *ngIf="priceDetails?.shippingPrice">
+    <div class="price__title">Shipping</div>
+    <div class="price__value">
+      {{
+      isShippingString
+      ? priceDetails?.shippingPrice
+      : (priceDetails?.shippingPrice | currency)
+      }}
+    </div>
+  </div>
+  <div class="price__row row" *ngIf="isInvoice">
+    <div class="price__title">Total Net Payments AUD</div>
+    <div class="price__value">
+      {{ priceDetails?.total | currency }}
+    </div>
+  </div>
+  <div class="price__row total row">
+    <div class="total__title">
+      {{ isInvoice ? 'Amount Due AUD' : 'Total price' }}
+    </div>
+    <div class="total__value">
+      {{
+      (isInvoice ? priceDetails?.amountDue : priceDetails?.total) | currency
+      }}
+    </div>
+  </div>
+</div>

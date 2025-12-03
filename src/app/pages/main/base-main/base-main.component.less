@@ -1,0 +1,36 @@
+@import "../../../../assets/styles/core/variables";
+
+.wrap {
+  .top {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+    padding-bottom: 24px;
+
+    &__search {
+      flex: 1;
+    }
+  }
+
+  .input {
+    height: 44px;
+    width: 95%;
+    margin-bottom: -1px;
+    border-color: transparent;
+    color: @color-slate-gray;
+    background: transparent;
+    transition: .3s ease-in;
+
+    &.disabled {
+      pointer-events: none;
+    }
+
+    &:focus {
+      border-bottom: 1px solid #c5c5c5;
+    }
+
+    &::placeholder {
+      color: @color-slate-gray;
+    }
+  }
+}

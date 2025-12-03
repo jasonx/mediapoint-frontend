@@ -1,0 +1,97 @@
+<div class="wrapper">
+  <h3 class="title">{{ isEdit ? 'Edit user' : 'Add user' }}</h3>
+  <form class="form" [formGroup]="form" autocomplete="off">
+    <div class="body">
+      <div class="field">
+        <app-field
+          formControlName="firstName"
+          [control]="form.controls['firstName']"
+          [label]="'First name'"
+          [labelColor]="'#111729'"
+          [type]="FIELD_TYPES.Text">
+        </app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="lastName"
+          [control]="form.controls['lastName']"
+          [label]="'Last name'"
+          [labelColor]="'#111729'"
+          [type]="FIELD_TYPES.Text"></app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="phone"
+          [control]="form.controls['phone']"
+          [label]="'Mobile phone'"
+          [labelColor]="'#111729'"
+          [type]="FIELD_TYPES.Text"
+          [mask]="phoneMask"></app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="email"
+          [control]="form.controls['email']"
+          [label]="'E-mail'"
+          [labelColor]="'#111729'"
+          [type]="FIELD_TYPES.Email"></app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="secondaryEmail"
+          [control]="form.controls['secondaryEmail']"
+          [label]="'Secondary Email'"
+          [labelColor]="'#111729'"
+          [type]="FIELD_TYPES.Email"></app-field>
+      </div>
+
+      <div class="field">
+        <app-field
+          formControlName="typeUser"
+          [control]="form.controls['typeUser']"
+          [label]="'Type of user'"
+          [labelColor]="'#111729'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="typeOfUser"></app-field>
+      </div>
+
+      <div class="field" *ngIf="!isEdit || (isEdit && isChangePassword)">
+        <app-field
+          formControlName="password"
+          [control]="form.controls['password']"
+          [label]="isEdit ? 'Update password' : 'Create password'"
+          [type]="FIELD_TYPES.Password"></app-field>
+      </div>
+
+      <div class="field" *ngIf="isChangePassword">
+        <app-field
+          formControlName="passwordConfirmation"
+          [control]="form.controls['passwordConfirmation']"
+          [label]="'Confirm password'"
+          [type]="FIELD_TYPES.Password"
+          (inputEvent)="addNewPass()"></app-field>
+      </div>
+
+      <div class="change-pass-btn">
+        <app-button
+          *ngIf="isEdit && !isChangePassword"
+          [buttonConfig]="buttonPasswordConfig"
+          (clickEvent)="changePassword()"></app-button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <app-button
+        (clickEvent)="cancel()"
+        [buttonConfig]="buttonCancelConfig"></app-button>
+      <app-button
+        [isLoaded]="isLoadedBtn"
+        (clickEvent)="submitForm()"
+        [buttonConfig]="buttonSubmitConfig"></app-button>
+    </div>
+  </form>
+</div>

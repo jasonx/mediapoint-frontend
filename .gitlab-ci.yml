@@ -1,0 +1,47 @@
+image:
+  name: sonarsource/sonar-scanner-cli:latest
+  entrypoint: [""]
+
+variables:
+  # GitLab project Settings > CI/CD > Variables
+  SONAR_TOKEN: "${SONAR_TOKEN}"
+  SONAR_HOST_URL: "${SONAR_HOST_URL}"
+  SONAR_PROJECT_KEY: "${CI_PROJECT_PATH}"
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+
+stages:
+  - sonarqube-check
+  - sonarqube-vulnerability-report
+
+sonarqube-check:
+  stage: sonarqube-check
+  cache:
+    policy: pull
+    key: "${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - sonar-scanner/
+  script:
+    - sonar-scanner
+  allow_failure: true
+  tags: [ docker ]
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == 'dev'
+    - if: $CI_COMMIT_BRANCH == 'development'
+    - if: $CI_COMMIT_BRANCH == 'main'
+
+sonarqube-vulnerability-report:
+  stage: sonarqube-vulnerability-report
+  script:
+    - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=${SONAR_PROJECT_KEY}&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
+  allow_failure: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == 'dev'
+    - if: $CI_COMMIT_BRANCH == 'development'
+    - if: $CI_COMMIT_BRANCH == 'main'
+  artifacts:
+    expire_in: 1 day
+    reports:
+      sast: gl-sast-sonar-report.json

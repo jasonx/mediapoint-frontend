@@ -1,0 +1,123 @@
+<div
+  class="filter-labels"
+  *ngIf="filterLabels && (filterLabels | json) !== '{}'">
+  <div class="label" *ngIf="filterLabels?.status">
+    <span class="label__title">Status:</span>
+    <span class="label__value">{{ filterLabels.status }}</span>
+    <img
+      class="label__close"
+      (click)="clearLabel(['status'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div
+    class="label"
+    *ngIf="filterLabels?.productSizeFrom || filterLabels?.productSizeTo">
+    <ng-container
+      *ngIf="filterLabels?.productSizeFrom && filterLabels?.productSizeTo">
+      <span class="label__title">Product size range:</span>
+      <span class="label__value">
+        {{ filterLabels.productSizeFrom }} mm &#8212;
+        {{ filterLabels.productSizeTo }} mm
+      </span>
+    </ng-container>
+
+    <ng-container
+      *ngIf="filterLabels?.productSizeFrom && !filterLabels?.productSizeTo">
+      <span class="label__title">Min product size:</span>
+      <span class="label__value"> {{ filterLabels.productSizeFrom }} mm </span>
+    </ng-container>
+
+    <ng-container
+      *ngIf="!filterLabels?.productSizeFrom && filterLabels?.productSizeTo">
+      <span class="label__title">Max product size:</span>
+      <span class="label__value"> {{ filterLabels.productSizeTo }} mm </span>
+    </ng-container>
+
+    <img
+      class="label__close"
+      (click)="clearLabel(['productSizeFrom', 'productSizeTo'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div
+    class="label"
+    *ngIf="filterLabels?.quantityFrom || filterLabels?.quantityTo">
+    <ng-container
+      *ngIf="filterLabels?.quantityFrom && filterLabels?.quantityTo">
+      <span class="label__title">Quantity range:</span>
+      <span class="label__value">
+        {{ filterLabels.quantityFrom }} &#8212;
+        {{ filterLabels.quantityTo }}
+      </span>
+    </ng-container>
+
+    <ng-container
+      *ngIf="filterLabels?.quantityFrom && !filterLabels?.quantityTo">
+      <span class="label__title">Min quantity:</span>
+      <span class="label__value"> {{ filterLabels.quantityFrom }} </span>
+    </ng-container>
+
+    <ng-container
+      *ngIf="!filterLabels?.quantityFrom && filterLabels?.quantityTo">
+      <span class="label__title">Max quantity:</span>
+      <span class="label__value"> {{ filterLabels.quantityTo }} </span>
+    </ng-container>
+
+    <img
+      class="label__close"
+      (click)="clearLabel(['quantityFrom', 'quantityTo'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div class="label" *ngIf="filterLabels?.startDate">
+    <span class="label__title">Date Range:</span>
+    <span class="label__value">
+      {{ filterLabels.startDate | date: 'dd/MM/YYYY' }} &#8212;
+      {{ filterLabels.endDate | date: 'dd/MM/YYYY' }}
+    </span>
+    <img
+      class="label__close"
+      (click)="clearLabel(['startDate', 'endDate'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div class="label" *ngIf="filterLabels?.priceFrom !== undefined">
+    <span class="label__title">$ Value range:</span>
+    <span class="label__value">
+      {{ filterLabels.priceFrom | currency }} &#8212;
+      {{ filterLabels.priceTo | currency }}
+    </span>
+    <img
+      class="label__close"
+      (click)="clearLabel(['priceFrom', 'priceTo'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div class="label" *ngIf="filterLabels?.typeOfPrint">
+    <span class="label__title">Type of print:</span>
+    <span class="label__value">{{ filterLabels.typeOfPrint?.label }}</span>
+    <img
+      class="label__close"
+      (click)="clearLabel(['typeOfPrint'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div class="label" *ngIf="filterLabels?.customer">
+    <span class="label__title">Customer:</span>
+    <span class="label__value">{{ filterLabels.customer?.label }}</span>
+    <img
+      class="label__close"
+      (click)="clearLabel(['customer'])"
+      src="./assets/images/icons/close-blue.svg"
+      alt="Close" />
+  </div>
+
+  <div class="clear" (click)="clearAll()">Clear All</div>
+</div>

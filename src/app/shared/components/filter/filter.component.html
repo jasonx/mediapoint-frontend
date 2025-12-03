@@ -1,0 +1,164 @@
+<div class="filter" [class.open]="isOpen" *ngIf="filterConfig.isLoaded && form">
+  <app-button
+    [buttonConfig]="filterButtonConfig"
+    (clickEvent)="isOpen = !isOpen"></app-button>
+
+  <div class="filter__overlay" (click)="onClose()"></div>
+  <form class="filter_main" [formGroup]="form">
+    <div class="main__title">Filter</div>
+
+    <div class="status" *ngIf="filterConfig.statuses?.length">
+      <div class="field">
+        <app-field
+          formControlName="status"
+          [control]="form.controls['status']"
+          [label]="'Status'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="filterConfig.statuses || []"
+          [noOptionsText]="'No options'"
+          [placeholder]="'Select status'"></app-field>
+      </div>
+    </div>
+
+    <div class="print" *ngIf="filterConfig.typeOfPrint?.length">
+      <div class="field">
+        <app-field
+          formControlName="typeOfPrint"
+          [control]="form.controls['typeOfPrint']"
+          [label]="'Type of print'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="filterConfig.typeOfPrint || []"
+          [noOptionsText]="'No options'"
+          [placeholder]="'Select type of print'"></app-field>
+      </div>
+    </div>
+
+    <div class="customer" *ngIf="filterConfig.customers?.length">
+      <div class="field">
+        <app-field
+          formControlName="customer"
+          [control]="form.controls['customer']"
+          [label]="'Customer'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="filterConfig.customers || []"
+          [noOptionsText]="'No options'"
+          [placeholder]="'Select customer'"></app-field>
+      </div>
+    </div>
+
+    <div class="date" *ngIf="filterConfig.isFilterDate">
+      <div class="label">
+        {{ filterConfig.filterDateTitle || 'Dispatch data range' }}
+      </div>
+      <mat-form-field appearance="fill" (click)="picker.open()">
+        <mat-date-range-input
+          [rangePicker]="picker"
+          [min]="filterConfig.minCreatedAt"
+          [max]="filterConfig.maxCreatedAt">
+          <input
+            matStartDate
+            formControlName="startDate"
+            placeholder="Start date" />
+          <input matEndDate formControlName="endDate" placeholder="End date" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
+    <div class="size" *ngIf="filterConfig.isSizeRange">
+      <div class="label">Product size range</div>
+      <div class="range__fields">
+        <div class="field">
+          <app-field
+            formControlName="productSizeFrom"
+            [control]="form.controls['productSizeFrom']"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'min'"
+            [dimension]="'mm'"
+            [mask]="WITHOUT_LETTERS_MASK"></app-field>
+        </div>
+        <div class="field">
+          <app-field
+            formControlName="productSizeTo"
+            [control]="form.controls['productSizeTo']"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'max'"
+            [dimension]="'mm'"
+            [mask]="WITHOUT_LETTERS_MASK"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="quantity" *ngIf="filterConfig.isQuantity">
+      <div class="label">Quantity range</div>
+      <div class="range__fields">
+        <div class="field">
+          <app-field
+            formControlName="quantityFrom"
+            [control]="form.controls['quantityFrom']"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'min'"
+            [mask]="WITHOUT_LETTERS_MASK"></app-field>
+        </div>
+        <div class="field">
+          <app-field
+            formControlName="quantityTo"
+            [control]="form.controls['quantityTo']"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'max'"
+            [mask]="WITHOUT_LETTERS_MASK"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="range" *ngIf="filterConfig.isFilterPrise">
+      <div class="range__title">$ Value range</div>
+      <div class="range_wrap">
+        <div class="slider-track" #sliderTrack></div>
+        <input
+          #minPrice
+          type="range"
+          [min]="filterConfig.minPrice"
+          [max]="filterConfig.maxPrice"
+          [value]="valueRange.min"
+          (input)="updateValueRange(+minPrice.value, 'min')" />
+        <input
+          #maxPrice
+          type="range"
+          [min]="filterConfig.minPrice"
+          [max]="filterConfig.maxPrice"
+          [value]="valueRange.max"
+          (input)="updateValueRange(+maxPrice.value, 'max')" />
+      </div>
+
+      <div class="range__fields">
+        <div class="field">
+          <app-field
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'min'"
+            [setInputValue]="valueRange.min | currency"
+            [mask]="WITHOUT_LETTERS_MASK"
+            (blurEvent)="updateValueRange($event, 'min')"></app-field>
+        </div>
+        <div class="field">
+          <app-field
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'max'"
+            [setInputValue]="valueRange.max | currency"
+            [mask]="WITHOUT_LETTERS_MASK"
+            (blurEvent)="updateValueRange($event, 'max')"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="main__buttons">
+      <app-button
+        [buttonConfig]="resultsButtonConfig"
+        (clickEvent)="search()"></app-button>
+      <app-button
+        [buttonConfig]="clearButtonConfig"
+        (clickEvent)="clear()"></app-button>
+    </div>
+  </form>
+</div>

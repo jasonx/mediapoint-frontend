@@ -1,0 +1,123 @@
+<div class="equipment">
+  <app-hero-banner [data]="heroData"></app-hero-banner>
+  <app-advantages [data]="advantages"></app-advantages>
+
+  <div class="equipment-1">
+    <div class="container">
+      <h2 class="equipment-1__title title">Durst Tau RSC</h2>
+      <div class="equipment-1__subtitle subtitle">
+        Installed in 2022, our Durst Tau RSC is a high-performance digital label
+        press built for precision and speed. It delivers 1200 dpi print quality
+        with durable UV inks for outstanding colour, detail, and outdoor
+        longevity. Perfect for trade label production, it allows us to produce
+        short to medium-run jobs with incredible consistency and fast
+        turnaround.
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="container">
+        <div class="content_wrap">
+          <div class="block-wrap">
+            <div class="block" *ngIf="labels">
+              <app-card [data]="labels"></app-card>
+            </div>
+          </div>
+
+          <div class="content__img">
+            <img src="/assets/images/equipment/eq-1.png" alt="img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="equipment-1__img container">
+      <img src="/assets/images/equipment/labels.jpg" alt="labels" />
+    </div>
+  </div>
+
+  <div class="equipment-2">
+    <div class="container">
+      <div class="equipment-2_top">
+        <div class="left">
+          <h2 class="equipment-2__title title">Durst 512R LED Plus</h2>
+          <div class="equipment-2__subtitle subtitle">
+            Installed in May 2020, the Durst 512R LED Plus is a highly
+            productive 5.2m wide roll to roll printing machine. This printer can
+            output up to 364 square meters per hour. It is equipped with CMYK
+            inks and offers some of the best dot placement and print quality in
+            the market. Also being from Durst it is a reliable workhorse.
+          </div>
+        </div>
+        <div class="block" *ngIf="banner">
+          <app-card [data]="banner"></app-card>
+        </div>
+      </div>
+
+      <div class="equipment-2__img">
+        <img src="/assets/images/equipment/printer.jpg" alt="img" />
+      </div>
+    </div>
+  </div>
+
+  <div class="equipment-1">
+    <div class="container">
+      <h2 class="equipment-1__title title">Durst P5 D4</h2>
+      <div class="equipment-1__subtitle subtitle">
+        Installed in 2023, our Durst P5 D4 flatbed printer can produce up to 200
+        boards per hour with UV inks. Alongside our new pallet-to-pallet
+        automation, we’ve streamlined production for faster, hands-free printing
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="container">
+        <div class="content_wrap">
+          <div class="block-wrap">
+            <div class="block" *ngIf="rigidBoards">
+              <app-card [data]="rigidBoards"></app-card>
+            </div>
+          </div>
+
+          <div class="content__img">
+            <img src="/assets/images/equipment/eq-3.jpg" alt="img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="equipment-4">
+    <div class="container">
+      <h2 class="equipment-4__title title">Oce Colorado</h2>
+      <div class="equipment-4__subtitle subtitle">
+        Installed in February 2021, our Oce Colorado uses UV Gel technology
+        which has a really sharp print quality. This printer specializes in roll
+        to roll media and rolls up to 100m long.
+      </div>
+
+      <div class="blocks" *ngIf="posters">
+        <div class="block">
+          <app-card [data]="posters"></app-card>
+        </div>
+        <div class="block">
+          <app-card [data]="display"></app-card>
+        </div>
+        <div class="block">
+          <app-card [data]="stickers"></app-card>
+        </div>
+      </div>
+    </div>
+
+    <img
+      class="equipment-4__img"
+      src="/assets/images/equipment/eq-4.jpg"
+      alt="img" />
+  </div>
+  <app-contact-us-form></app-contact-us-form>
+</div>
+
+<app-scroll-btn></app-scroll-btn>
+<div class="block-disabled loader-wrap" *ngIf="!isLoaded">
+  <app-loader></app-loader>
+</div>

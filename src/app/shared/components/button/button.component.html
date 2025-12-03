@@ -1,0 +1,24 @@
+<div class="btn-wrap" [tooltip]="buttonConfig.tooltip || ''">
+  <button
+    class="btn"
+    [type]="buttonConfig.type || BUTTON_TYPE.Button"
+    [class.loading]="!isLoaded"
+    [ngClass]="buttonClass"
+    [style]="{
+      padding: buttonConfig.padding,
+      color: buttonConfig.color,
+      fontWeight: buttonConfig.fontWeight,
+      minWidth: buttonConfig.minWidth
+    }"
+    (click)="onClick()"
+    [disabled]="buttonConfig.isDisabled">
+    <img
+      *ngIf="buttonConfig.icon"
+      class="icon"
+      alt="Icon"
+      [src]="'./assets/images/icons/' + buttonConfig.icon" />
+    <span class="text" [innerHtml]="buttonConfig.text"></span>
+
+    <span *ngIf="!isLoaded" class="loader"></span>
+  </button>
+</div>

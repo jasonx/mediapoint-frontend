@@ -1,0 +1,13 @@
+<app-header *ngIf="!isHideHeader"></app-header>
+
+<div class="content">
+  <div class="content_nav" *ngIf="isLoggedIn && !isHideHeader">
+    <app-navigation></app-navigation>
+  </div>
+  <div class="content_main" [style.width]="'calc(100vw - ' + (isLoggedIn ? '132px' : '0px') + ')'">
+    <div class="main-wrap">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer *ngIf="!isHideHeader"></app-footer>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+@import "variables";
+
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: @color-catskill-white;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: @color-slate-gray;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgb(44 44 44 / 20%);
+  border-radius: 10px;
+  background-color: @color-catskill-white;
+}
+
+textarea,
+div {
+  &::-webkit-scrollbar {
+    width: 12px;
+    background-color: @color-white;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: @color-mercury;
+    border: 4px solid @color-white;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: none;
+    background-color: transparent;
+  }
+}

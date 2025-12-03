@@ -1,0 +1,46 @@
+@import "../../../../../assets/styles/core/variables";
+
+::ng-deep {
+  .app-block {
+    .tabs {
+      height: 28px !important;
+
+      .tab {
+        font-size: 10px;
+      }
+    }
+
+    .mat-form-field-type-mat-date-range-input .mat-form-field-infix {
+      padding-bottom: 8px;
+      border-top-width: 7px;
+    }
+  }
+
+  .mat-datepicker-popup {
+    transform: translateX(-65px);
+  }
+}
+
+.date {
+  position: relative;
+  width: 250px;
+  padding-right: 20px;
+
+  &__clear {
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    padding: 6px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}
+
+.chart-bar {
+  padding: 0 20px;
+
+  canvas {
+    width: 100% !important;
+    max-height: 260px;
+  }
+}

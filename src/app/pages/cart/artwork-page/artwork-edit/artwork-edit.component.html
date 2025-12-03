@@ -1,0 +1,121 @@
+<div class="artwork-edit" *ngIf="artwork">
+  <div class="main">
+    <img *ngIf="artwork.previewUrl" [src]="artwork.previewUrl" alt="example" class="main__artwork" [class.error]="isError" />
+    <div [style.opacity]="artwork.previewUrl ? 0 : 1" class="upload">
+      <app-upload-big-file
+        [id]="artwork.id"
+        (startLoadedFileEvent)="startLoadedFile()"
+        (loadedFileEvent)="fileDownloaded($event)"
+        [accept]="accept"></app-upload-big-file>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar_wrap">
+      <div class="sidebar__top">
+        <div class="sidebar__name">{{ artwork.fileName }}</div>
+        <div class="sidebar__text">Image size: {{ artwork.imageSize }}</div>
+        <span class="sidebar__status status-label" [ngClass]="toKebabCase(artwork.status)">
+          {{ artwork.status }}
+        </span>
+
+        <div class="error-block" *ngIf="isError">
+          <div class="error-block__title">Artwork error</div>
+          <div class="error-block__text">
+            {{ artwork.rejectComment }}
+          </div>
+        </div>
+      </div>
+
+      <div class="improvement-buttons">
+        <div class="btn" *ngIf="isError" (click)="onTrimbox()">
+          <div class="btn-wrap">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.8337 5.13464V11.868C13.727 11.848 13.6137 11.8346 13.5003 11.8346C12.5803 11.8346 11.8337 12.5813 11.8337 13.5013C11.8337 13.6146 11.847 13.728 11.867 13.8346H5.13366C5.15366 13.728 5.16699 13.6146 5.16699 13.5013C5.16699 12.5813 4.42033 11.8346 3.50033 11.8346C3.38699 11.8346 3.27366 11.848 3.16699 11.868V5.13464C3.27366 5.15464 3.38699 5.16797 3.50033 5.16797C4.42033 5.16797 5.16699 4.4213 5.16699 3.5013C5.16699 3.38797 5.15366 3.27464 5.13366 3.16797H11.867C11.847 3.27464 11.8337 3.38797 11.8337 3.5013C11.8337 4.4213 12.5803 5.16797 13.5003 5.16797C13.6137 5.16797 13.727 5.15464 13.8337 5.13464Z"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M5.16634 3.4987C5.16634 4.4187 4.41967 5.16536 3.49967 5.16536C3.38634 5.16536 3.27301 5.15203 3.16634 5.13203C2.40634 4.9787 1.83301 4.30536 1.83301 3.4987C1.83301 2.5787 2.57967 1.83203 3.49967 1.83203C4.30634 1.83203 4.97967 2.40536 5.13301 3.16536C5.15301 3.27203 5.16634 3.38536 5.16634 3.4987Z"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M15.1663 3.4987C15.1663 4.30536 14.593 4.9787 13.833 5.13203C13.7263 5.15203 13.613 5.16536 13.4997 5.16536C12.5797 5.16536 11.833 4.4187 11.833 3.4987C11.833 3.38536 11.8463 3.27203 11.8663 3.16536C12.0197 2.40536 12.693 1.83203 13.4997 1.83203C14.4197 1.83203 15.1663 2.5787 15.1663 3.4987Z"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M5.16634 13.4987C5.16634 13.612 5.15301 13.7254 5.13301 13.832C4.97967 14.592 4.30634 15.1654 3.49967 15.1654C2.57967 15.1654 1.83301 14.4187 1.83301 13.4987C1.83301 12.692 2.40634 12.0187 3.16634 11.8654C3.27301 11.8454 3.38634 11.832 3.49967 11.832C4.41967 11.832 5.16634 12.5787 5.16634 13.4987Z"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M15.1663 13.4987C15.1663 14.4187 14.4197 15.1654 13.4997 15.1654C12.693 15.1654 12.0197 14.592 11.8663 13.832C11.8463 13.7254 11.833 13.612 11.833 13.4987C11.833 12.5787 12.5797 11.832 13.4997 11.832C13.613 11.832 13.7263 11.8454 13.833 11.8654C14.593 12.0187 15.1663 12.692 15.1663 13.4987Z"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Autofix trimbox
+          </div>
+        </div>
+        <div class="btn" *ngIf="isError" (click)="onScale()">
+          <div class="btn-wrap">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.99967 15.1654H9.99967C13.333 15.1654 14.6663 13.832 14.6663 10.4987V6.4987C14.6663 3.16536 13.333 1.83203 9.99967 1.83203H5.99967C2.66634 1.83203 1.33301 3.16536 1.33301 6.4987V10.4987C1.33301 13.832 2.66634 15.1654 5.99967 15.1654Z"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M12 4.5L4 12.5" stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M11.9997 7.16667V4.5H9.33301" stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M4 9.83203V12.4987H6.66667" stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Auto scale
+          </div>
+        </div>
+        <div class="btn" *ngIf="isError" (click)="onRotate()">
+          <div class="btn-wrap">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.92639 3.88823C9.34639 3.7149 8.70639 3.60156 7.99973 3.60156C4.80639 3.60156 2.21973 6.18823 2.21973 9.38156C2.21973 12.5816 4.80639 15.1682 7.99973 15.1682C11.1931 15.1682 13.7797 12.5816 13.7797 9.38823C13.7797 8.20156 13.4197 7.0949 12.8064 6.1749"
+                stroke="#020203" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M10.7538 4.04536L8.82715 1.83203" stroke="#020203" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M10.7535 4.04688L8.50684 5.68687" stroke="#020203" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            Rotate
+          </div>
+        </div>
+        <div class="btn" (click)="onDownload()">
+          <div class="btn-wrap">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.21289 8.28516L7.91956 9.99182L9.62622 8.28516" stroke="#020203" stroke-miterlimit="10"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7.91992 3.16797V9.94797" stroke="#020203" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M13.3337 8.62109C13.3337 11.5678 11.3337 13.9544 8.00033 13.9544C4.66699 13.9544 2.66699 11.5678 2.66699 8.62109"
+                stroke="#020203" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Download
+          </div>
+        </div>
+        <div class="btn" (click)="onUploadNewFile()">
+          <div class="btn-wrap">
+            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.21289 4.83167L7.91956 3.125L9.62622 4.83167" stroke="#020203" stroke-miterlimit="10"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M7.91992 9.95188V3.17188" stroke="#020203" stroke-miterlimit="10" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path
+                d="M2.66699 8.5C2.66699 11.4467 4.66699 13.8333 8.00033 13.8333C11.3337 13.8333 13.3337 11.4467 13.3337 8.5"
+                stroke="#020203" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Upload new PDF
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar_footer">
+      <div class="sidebar_footer__btn">
+        <app-button [buttonConfig]="buttonCloseConfig" (clickEvent)="close()"></app-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader-wrap" *ngIf="isLoading">
+      <app-loader></app-loader>
+    </div>
+</div>

@@ -1,0 +1,179 @@
+<div class="field" [ngClass]="type">
+  <ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="FIELD_TYPES.Password">
+      <label class="field_title" [ngStyle]="{ color: labelColor }" [for]="label.toLowerCase()">
+        {{ label }}
+        <span *ngIf="isRequired">&nbsp;*</span>
+      </label>
+      <input class="input" autocomplete="new-password" #input [id]="label.toLowerCase()" [name]="label.toLowerCase()"
+        [class.error]="isError" [type]="type" [placeholder]="placeholder" [(ngModel)]="value"
+        (blur)="onChange(input.value)" (focus)="onFocus()" (keyup)="writeValue(input.value)" />
+      <img class="field__eye" [src]="
+          'assets/images/icons/eye-' +
+          (isShowPassword ? 'show' : 'hide') +
+          '.svg'
+        " alt="" (click)="onChangeDisplayPass()" />
+    </ng-container>
+
+    <ng-container *ngSwitchCase="FIELD_TYPES.Radio">
+      <div class="input-wrap" [class.disabled]="isDisabled">
+        <input #input
+          class="input radio"
+          [type]="FIELD_TYPES.Radio"
+          [name]="name"
+          [value]="radioValue"
+          [checked]="getIsSelected(radioValue)"
+          (change)="writeValue(input.value)" />
+        <label [ngStyle]="{ color: labelColor }">
+          {{ label }}
+        </label>
+
+        <ng-container *ngTemplateOutlet="tooltipBtn"></ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="FIELD_TYPES.RadioInput">
+      <div class="input-wrap">
+        <input class="input radio" [type]="FIELD_TYPES.Radio" [name]="name" [checked]="isRadioInputChecked"
+          (change)="writeRadioValue(input.value)" />
+        <label></label>
+        <input #input class="radio-input" [placeholder]="placeholder" [disabled]="isDisabled"
+          [(ngModel)]="radioValue.title" (keyup)="writeRadioValue(input.value)" />
+
+        <div *ngIf="dimension" class="dimension">{{ dimension }}</div>
+      </div>
+
+      <ng-container *ngTemplateOutlet="tooltipBtn"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="FIELD_TYPES.Selector">
+      <div class="selector" [class.disabled]="isDisabled" (clickOutside)="onClickedOutside()">
+        <label *ngIf="label" class="field_title" [ngStyle]="{ color: labelColor }">
+          {{ label }}
+          <span *ngIf="isRequired">&nbsp;*</span>
+          <ng-container *ngTemplateOutlet="tooltipBtn"></ng-container>
+        </label>
+
+        <div class="input-wrap">
+          <div class="selector-wrap">
+            <div class="selector_main" [ngClass]="{ open: isSelectorOpen, free: value === '1 or more' }"
+              (click)="!isDisabled ? (isSelectorOpen = !isSelectorOpen) : null">
+              <input autocomplete="off" class="input" [class.error]="isError" [readonly]="true" [type]="type"
+                [disabled]="isDisabled" [placeholder]="placeholder" [(ngModel)]="value?.label || value" />
+
+              <img class="arrow" [src]="
+                  'assets/images/icons/arrow-down' +
+                  (isDisabled ? '-disabled' : '') +
+                  '.svg'
+                " alt="Expand" />
+            </div>
+            <div class="options">
+              <div class="options__item" *ngFor="let option of options" [class.selected]="getIsSelected(option)"
+                (click)="onSelected(option)">
+                <span class="ellipsis" [class.free]="option === 'Unlimited'">
+                  {{ option === 'Unlimited' ? '1 or more' : option.label || option }}
+                </span>
+              </div>
+              <div class="no-options" *ngIf="!options?.length">
+                {{ noOptionsText }}
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="dimension" class="dimension">{{ dimension }}</div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="FIELD_TYPES.SearchByText">
+      <label class="field_title" [ngStyle]="{ color: labelColor }" [for]="label.toLowerCase()">
+        {{ label }}
+        <span *ngIf="isRequired">&nbsp;*</span>
+        <ng-container *ngTemplateOutlet="tooltipBtn"></ng-container>
+      </label>
+      <div class="input-wrap">
+        <input #input class="input" [id]="label.toLowerCase()" [name]="label.toLowerCase()"
+          [autocomplete]="isAutocomplete ? label.toLowerCase() : 'off'" [class.error]="isError" [type]="type"
+          [placeholder]="placeholder" [(ngModel)]="value" (blur)="onChange(input.value); onClickedOutside()"
+          (focus)="onFocus()" (keyup)="writeValue(input.value)" />
+
+        <div class="options" *ngIf="(options.length || isNotFound) && isFocus">
+          <div class="options__item" *ngFor="let option of options" [class.selected]="getIsSelected(option)"
+            (click)="onSelected(option)">
+            <span class="ellipsis">{{ option.label || option }}</span>
+          </div>
+          <div class="no-options" *ngIf="isNotFound">
+            No results found. Please check your input.
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="FIELD_TYPES.Checkbox">
+      <label class="checkbox-label">
+        <span [innerHtml]="label"></span>
+        <span *ngIf="isRequired">&nbsp;*</span>
+        <input #input class="checkbox" [class.error]="isError" [type]="type" [name]="label" [checked]="value"
+          (change)="writeValue(input.checked)" />
+        <span class="checkmark" [tooltip]="tooltipText"></span>
+      </label>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="FIELD_TYPES.Textarea">
+      <label *ngIf="label" class="field_title" [ngStyle]="{ color: labelColor }" [for]="label.toLowerCase()">
+        {{ label }}
+        <span *ngIf="isRequired">&nbsp;*</span>
+      </label>
+      <textarea class="input textarea" #input [id]="label.toLowerCase()" [name]="label.toLowerCase()"
+        [placeholder]="placeholder" [(ngModel)]="value" (keyup)="writeValue(input.value)"></textarea>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <label class="field_title" [ngStyle]="{ color: labelColor }" [for]="label.toLowerCase()">
+        {{ label }}
+        <span *ngIf="isRequired">&nbsp;*</span>
+        <ng-container *ngTemplateOutlet="tooltipBtn"></ng-container>
+      </label>
+      <div class="input-wrap" [class.disabled]="isDisabled">
+        <input #input class="input" [id]="label.toLowerCase()" [name]="label.toLowerCase()"
+          [autocomplete]="isAutocomplete ? label.toLowerCase() : 'off'" [class.error]="isError" [type]="type"
+          [placeholder]="placeholder" [(ngModel)]="value" (blur)="onChange(input.value)" (focus)="onFocus()"
+          (keyup)="writeValue(input.value)" />
+
+        <div *ngIf="dimension" class="dimension">{{ dimension }}</div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #tooltipBtn>
+    <div *ngIf="tooltipText" class="tooltip-btn" [class.active]="getIsSelected(radioValue)" [tooltip]="tooltipText"
+      [maxWidth]="207">
+      <img src="assets/images/icons/icon-info.svg" alt="Info" />
+    </div>
+  </ng-template>
+
+  <div class="errors" *ngIf="isError">
+    <ng-container *ngIf="
+        control.errors?.hasOwnProperty('required') ||
+          control.errors?.hasOwnProperty('email') ||
+          control.errors?.hasOwnProperty('minlength');
+        else customErrors
+      ">
+      <span *ngIf="control.errors?.hasOwnProperty('required')">
+        Required field
+      </span>
+      <span *ngIf="control.errors?.hasOwnProperty('email')">
+        Not correct email format
+      </span>
+      <span *ngIf="control.errors?.hasOwnProperty('minlength')">
+        Minimum length {{ control.errors?.['minlength']?.requiredLength }}
+      </span>
+    </ng-container>
+
+    <ng-template #customErrors>
+      <ng-container *ngIf="control.errors">
+        <span>{{ errorText }}</span>
+      </ng-container>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+@import (less) "/src/assets/styles/core/variables.less";
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  background: @color-white;
+  padding: 64px 0;
+  width: 132px;
+  height: 100%;
+  border-right: 1px solid @color-alice-blue;
+  box-shadow: 0 -5px 12px rgb(216 231 246 / 40%);
+
+  &_list {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    flex-direction: column;
+    row-gap: 24px;
+    flex: 1;
+    height: calc(100vh - var(--header-height) - 87px);
+    overflow: auto;
+
+    .item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: @color-waterloo;
+      transition: @animate-200ms;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background-color: @color-mariner;
+        opacity: 0;
+        transition: @animate-200ms;
+      }
+
+      &__icon {
+        path {
+          transition: @animate-200ms;
+        }
+      }
+
+      &.active {
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      &:hover,
+      &.active {
+        color: @color-mariner;
+
+        .item {
+          &__icon {
+            path {
+              stroke: @color-mariner;
+            }
+
+            .link-icon {
+              path {
+                fill: @color-mariner;
+                stroke: transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

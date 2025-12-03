@@ -1,0 +1,12 @@
+<div class="faq">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle *ngFor="let faq of data">
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ faq.title }} </mat-panel-title>
+  
+        <div class="toggle"></div>
+      </mat-expansion-panel-header>
+      <div [innerHtml]="faq.content"></div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

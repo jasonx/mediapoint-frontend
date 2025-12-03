@@ -1,0 +1,42 @@
+@import (less) "/src/assets/styles/core/variables.less";
+
+.header {
+  &__title {
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__text {
+    margin-bottom: 24px;
+    line-height: 21px;
+    color: @color-slate-gray;
+  }
+}
+
+.body {
+  margin-bottom: 24px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 28px;
+
+    &::ng-deep {
+      app-field {
+        .checkbox {
+          .checkbox-label {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;
+}

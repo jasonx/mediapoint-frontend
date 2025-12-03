@@ -1,0 +1,37 @@
+@import "../../../../assets/styles/core/variables";
+
+.invoices {
+  .pay-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+    padding: 14px 40px;
+    box-shadow: 0 -2px 2px @color-mercury;
+    border-radius: 6px 6px 0 0;
+    background: @color-white;
+    transform: translateY(100%);
+    transition: @animate-300ms;
+
+    &.show {
+      transform: translateY(0);
+    }
+
+    .amount {
+      display: flex;
+      font-weight: 600;
+
+      &__title {
+        margin-right: 8px;
+        color: @color-slate-gray;
+        font-size: 16px;
+      }
+
+      &__value {
+        font-size: 18px;
+      }
+    }
+  }
+}

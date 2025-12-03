@@ -1,0 +1,25 @@
+<div class="widget radio">
+  <div class="radio__field" *ngFor="let field of properties[0].options">
+    <app-field
+      [label]="field.title"
+      [type]="FIELD_TYPES.Radio"
+      [name]="widgetKey"
+      [radioValue]="field.id"
+      [tooltipText]="field.description"
+      [setInputValue]="selectedOptionId || properties[0].selectedOptionId"
+      [isDisabled]="!!field.disabled"
+      (inputEvent)="onSelectOption($event, field)"></app-field>
+  </div>
+
+  <div class="error-block" *ngIf="isDisplayWarning">
+    <app-notification-block
+      [type]="NotificationType.Warning"
+      [text]="warningText"></app-notification-block>
+  </div>
+</div>
+
+<div class="widgets_btn" *ngIf="isDisplayBtn">
+  <app-button
+    [buttonConfig]="buttonNextConfig"
+    (clickEvent)="confirmSaving()"></app-button>
+</div>

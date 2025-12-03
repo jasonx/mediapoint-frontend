@@ -1,0 +1,147 @@
+<div class="invoices wrap">
+  <div class="top">
+    <div class="top__search">
+      <app-search
+        [placeholder]="'Type PO number, Customer name or any other data...'"
+        (searchEvent)="searchByText($event)"></app-search>
+    </div>
+    <div class="top__filter">
+      <app-filter
+        [setFilterConfig]="filterConfig"
+        (searchEvent)="searchByFilters($event)"></app-filter>
+    </div>
+  </div>
+
+  <app-filter-labels
+    [setFilterLabels]="filterLabels"
+    (clearLabelsEvent)="searchByFilters($event)">
+  </app-filter-labels>
+
+  <ng-container *ngIf="isDataLoaded; else loading">
+    <ng-container *ngIf="dataSource.data.length; else noResults">
+      <div class="table-wrap">
+        <table
+          mat-table
+          matSort
+          class="table"
+          [dataSource]="dataSource"
+          (matSortChange)="sortData($event)">
+          <!-- TODO: future functionality -->
+          <!-- <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="$event ? onToggleCheckbox(row.id) : null"
+                [checked]="selection.isSelected(row.id)">
+              </mat-checkbox>
+            </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Invoice number
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.id }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="poNumber">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>PO Number</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.poNumber }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Customer name
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.fullName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Invoice date
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdAt | date: 'dd/MM/YY' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dueDate">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Due date</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.dueDate | date: 'dd/MM/YY' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Total amount
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.total | currency }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">
+              <span
+                class="status-label"
+                [ngClass]="toKebabCase(element.status)">
+                {{ element.status }}
+              </span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{ selected: selection.isSelected(row.id) }"
+            (mouseup)="goToDetailsPage($event, row.id)"></tr>
+        </table>
+
+        <mat-paginator
+          *ngIf="isDisplayPaginator"
+          [length]="totalItems"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageIndex]="params.currentPage - 1"
+          (page)="onChangePage($event)"></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <app-no-results
+        [isSearch]="isSearch"
+        [noResultsText]="'You don\'t have invoices yet'"></app-no-results>
+    </ng-template>
+
+    <!-- TODO: future functionality -->
+    <!-- <div class="pay-block" [class.show]="totalAmountToPay">
+      <div class="amount">
+        <span class="amount__title">Total amount:</span>
+        <div class="amount__value">{{ totalAmountToPay | currency }}</div>
+      </div>
+      <app-button
+        [buttonConfig]="buttonConfig"
+        (clickEvent)="onPay()"></app-button>
+    </div> -->
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

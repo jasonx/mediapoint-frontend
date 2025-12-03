@@ -1,0 +1,47 @@
+@import "/src/assets/styles/core/content-general.less";
+
+.advantages {
+  position: relative;
+  background: @color-fun-blue;
+  padding: 100px 0 87px;
+  overflow: hidden;
+
+  .blocks {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+    z-index: 2;
+
+    .block {
+      max-width: 180px;
+
+      &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        background-color: @color-white;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+      }
+
+      &__text {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 26px;
+        text-align: center;
+        color: @color-white;
+      }
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    bottom: -48px;
+    left: -18px;
+    opacity: .2;
+    z-index: 1;
+  }
+}

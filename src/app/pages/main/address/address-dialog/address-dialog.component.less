@@ -1,0 +1,50 @@
+@import "/src/assets/styles/core/variables.less";
+
+.wrapper {
+  padding: 32px 24px;
+
+  .title {
+    margin-bottom: 32px;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  .form {
+    .body {
+      display: flex;
+      flex-direction: column;
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      .row-title {
+        margin-bottom: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 18px;
+        letter-spacing: .015em;
+      }
+
+      .row {
+        display: flex;
+        column-gap: 16px;
+
+        .field {
+          flex-grow: 1;
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding-top: 16px;
+
+      .button {
+        width: 100%;
+      }
+    }
+  }
+}

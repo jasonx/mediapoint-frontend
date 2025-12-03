@@ -1,0 +1,61 @@
+<div class="login">
+  <h2 class="auth-title title">Login</h2>
+  <div class="auth-descr descr">
+    24/7 online ordering & approvals, fast turnarounds, and white-label delivery under your brand.
+  </div>
+
+  <form
+    class="form"
+    [formGroup]="form"
+    (ngSubmit)="submitForm()"
+    autocomplete="on">
+    <div class="form_field">
+      <app-field
+        formControlName="email"
+        [control]="form.controls['email']"
+        [label]="'Email'"
+        [labelColor]="'white'"
+        [type]="FIELD_TYPES.Email"
+        [placeholder]="'Email'"></app-field>
+    </div>
+
+    <div class="form_field">
+      <app-field
+        formControlName="password"
+        [control]="form.controls['password']"
+        [label]="'Password'"
+        [labelColor]="'white'"
+        [type]="FIELD_TYPES.Password"
+        [placeholder]="'Password'"></app-field>
+    </div>
+
+    <div
+      *ngIf="notification"
+      class="notification"
+      [innerHTML]="notification"></div>
+
+    <div class="submit">
+      <app-button
+        [buttonConfig]="buttonSubmitConfig"
+        [isLoaded]="isLoadedBtn"></app-button>
+    </div>
+  </form>
+
+  <div class="buttons">
+    <div class="question">
+      Don't have an account?
+      <app-button
+        [buttonConfig]="buttonSignUpConfig"
+        [routerLink]="
+          '/authorization/' + AUTHORIZATION.REGISTRATION
+        "></app-button>
+    </div>
+    <div class="recovery">
+      <app-button
+        [buttonConfig]="buttonRecoveryConfig"
+        [routerLink]="
+          '/authorization/' + AUTHORIZATION.FORGOT_PASSWORD
+        "></app-button>
+    </div>
+  </div>
+</div>

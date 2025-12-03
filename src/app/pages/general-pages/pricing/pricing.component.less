@@ -1,0 +1,142 @@
+@import '/src/assets/styles/core/content-general.less';
+
+.pricing {
+  &::ng-deep {
+    .hero {
+      &__title {
+        max-width: 517px;
+      }
+    }
+
+    swiper-slide {
+      margin-top: auto;
+    }
+  }
+}
+
+.exclusive {
+  position: relative;
+  padding: 120px 0;
+  background: @color-white;
+
+  &_wrap {
+    display: flex;
+    align-items: center;
+  }
+
+  &_content {
+    width: 50%;
+    padding-right: 10%;
+  }
+
+  &__title {
+    text-align: left;
+  }
+
+  &_list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50vw;
+    right: 0;
+    padding: 120px 70px;
+    background: @color-fun-blue;
+    color: @color-white;
+
+    &__title {
+      max-width: 300px;
+      margin-bottom: 24px;
+      font-size: 22px;
+      line-height: 30px;
+      font-weight: 500;
+    }
+
+    .block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 24px;
+      font-size: 18px;
+
+      &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        min-width: 48px;
+        height: 48px;
+        background: @color-white;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.catalog {
+  padding: 96px 0;
+
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__subtitle {
+    margin-bottom: 30px;
+  }
+
+  .swiper-wrap {
+    position: relative;
+
+    .block {
+      &__img {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      &__title {
+        min-height: 44px;
+        color: @color-ebony;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+
+    .nav-button {
+      &-prev-cust,
+      &-next-cust {
+        position: absolute;
+        top: 50%;
+        cursor: pointer;
+        padding: 10px;
+        width: 50px;
+        z-index: 9;
+
+        &.disabled {
+          opacity: 0.3;
+          pointer-events: none;
+        }
+      }
+
+      &-prev-cust {
+        left: 0;
+        transform: rotate(-180deg) translateY(50%);
+      }
+
+      &-next-cust {
+        right: 0;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+  }
+}
+
+.text-and-img {
+  margin-bottom: 72px;
+}

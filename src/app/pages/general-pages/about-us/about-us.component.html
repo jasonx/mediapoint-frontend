@@ -1,0 +1,13 @@
+<div class="about-us">
+  <app-hero-banner [data]="heroData"></app-hero-banner>
+  <app-advantages [data]="advantages"></app-advantages>
+  <app-text-and-img [content]="resellersContent"></app-text-and-img>
+  <app-big-image [data]="equipmentData"></app-big-image>
+  <app-text-and-img [content]="vacanciesContent"></app-text-and-img>
+  <app-contact-us-form></app-contact-us-form>
+</div>
+
+<app-scroll-btn></app-scroll-btn>
+<div class="block-disabled loader-wrap" *ngIf="!isLoaded">
+  <app-loader></app-loader>
+</div>

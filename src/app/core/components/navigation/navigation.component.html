@@ -1,0 +1,237 @@
+<div class="navigation">
+  <ul class="navigation_list">
+    <li class="navigation__item" *ngFor="let nav of navigations">
+      <a class="item" [routerLink]="nav.link" routerLinkActive="active">
+        <div class="item__icon">
+          <ng-container
+            *ngTemplateOutlet="
+              nav.icon === 'dashboardIcon'
+                ? dashboardIcon
+                : nav.icon === 'ordersIcon'
+                ? ordersIcon
+                : nav.icon === 'quotesIcon'
+                ? quotesIcon
+                : nav.icon === 'addressIcon'
+                ? addressIcon
+                : nav.icon === 'productsIcon'
+                ? productsIcon
+                : nav.icon === 'invoicesIcon'
+                ? invoicesIcon
+                : nav.icon === 'linkIcon'
+                ? linkIcon
+                : linkIcon
+            "></ng-container>
+        </div>
+        <div class="item__title">{{ nav.title }}</div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #dashboardIcon>
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+    <g clip-path="url(#clip0_8353_25115)">
+      <path d="M19.5 4.33301H6.5C5.30339 4.33301 4.33334 5.30306 4.33334 6.49967V19.4997C4.33334 20.6963 5.30339 21.6663 6.5 21.6663H19.5C20.6966 21.6663 21.6667 20.6963 21.6667 19.4997V6.49967C21.6667 5.30306 20.6966 4.33301 19.5 4.33301Z" stroke="#74769A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M4.33334 9.75H12.0683H4.33334Z" fill="#ffffff"/>
+      <path d="M4.33334 9.75H12.0683" stroke="#74769A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 16.25H21.6667" stroke="#74769A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 4.33301V21.6663" stroke="#74769A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+      <clipPath id="clip0_8353_25115">
+        <rect width="26" height="26" fill="white"/>
+      </clipPath>
+    </defs>
+    </svg>
+</ng-template>
+<ng-template #ordersIcon>
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_2814_40799)">
+      <path
+        d="M10.4997 5.8335H8.16634C7.5475 5.8335 6.95401 6.07933 6.51643 6.51691C6.07884 6.9545 5.83301 7.54799 5.83301 8.16683V22.1668C5.83301 22.7857 6.07884 23.3792 6.51643 23.8167C6.95401 24.2543 7.5475 24.5002 8.16634 24.5002H19.833C20.4518 24.5002 21.0453 24.2543 21.4829 23.8167C21.9205 23.3792 22.1663 22.7857 22.1663 22.1668V8.16683C22.1663 7.54799 21.9205 6.9545 21.4829 6.51691C21.0453 6.07933 20.4518 5.8335 19.833 5.8335H17.4997"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M15.1667 3.5H12.8333C11.5447 3.5 10.5 4.54467 10.5 5.83333C10.5 7.122 11.5447 8.16667 12.8333 8.16667H15.1667C16.4553 8.16667 17.5 7.122 17.5 5.83333C17.5 4.54467 16.4553 3.5 15.1667 3.5Z"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M10.5 14H10.5117"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M15.167 14H17.5003"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M10.5 18.6667H10.5117"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M15.167 18.6665H17.5003"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2814_40799">
+        <rect width="28" height="28" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+</ng-template>
+<ng-template #quotesIcon>
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_2814_40809)">
+      <path
+        d="M17.5 24.5H7C6.07174 24.5 5.1815 24.1313 4.52513 23.4749C3.86875 22.8185 3.5 21.9283 3.5 21V19.8333H15.1667V22.1667C15.1667 22.7855 15.4125 23.379 15.8501 23.8166C16.2877 24.2542 16.8812 24.5 17.5 24.5ZM17.5 24.5C18.1188 24.5 18.7123 24.2542 19.1499 23.8166C19.5875 23.379 19.8333 22.7855 19.8333 22.1667V5.83333C19.8333 5.37184 19.9702 4.92072 20.2266 4.537C20.483 4.15329 20.8474 3.85422 21.2737 3.67762C21.7001 3.50101 22.1693 3.4548 22.6219 3.54484C23.0745 3.63487 23.4903 3.8571 23.8166 4.18342C24.1429 4.50974 24.3651 4.9255 24.4552 5.37812C24.5452 5.83075 24.499 6.2999 24.3224 6.72626C24.1458 7.15262 23.8467 7.51704 23.463 7.77343C23.0793 8.02982 22.6282 8.16667 22.1667 8.16667H19.8333M22.1667 3.5H9.33333C8.40508 3.5 7.51484 3.86875 6.85846 4.52513C6.20208 5.1815 5.83333 6.07174 5.83333 7V19.8333"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M10.5 8.16669H15.1667"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M10.5 12.8333H15.1667"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2814_40809">
+        <rect width="28" height="28" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+</ng-template>
+<ng-template #addressIcon>
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_2814_40816)">
+      <path
+        d="M14 16.3333C15.933 16.3333 17.5 14.7663 17.5 12.8333C17.5 10.9003 15.933 9.33331 14 9.33331C12.067 9.33331 10.5 10.9003 10.5 12.8333C10.5 14.7663 12.067 16.3333 14 16.3333Z"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M20.6002 19.4332L15.65 24.3834C15.2125 24.8204 14.6193 25.0659 14.0009 25.0659C13.3825 25.0659 12.7893 24.8204 12.3518 24.3834L7.4005 19.4332C6.09525 18.1279 5.20639 16.4648 4.8463 14.6544C4.48621 12.8439 4.67107 10.9673 5.3775 9.26188C6.08393 7.55646 7.28021 6.09882 8.81506 5.07328C10.3499 4.04774 12.1544 3.50037 14.0003 3.50037C15.8463 3.50037 17.6508 4.04774 19.1856 5.07328C20.7204 6.09882 21.9167 7.55646 22.6232 9.26188C23.3296 10.9673 23.5144 12.8439 23.1544 14.6544C22.7943 16.4648 21.9054 18.1279 20.6002 19.4332V19.4332Z"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2814_40816">
+        <rect width="28" height="28" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+</ng-template>
+<ng-template #productsIcon>
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.0183 4.09502L18.0717 8.20168C18.3517 8.77335 19.0983 9.32168 19.7283 9.42668L23.45 10.045C25.83 10.4417 26.39 12.1684 24.675 13.8717L21.7817 16.765C21.2917 17.255 21.0233 18.2 21.175 18.8767L22.0033 22.4584C22.6567 25.2934 21.1517 26.39 18.6433 24.9084L15.155 22.8434C14.525 22.47 13.4867 22.47 12.845 22.8434L9.35667 24.9084C6.86 26.39 5.34333 25.2817 5.99667 22.4584L6.825 18.8767C6.97667 18.2 6.70833 17.255 6.21833 16.765L3.325 13.8717C1.62167 12.1684 2.17 10.4417 4.55 10.045L8.27167 9.42668C8.89 9.32168 9.63667 8.77335 9.91667 8.20168L11.97 4.09502C13.09 1.86668 14.91 1.86668 16.0183 4.09502Z"
+      stroke="#74769A"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+</ng-template>
+<ng-template #invoicesIcon>
+  <svg
+    width="28"
+    height="28"
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_2814_40829)">
+      <path
+        d="M16.333 3.5V8.16667C16.333 8.47609 16.4559 8.77283 16.6747 8.99162C16.8935 9.21042 17.1903 9.33333 17.4997 9.33333H22.1663"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M16.8633 2.96967C16.7227 2.82902 16.5319 2.75 16.333 2.75H8.16634C7.34859 2.75 6.56433 3.07485 5.9861 3.65309C5.40786 4.23132 5.08301 5.01558 5.08301 5.83333V22.1667C5.08301 22.9844 5.40786 23.7687 5.98609 24.3469L6.51128 23.8217L5.9861 24.3469C6.56433 24.9251 7.34859 25.25 8.16634 25.25H19.833C20.6508 25.25 21.435 24.9251 22.0133 24.3469C22.5915 23.7687 22.9163 22.9844 22.9163 22.1667V9.33333C22.9163 9.13442 22.8373 8.94366 22.6967 8.803L16.8633 2.96967Z"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M10.5 8.16666H11.6667"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M10.5 15.1667H17.5"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+      <path
+        d="M15.167 19.8333H17.5003"
+        stroke="#74769A"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </g>
+    <defs>
+      <clipPath id="clip0_2814_40829">
+        <rect width="28" height="28" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+</ng-template>
+<ng-template #linkIcon>
+  <svg
+    class="link-icon"
+    width="28"
+    height="28"
+    viewBox="0 0 28 28"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M22.2487 16.6135C21.9103 16.9518 21.3737 16.9518 21.047 16.6135C20.7087 16.2751 20.7087 15.7385 21.047 15.4118C23.3803 13.0785 23.3803 9.28679 21.047 6.96513C18.7137 4.64346 14.922 4.63179 12.6003 6.96513C10.2787 9.29846 10.267 13.0901 12.6003 15.4118C12.9387 15.7501 12.9387 16.2868 12.6003 16.6135C12.262 16.9518 11.7253 16.9518 11.3987 16.6135C8.40032 13.6151 8.40032 8.73846 11.3987 5.75179C14.397 2.76513 19.2737 2.75346 22.2603 5.75179C25.247 8.75013 25.247 13.6151 22.2487 16.6135Z"
+      fill="#74769A" />
+    <path
+      d="M5.75135 11.3867C6.08969 11.0483 6.62636 11.0483 6.95302 11.3867C7.29136 11.725 7.29136 12.2617 6.95302 12.5883C4.61969 14.9217 4.61969 18.7133 6.95302 21.035C9.28636 23.3567 13.078 23.3683 15.3997 21.035C17.7214 18.7017 17.733 14.91 15.3997 12.5883C15.0614 12.25 15.0614 11.7133 15.3997 11.3867C15.738 11.0483 16.2747 11.0483 16.6014 11.3867C19.5997 14.385 19.5997 19.2617 16.6014 22.2483C13.603 25.235 8.72636 25.2467 5.73969 22.2483C2.75302 19.25 2.75302 14.385 5.75135 11.3867Z"
+      fill="#74769A" />
+  </svg>
+</ng-template>

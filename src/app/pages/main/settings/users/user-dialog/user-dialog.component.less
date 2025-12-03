@@ -1,0 +1,44 @@
+@import (less) "/src/assets/styles/core/variables.less";
+
+.wrapper {
+  padding: 32px 104px;
+
+  .title {
+    margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 120%;
+    color: @color-ebony;
+    text-align: center;
+  }
+
+  .form {
+    .body {
+      display: flex;
+      flex-direction: column;
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      app-button {
+        align-self: center;
+      }
+    }
+
+    .change-pass-btn {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 8px;
+      row-gap: 8px;
+      padding-top: 24px;
+    }
+  }
+}

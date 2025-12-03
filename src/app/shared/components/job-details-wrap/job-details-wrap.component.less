@@ -1,0 +1,40 @@
+@import "../../../../assets/styles/core/variables";
+
+.details {
+  margin-bottom: 16px;
+  border: 1px solid @color-link-water;
+  border-radius: 6px;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7.5px 9.5px 7.5px 24px;
+    margin-bottom: 24px;
+    background: @color-alice-blue;
+
+    &__title {
+      margin-right: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 130%;
+    }
+
+    &_left,
+    &_info {
+      display: flex;
+      align-items: center;
+    }
+
+    .price {
+      margin-right: 15px;
+      font-weight: 500;
+      font-size: 16px;
+      color: @color-fun-blue;
+    }
+  }
+
+  .content {
+    padding: 0 24px 8px;
+  }
+}

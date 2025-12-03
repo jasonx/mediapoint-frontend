@@ -1,0 +1,94 @@
+<div class="gallery" [ngClass]="customClass">
+  <div class="gallery_main">
+    <div class="main-imgs">
+      <img
+        *ngFor="let img of images"
+        class="main-img"
+        [class.show]="img === activeImage"
+        [src]="img"
+        alt="img" />
+    </div>
+    <ng-container *ngTemplateOutlet="isShowBtn ? prevBtn : null"></ng-container>
+    <ng-container *ngTemplateOutlet="isShowBtn ? nextBtn : null"></ng-container>
+  </div>
+  <div class="gallery_list" *ngIf="images.length > 1">
+    <img
+      *ngFor="let img of images"
+      class="gallery_list__img"
+      [class.active]="img === activeImage"
+      (click)="onSelectImg(img)"
+      [src]="img"
+      alt="img" />
+  </div>
+</div>
+
+<ng-template #prevBtn>
+  <svg
+    class="gallery-btn prev"
+    (click)="onPrevImg()"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <rect
+      class="fill"
+      x="0.3"
+      y="0.3"
+      width="23.4"
+      height="23.4"
+      rx="11.7"
+      fill="#EEF6FF" />
+    <rect
+      x="0.3"
+      y="0.3"
+      width="23.4"
+      height="23.4"
+      rx="11.7"
+      stroke="#1B469B"
+      stroke-width="0.6" />
+    <path
+      d="M13.4999 15.9599L10.2399 12.6999C9.85492 12.3149 9.85492 11.6849 10.2399 11.2999L13.4999 8.03992"
+      stroke="#1B459B"
+      stroke-width="0.75"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+</ng-template>
+<ng-template #nextBtn>
+  <svg
+    class="gallery-btn next"
+    (click)="onNextImg()"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
+    <rect
+      class="fill"
+      x="23.7"
+      y="23.7"
+      width="23.4"
+      height="23.4"
+      rx="11.7"
+      transform="rotate(-180 23.7 23.7)"
+      fill="#EEF6FF" />
+    <rect
+      x="23.7"
+      y="23.7"
+      width="23.4"
+      height="23.4"
+      rx="11.7"
+      transform="rotate(-180 23.7 23.7)"
+      stroke="#1B469B"
+      stroke-width="0.6" />
+    <path
+      d="M10.5001 8.04008L13.7601 11.3001C14.1451 11.6851 14.1451 12.3151 13.7601 12.7001L10.5001 15.9601"
+      stroke="#1B459B"
+      stroke-width="0.75"
+      stroke-miterlimit="10"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+  </svg>
+</ng-template>

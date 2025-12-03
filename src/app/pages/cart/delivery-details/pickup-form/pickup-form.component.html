@@ -1,0 +1,53 @@
+<div class="pickup">
+  <form class="form" [formGroup]="form">
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="contactName"
+          [control]="form.controls['contactName']"
+          [label]="'Contact name'"
+          [type]="FIELD_TYPES.Text"></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="phone"
+          [control]="form.controls['phone']"
+          [label]="'Phone number'"
+          [type]="FIELD_TYPES.Text"
+          [mask]="phoneMask"></app-field>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="dispatchEmail"
+          [control]="form.controls['dispatchEmail']"
+          [label]="'Dispatch email'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="AVAILABLE_DISPATCH_EMAIL"
+          [tooltipText]="deliveryDetails.dispatchEmailDescription || ''"
+          [noOptionsText]="'No emails'"></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="dispatchEmail2"
+          [control]="form.controls['dispatchEmail2']"
+          [label]="'Dispatch email 2'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="AVAILABLE_DISPATCH_EMAIL"
+          [tooltipText]="deliveryDetails.dispatchEmail2Description || ''"
+          [noOptionsText]="'No emails'"></app-field>
+      </div>
+    </div>
+    <div class="forn__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="addLogoToConsignmentLogo"
+          [control]="form.controls['addLogoToConsignmentLogo']"
+          [label]="'Add My Logo To Consignment Label'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="addLogoOptions"></app-field>
+      </div>
+    </div>
+  </form>
+</div>

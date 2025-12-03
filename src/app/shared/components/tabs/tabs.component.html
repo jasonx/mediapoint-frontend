@@ -1,0 +1,21 @@
+<div class="tabs">
+  <div
+    *ngFor="let tab of tabs"
+    class="tab"
+    [class.active]="selectedTab?.title === tab.title"
+    (click)="onSelectTab({ index: tab.index, title: tab.title })">
+    <img
+      *ngIf="tab.icon"
+      [src]="'./assets/images/icons/' + tab.icon"
+      alt="icon" />
+    {{ capitalizeFirstLetter(tab.title) }}
+  </div>
+
+  <div
+    class="tabs__bg"
+    [ngStyle]="{
+      display: selectedTab ? 'flex' : 'none',
+      width: width + '%',
+      left: position
+    }"></div>
+</div>

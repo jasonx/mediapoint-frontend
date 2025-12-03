@@ -1,0 +1,19 @@
+<div class="search">
+  <img
+    class="search__icon"
+    src="./assets/images/icons/search-black.svg"
+    alt="Search" />
+  <input
+    class="search__input"
+    type="text"
+    [placeholder]="placeholder"
+    [(ngModel)]="searchText"
+    (input)="search()"
+    (keydown.esc)="clear()" />
+  <img
+    class="search__clear"
+    *ngIf="searchText"
+    (click)="clear()"
+    src="./assets/images/icons/close.svg"
+    alt="Clear" />
+</div>

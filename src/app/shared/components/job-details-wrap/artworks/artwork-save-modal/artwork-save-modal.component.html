@@ -1,0 +1,30 @@
+<div class="dialog">
+  <img
+    mat-button
+    mat-dialog-close
+    class="close-btn"
+    src="./assets/images/icons/close-circle.svg"
+    alt="Close" />
+
+  <div class="main">
+    <app-upload
+      [isAsImage]="true"
+      (loadedFileEvent)="loadFile($event)"
+      [accept]="'application/pdf,application/vnd.ms-excel'"></app-upload>
+  </div>
+
+  <div class="bar" *ngIf="newFile">
+    <div class="bar_info">
+      <ng-container> Save the new file! </ng-container>
+    </div>
+
+    <div class="bar__button">
+      <div class="bar__button">
+        <app-button
+          [buttonConfig]="saveButtonConfig"
+          [isLoaded]="isLoadedBtn"
+          (click)="saveArtwork()"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

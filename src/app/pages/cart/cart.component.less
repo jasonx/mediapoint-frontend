@@ -1,0 +1,35 @@
+@import "/src/assets/styles/core/variables.less";
+
+.main-cart {
+  padding: 40px 100px 40px 48px;
+
+  .breadcrumbs {
+    margin-bottom: 24px;
+  }
+
+  .app-block {
+    padding: 24px 16px;
+  }
+
+  .title-main {
+    padding-bottom: 32px;
+  }
+
+  .cart-summary {
+    &_buttons {
+      margin-top: 24px;
+
+      .btn {
+        &:not(:last-child) {
+          margin-bottom: 8px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .main-cart {
+    padding: 30px;
+  }
+}

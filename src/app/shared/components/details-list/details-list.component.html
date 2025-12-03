@@ -1,0 +1,19 @@
+<div class="details">
+  <div class="subtitle" *ngIf="title">{{ title }}</div>
+
+  <div class="items">
+    <div class="item" *ngFor="let item of listData">
+      <div class="item__title">{{ item.title }}</div>
+      <div class="item__value-wrap">
+        <div class="item__value">
+          {{ formattingValue(item.value) || '&#8212;' }}
+        </div>
+        <div
+          class="copy"
+          *ngIf="isShowCopyBtn && item.value && item.value !== '--'">
+          <app-copy-btn [text]="item.value" [color]="'#677489'"></app-copy-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

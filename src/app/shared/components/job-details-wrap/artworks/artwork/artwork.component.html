@@ -1,0 +1,33 @@
+<div class="artwork">
+  <div class="artwork_wrap">
+    <ng-container *ngIf="!isAdmin && isClientRejected; else artwork">
+      <div class="container" (click)="loadFile()">
+        <img src="./assets/images/icons/upload.svg" alt="Upload" />
+        <div class="text">Upload artwork</div>
+      </div>
+    </ng-container>
+
+    <ng-template #artwork>
+      <app-artwork-img
+        [src]="artworkData.url"
+        [previewUrl]="artworkData.previewUrl || ''"></app-artwork-img>
+    </ng-template>
+
+    <div class="download" (click)="onDownload()">
+      <img src="./assets/images/icons/download.svg" alt="download" />
+    </div>
+
+    <div class="error" *ngIf="isError">
+      <div class="error_status status-label canceled">Artwork error</div>
+      <div class="error_message">
+        <span>{{ artworkData.rejectComment }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="artwork__btn" *ngIf="isShowButton">
+    <app-button
+      [buttonConfig]="buttonConfig"
+      (clickEvent)="showArtwork()"></app-button>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="widgets" [class.loading]="!isLoaded">
+  <ng-container *ngIf="widgetKey === WidgetsKey.Quantity; else otherSteps">
+    <app-quantity
+      [properties]="properties"
+      [widgetKey]="widgetKey"
+      [jobId]="jobId"></app-quantity>
+  </ng-container>
+
+  <ng-template #otherSteps>
+    <ng-container [ngSwitch]="propertiesType">
+      <ng-container *ngSwitchCase="WidgetsType.RadioImage">
+        <app-radio-image
+          [properties]="properties"
+          [widgetKey]="widgetKey"></app-radio-image>
+      </ng-container>
+      <ng-container *ngSwitchCase="WidgetsType.NumericInput">
+        <app-numeric-input
+          [properties]="properties"
+          [widgetKey]="widgetKey"></app-numeric-input>
+      </ng-container>
+      <ng-container *ngSwitchCase="WidgetsType.Radio">
+        <app-radio
+          [properties]="properties"
+          [widgetKey]="widgetKey"></app-radio>
+      </ng-container>
+      <ng-container *ngSwitchCase="WidgetsType.RadioCustomNumber">
+        <app-radio-custom
+          [properties]="properties"
+          [widgetKey]="widgetKey"></app-radio-custom>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <app-combined
+          [properties]="properties"
+          [widgetKey]="widgetKey"></app-combined>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+</div>

@@ -1,0 +1,26 @@
+<div class="widget custom-radio">
+  <div class="custom-radio__field" *ngFor="let field of properties[0].options">
+    <app-field
+      [type]="FIELD_TYPES.RadioInput"
+      [name]="widgetKey"
+      [mask]="NUMBER_MASK"
+      [placeholder]="'Custom...'"
+      [isDisabled]="!getIsCustomField(field.id)"
+      [radioValue]="field"
+      [selectedRadioInputValue]="selectedValue"
+      [dimension]="properties[0].measure"
+      (inputEvent)="onSelectOption($event)"></app-field>
+
+    <div
+      class="error"
+      *ngIf="getIsCustomField(field.id) && errorValidationText">
+      {{ errorValidationText }}
+    </div>
+  </div>
+</div>
+
+<div class="widgets_btn">
+  <app-button
+    [buttonConfig]="buttonNextConfig"
+    (clickEvent)="saveData()"></app-button>
+</div>

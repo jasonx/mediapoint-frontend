@@ -1,0 +1,12 @@
+<div class="artworks" *ngIf="artworks.length">
+  <div class="subtitle">Artworks</div>
+
+  <div class="items">
+    <div class="item" *ngFor="let artwork of artworks">
+      <app-artwork
+        [setArtworkData]="artwork"
+        [jobId]="jobId"
+        [jobStatus]="jobStatus"></app-artwork>
+    </div>
+  </div>
+</div>

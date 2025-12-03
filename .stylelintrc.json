@@ -1,0 +1,18 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "customSyntax": "postcss-less",
+  "files": ["src/**/*.{css,less}"],
+  "rules": {
+    "declaration-empty-line-before": ["always", {
+      "except": ["first-nested"],
+      "ignore": [ "after-declaration"]
+    }],
+    "selector-pseudo-element-no-unknown": [true, {
+      "ignorePseudoElements": ["ng-deep"]
+    }],
+    "at-rule-no-unknown": null,
+    "number-leading-zero": "never",
+    "no-empty-source": null,
+    "function-no-unknown": [true, {"ignoreFunctions": ["lighten", "darken"]}]
+  }
+ }

@@ -1,0 +1,115 @@
+<section class="notifications">
+  <div class="top">
+    <h1 class="notifications__title title-main">My notifications</h1>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-container__main">
+      <div class="app-block">
+        <ng-container *ngIf="isDataLoaded; else loading">
+          <ng-container *ngIf="notifications.length; else noResults">
+            <div class="main" [class.block-disabled]="!isDataReloaded">
+              <ul class="list">
+                <li
+                  class="item"
+                  *ngFor="let item of notifications"
+                  [class.read]="item.isRead"
+                  (click)="onClickNotification(item)">
+                  <div class="notification">
+                    <div class="header">
+                      <div class="title">
+                        <img
+                          *ngIf="item.title.includes('accepted')"
+                          src="./assets/images/icons/pin-green.svg"
+                          alt="&#8226;" />
+                        <img
+                          *ngIf="item.title.includes('error')"
+                          src="./assets/images/icons/pin-red.svg"
+                          alt="&#8226;" />
+                        <span class="name">{{ item.title }}</span>
+                      </div>
+                      <span class="date">{{ getDate(item.createdAt) }}</span>
+                    </div>
+                    <div class="description" [innerHTML]="item.body"></div>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="paginator" *ngIf="totalItems > params.perPage">
+                <mat-paginator
+                  [length]="totalItems"
+                  [pageSize]="params.perPage"
+                  [pageSizeOptions]="[5, 10, 20]"
+                  [pageIndex]="params.currentPage - 1"
+                  (page)="onChangePage($event)">
+                </mat-paginator>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #loading>
+          <div class="loading-wrap">
+            <app-loader></app-loader>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="grid-container__info">
+      <div class="grid-container__sidebar filter fixed">
+        <div class="title">Filter by</div>
+        <form class="filters" [formGroup]="filtersForm" autocomplete="off">
+          <app-field
+            formControlName="orderDispatched"
+            [control]="filtersForm.controls['orderDispatched']"
+            [label]="'Dispatched'"
+            [type]="FIELD_TYPES.Checkbox"></app-field>
+
+          <app-field
+            formControlName="orderStatusChanged"
+            [control]="filtersForm.controls['orderStatusChanged']"
+            [label]="'Status changed'"
+            [type]="FIELD_TYPES.Checkbox"></app-field>
+
+          <app-field
+            formControlName="proofReady"
+            [control]="filtersForm.controls['proofReady']"
+            [label]="'Proof ready'"
+            [type]="FIELD_TYPES.Checkbox"></app-field>
+
+          <app-field
+            formControlName="artworkError"
+            [control]="filtersForm.controls['artworkError']"
+            [label]="'Artwork error'"
+            [type]="FIELD_TYPES.Checkbox"></app-field>
+
+          <app-field
+            formControlName="proofAwaitingApproval"
+            [control]="filtersForm.controls['proofAwaitingApproval']"
+            [label]="'Proof awaiting approval'"
+            [type]="FIELD_TYPES.Checkbox"></app-field>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noResults>
+    <div class="no-results">
+      <img
+        class="icon"
+        src="./assets/images/icons/direct.svg"
+        alt="Notifications" />
+      <span class="no-results__title">
+        {{
+          isFiltering
+            ? 'No notification for your filters were found'
+            : 'Haven’t new notifications'
+        }}
+      </span>
+      <span class="no-results__description" *ngIf="!isFiltering">
+        You do not have any notifications
+      </span>
+    </div>
+  </ng-template>
+</section>

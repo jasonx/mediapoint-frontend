@@ -1,0 +1,134 @@
+<ng-container *ngIf="isDataLoaded; else loading">
+  <div class="header">
+    <div class="header_info">
+      <h5 class="header__title">Users</h5>
+      <div class="header__text" *ngIf="!isEmployee">
+        Select users who will receive email notifications from the platform
+      </div>
+    </div>
+
+    <div class="header_btn">
+      <app-button
+        *ngIf="!isEmployee"
+        (click)="updateUser()"
+        [buttonConfig]="addUserButtonConfig"></app-button>
+    </div>
+  </div>
+
+  <div
+    class="body"
+    [ngClass]="{
+      pagination: totalItems > params.perPage,
+      'with-icon': isEmployee
+    }">
+    <table
+      class="table"
+      mat-table
+      matSort
+      [class.block-disabled]="!isLoaded"
+      [dataSource]="dataSource"
+      (matSortChange)="sortData($event)">
+      <ng-container matColumnDef="receiver">
+        <th mat-header-cell *matHeaderCellDef></th>
+
+        <td mat-cell *matCellDef="let element" class="checkbox">
+          <app-field
+            [label]="''"
+            [type]="FIELD_TYPES.Checkbox"
+            (inputEvent)="
+              changeGlobalNotificationsReceiver(
+                element.id,
+                element.isGlobalNotificationsReceiver
+              )
+            "
+            [setInputValue]="element.isGlobalNotificationsReceiver"
+            [tooltipText]="
+              element.isGlobalNotificationsReceiver
+                ? 'This user is set as the receiver of the automatic emails from the platform'
+                : 'This user is not set as the receiver of the automatic emails from the platform'
+            "></app-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="contact">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by name">
+          Contact
+        </th>
+        <td class="contact" mat-cell *matCellDef="let element">
+          <div class="contact_wrap">
+            <div class="contact__avatar">
+              {{ getFirstLetter(element.contact) }}
+            </div>
+            <div class="contact_info">
+              <div class="contact__name">{{ element.contact }}</div>
+              <div class="contact__email">{{ element.email }}</div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="typeUser">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by type of user">
+          Type of user
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.typeUser }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdOn">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by date">
+          Created on
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdOn | date: 'dd/MM/YY' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="actions">
+            <button
+              class="btn circle circle-blue"
+              (click)="updateUser(element.id)">
+              <img src="./assets/images/icons/edit.svg" alt="Edit" />
+            </button>
+            <button class="btn circle circle-red" (click)="delete(element.id)">
+              <img src="./assets/images/icons/trash-red.svg" alt="Delete" />
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [ngClass]="{ selected: row.isGlobalNotificationsReceiver }"></tr>
+    </table>
+
+    <mat-paginator
+      *ngIf="isDisplayPaginator"
+      [length]="totalItems"
+      [pageSizeOptions]="[5, 10, 20]"
+      [pageSize]="params.perPage"
+      (page)="onChangePage($event)"></mat-paginator>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader-wrap">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

@@ -1,0 +1,40 @@
+@import "../../../../assets/styles/core/variables";
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 32px;
+  border-radius: 6px;
+
+  &.info {
+    background-color: @color-hawkes-blue;
+    box-shadow: 0 4px 14px rgb(75 98 154 / 6%);
+  }
+
+  &.warning {
+    background-color: @color-serenade;
+    box-shadow: 0 2px 2px rgb(196 173 138 / 25%);
+  }
+
+  &.error {
+    color: @color-punch;
+    background-color: @color-misty-rose;
+    box-shadow: 0 2px 2px rgb(196 138 138 / 25%);
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+  }
+
+  &__btn {
+    margin-top: 12px;
+  }
+
+  .icon {
+    display: block;
+    margin-right: 10px;
+  }
+}

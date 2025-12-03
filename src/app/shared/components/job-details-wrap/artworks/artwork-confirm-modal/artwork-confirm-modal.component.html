@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <div class="title">Proof added</div>
+  <div class="description">
+    The email contacts below will be notified when a proof is ready for
+    approval.
+  </div>
+  <div class="image">
+    <app-artwork-img [src]="url"></app-artwork-img>
+  </div>
+  <div class="fields" [formGroup]="form">
+    <div class="field">
+      <app-field
+        formControlName="email"
+        [control]="form.controls['email']"
+        [label]="'Email contact'"
+        [type]="FIELD_TYPES.Text"
+        [placeholder]="'your@mail.com'"></app-field>
+    </div>
+
+    <div class="field">
+      <app-field
+        *ngIf="isExtraEmail"
+        formControlName="extraEmail"
+        [control]="form.controls['extraEmail']"
+        [label]="'Extra email'"
+        [type]="FIELD_TYPES.Text"
+        [placeholder]="'your@mail.com'"></app-field>
+    </div>
+
+    <div class="control">
+      <app-button
+        *ngIf="!isExtraEmail"
+        [buttonConfig]="addExtraEmailButtonConfig"
+        (click)="toggleExtraEmail()">
+      </app-button>
+      <app-button
+        *ngIf="isExtraEmail"
+        [buttonConfig]="removeExtraEmailButtonConfig"
+        (click)="toggleExtraEmail()">
+      </app-button>
+    </div>
+  </div>
+
+  <div class="action">
+    <app-button [buttonConfig]="closeButtonConfig" (click)="close()">
+    </app-button>
+    <app-button
+      [buttonConfig]="saveButtonConfig"
+      [isLoaded]="isLoadedBtn"
+      (click)="save()">
+    </app-button>
+  </div>
+</div>

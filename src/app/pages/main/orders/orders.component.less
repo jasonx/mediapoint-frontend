@@ -1,0 +1,264 @@
+@import "../../../../assets/styles/core/variables";
+
+.orders {
+  .title-main {
+    margin-bottom: 32px;
+  }
+
+  .top {
+    &_tabs {
+      width: 260px;
+    }
+  }
+
+  table {
+    border-spacing: 0;
+
+    td {
+      &:first-child {
+        padding-left: 16px;
+      }
+
+      &:last-child {
+        padding-right: 16px;
+      }
+
+      .hover {
+        color: @color-fun-blue;
+        transition: @animate-200ms;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    th {
+      padding: 0;
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        width: 100px;
+      }
+
+      &:nth-child(4),
+      &:nth-child(5) {
+        width: 13vw;
+      }
+
+      &:nth-child(6) {
+        width: 15vw;
+      }
+
+      &:nth-child(7) {
+        width: 9vw;
+      }
+
+      &:nth-child(8) {
+        min-width: 130px;
+      }
+    }
+
+    &.jobs-table {
+      th {
+        &:first-child {
+          width: 87px;
+        }
+
+        &:last-child {
+          min-width: 61px;
+        }
+      }
+    }
+
+    &.admin {
+      &.mat-table {
+        th {
+          &.mat-header-cell {
+            &:first-child {
+              width: 111px;
+              min-width: 111px;
+            }
+
+            &:nth-child(6) {
+              width: auto;
+            }
+
+            &.small {
+              width: 75px;
+              min-width: 75px;
+            }
+          }
+        }
+      }
+    }
+
+    &:not(.admin) {
+      &.jobs-table {
+        th {
+          &:nth-child(2) {
+            width: 10.5vw;
+          }
+        }
+      }
+    }
+
+    .mat-column-select {
+      text-align: center;
+    }
+
+    .checkbox-wrap {
+      margin-left: -24px;
+    }
+  }
+
+  .expanded {
+    &_details {
+      overflow: hidden;
+      display: flex;
+    }
+  }
+
+  tr {
+    &.expanded-row {
+      height: 0;
+
+      td {
+        border: 0;
+      }
+    }
+
+    .icons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 24px;
+
+      .icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        margin-left: 12px;
+        background: @color-white;
+        border-radius: 6px;
+      }
+
+      .icon {
+        max-width: 16px;
+        max-height: 16px;
+      }
+    }
+
+    .artwork {
+      display: block;
+      width: 54px;
+      height: 54px;
+      border-radius: 6px;
+      margin-right: 40px;
+
+      img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &.open {
+      & + .expanded-row {
+        .mat-cell {
+          padding-bottom: 8px;
+        }
+
+        .expanded {
+          &_details {
+            padding-bottom: 8px;
+          }
+        }
+      }
+    }
+
+    &:nth-child(odd) {
+      & + .expanded-row {
+        &:hover {
+          background-color: @color-white;
+        }
+
+        .table {
+          &__header {
+            background-color: @color-zumthor;
+
+            th {
+              padding: 6px 0 5px;
+              text-align: left;
+              font-size: 12px;
+              font-weight: 500;
+              border-bottom: 1px solid #8fb9f9;
+              color: @color-ebony;
+            }
+          }
+
+          &__row {
+            transition: @animate-300ms;
+
+            &:hover {
+              background-color: @color-alice-blue;
+            }
+
+            td {
+              padding: 7px 0;
+              color: @color-slate-gray;
+              font-size: 12px;
+              border-bottom: 1px solid @color-hawkes-blue-3;
+            }
+
+            &:last-child {
+              td {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+
+        .expanded {
+          &_details {
+            position: relative;
+            border-radius: 0 0 8px 8px;
+            background-color: @color-link-water-2;
+
+            &::after {
+              content: "";
+              display: block;
+              height: 1px;
+              width: 100%;
+              background-color: @color-hawkes-blue-3;
+              position: absolute;
+              left: 0;
+              bottom: -8px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .jobs {
+    .icons {
+      .icon {
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .arrow {
+    display: flex;
+    width: 32px;
+    margin: 0 0 0 auto;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}
+

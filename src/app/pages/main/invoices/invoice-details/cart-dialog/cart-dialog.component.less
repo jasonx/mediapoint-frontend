@@ -1,0 +1,148 @@
+@import (less) '/src/assets/styles/core/variables.less';
+
+.cart-dialog {
+  padding: 44px 52px;
+  transition: @animate-200ms;
+
+  &.error {
+    box-shadow: inset 0 0 10px @color-punch;
+  }
+
+  .wrap {
+    position: relative;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  .close-btn {
+    width: 10px;
+    cursor: pointer;
+    z-index: 99;
+  }
+
+  #payment-form {
+    position: relative;
+    height: 236px;
+    z-index: 9;
+    overflow: hidden;
+  }
+
+  .cards {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    margin: 7px 4px;
+
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid @color-cadet-blue;
+      border-radius: 5px;
+      width: 45px;
+      height: 28px;
+    }
+
+    .icon {
+      max-width: 75%;
+      max-height: 80%;
+    }
+  }
+
+  .cart {
+    &__btn {
+      margin-top: 32px;
+    }
+  }
+
+  .form-errors {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    .error-field {
+      position: absolute;
+      height: 44px;
+
+      &__input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 1px solid @color-mystic;
+        border-radius: 6px;
+        transition: @animate-200ms;
+      }
+
+      &__text {
+        position: absolute;
+        bottom: -20px;
+        color: @color-punch;
+        font-size: 10px;
+        opacity: 0;
+        transition: @animate-200ms;
+      }
+
+      &.error {
+        .error-field {
+          &__input {
+            border-color: @color-punch;
+          }
+
+          &__text {
+            opacity: 1;
+          }
+        }
+      }
+
+      &.name {
+        width: 100%;
+        top: 76px;
+      }
+
+      &.number {
+        width: 100%;
+        top: 160px;
+      }
+
+      &.expiry {
+        width: calc(50% - 8px);
+        top: 244px;
+      }
+
+      &.cvn {
+        width: calc(50% - 8px);
+        top: 244px;
+        left: calc(50% + 8px);
+      }
+    }
+  }
+
+  .general-error {
+    position: absolute;
+    bottom: -100px;
+    width: 100%;
+    color: @color-punch;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .loader {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+  }
+}

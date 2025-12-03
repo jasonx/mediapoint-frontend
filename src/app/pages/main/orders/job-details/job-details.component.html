@@ -1,0 +1,36 @@
+<div class="jobs" *ngIf="jobsData; else loading">
+  <div class="jobs__back">
+    <app-button [buttonConfig]="backButtonConfig"></app-button>
+  </div>
+
+  <div class="title-main">Job details</div>
+
+  <div class="grid-container">
+    <div class="grid-container__main">
+      <div class="app-block">
+        <app-job-details-wrap
+          [job]="jobsData"
+          [price]="jobsData.price"
+          [isShowMenu]="!isAdmin"
+          (duplicateEvent)="duplicateJob($event)"
+          (deleteEvent)="deleteJob($event)"></app-job-details-wrap>
+      </div>
+    </div>
+
+    <div class="grid-container__sidebar price fixed">
+      <app-price-data
+        [title]="'Price'"
+        [priceDetails]="priceDetails"></app-price-data>
+
+      <div class="button" *ngIf="isAdmin">
+        <app-button
+          [buttonConfig]="confirmButtonConfig"
+          (clickEvent)="confirmChanges()"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

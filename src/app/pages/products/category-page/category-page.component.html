@@ -1,0 +1,21 @@
+<div class="category" *ngIf="categoryData; else loading">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <h1 class="category__title">{{ title }}</h1>
+  <div class="category_blocks">
+    <div class="block" *ngFor="let product of cardData">
+      <app-card [data]="product"></app-card>
+    </div>
+  </div>
+
+  <div class="category_info">
+    <div class="info" [innerHtml]="categoryData.seoDescriptionLeft"></div>
+    <div class="info" [innerHtml]="categoryData.seoDescriptionRight"></div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

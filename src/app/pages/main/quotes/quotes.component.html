@@ -1,0 +1,181 @@
+<div class="quotes wrap">
+  <div class="title-main">Quotes</div>
+
+  <div class="top">
+    <div class="top__search">
+      <app-search
+        [placeholder]="'Type PO number, Job number or any other data...'"
+        (searchEvent)="searchByText($event)"></app-search>
+    </div>
+    <div class="top__filter">
+      <app-filter
+        [setFilterConfig]="filterConfig"
+        (searchEvent)="searchByFilters($event)"></app-filter>
+    </div>
+  </div>
+
+  <app-filter-labels
+    [setFilterLabels]="filterLabels"
+    (clearLabelsEvent)="searchByFilters($event)">
+  </app-filter-labels>
+
+  <div class="selected-block" *ngIf="selection.selected.length">
+    <div class="selected-item">
+      Selected items: {{ selection.selected.length }}
+    </div>
+    <div class="buttons">
+      <img
+        *ngIf="!isAdmin"
+        (click)="onCreateOrder()"
+        src="./assets/images/icons/basket.svg"
+        [tooltip]="'Add to new order'"
+        alt="Add to new order" />
+      <img
+        (click)="onDuplicate()"
+        src="./assets/images/icons/copy.svg"
+        [tooltip]="'Duplicate'"
+        alt="Duplicate" />
+      <img
+        (click)="onDelete()"
+        src="./assets/images/icons/trash-black.svg"
+        [tooltip]="'Delete'"
+        alt="Delete" />
+    </div>
+  </div>
+
+  <ng-container *ngIf="isDataLoaded; else loading">
+    <ng-container *ngIf="dataSource.data.length; else noResults">
+      <div class="table-wrap" [class.block-disabled]="!isLoaded">
+        <table
+          mat-table
+          matSort
+          class="table"
+          [dataSource]="dataSource"
+          (matSortChange)="sortData($event)">
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row.id) : null"
+                [checked]="selection.isSelected(row.id)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Quote number
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="quoteReference">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Quote Reference
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <input
+                #input
+                class="input btn"
+                [class.disabled]="isAdmin"
+                type="text"
+                [ngModel]="element.quoteReference"
+                (keyup.enter)="input.blur()"
+                (blur)="saveReference(element, input.value)"
+                placeholder="&#8212;" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Quote Date
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.createdAt | date: 'dd/MM/YY' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="validUntil">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Valid Until
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.validUntil | date: 'dd/MM/YY' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Created by
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.price | currency }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">
+              <span
+                class="status-label"
+                [ngClass]="toKebabCase(element.status)">
+                {{ element.status }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="menu">
+            <th mat-header-cell *matHeaderCellDef class="small"></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="menu">
+                <app-options-menu
+                  [nameItem]="'quote'"
+                  [listOfOptions]="listOfOptions"
+                  (duplicateEvent)="onDuplicate(element.id)"
+                  (addToCartEvent)="onCreateOrder(element.id)"
+                  (deleteEvent)="onDelete(element.id)"></app-options-menu>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{ selected: selection.isSelected(row.id) }"
+            (mouseup)="goToDetailsPage($event, row.id)"></tr>
+        </table>
+
+        <mat-paginator
+          *ngIf="isDisplayPaginator"
+          [length]="totalItems"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageIndex]="params.currentPage - 1"
+          (page)="onChangePage($event)"></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <app-no-results
+        [isSearch]="isSearch"
+        [noResultsText]="'You don\'t have quotes yet'"></app-no-results>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

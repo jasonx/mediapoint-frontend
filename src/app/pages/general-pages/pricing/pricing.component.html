@@ -1,0 +1,87 @@
+<div class="pricing">
+  <app-hero-banner
+    [data]="heroData"
+    [isButtonVisible]="!authorizationService.isLoggedIn"></app-hero-banner>
+  <app-why-block [title]="'Why work with us?'"></app-why-block>
+
+  <div class="exclusive">
+    <div class="container">
+      <div class="exclusive_wrap">
+        <div class="exclusive_content">
+          <h2
+            class="exclusive__title title"
+            [innerHtml]="exclusiveData.title"></h2>
+          <div
+            class="exclusive__text text"
+            [innerHtml]="exclusiveData.text"></div>
+        </div>
+
+        <div class="exclusive_list">
+          <h2 class="exclusive_list__title">{{ exclusiveData.title2 }}</h2>
+          <div class="blocks">
+            <div class="block" *ngFor="let block of exclusiveData.blocks">
+              <div class="block__icon">
+                <img [src]="block.icon" alt="icon" />
+              </div>
+              <div class="block__text">{{ block.text }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="catalog">
+    <div class="container">
+      <h2 class="catalog__title title">Print Products at Reseller Pricing</h2>
+      <div class="catalog__subtitle subtitle">
+        Access our full range of wide format, sticker, and label products all
+        available with live our best pricing so you can make more margin. Every
+        product is optimised for resellers: consistent quality, efficient
+        packing, and optional white-label shipping direct to your customer.
+      </div>
+
+      <div class="swiper-wrap">
+        <swiper-container #swiperEl>
+          <swiper-slide *ngFor="let product of products">
+            <a
+              [routerLink]="'/' + product.categorySlug + '/' + product.slug"
+              class="block">
+              <div class="block__img">
+                <img [src]="product.imageUrl" [alt]="product.title" />
+              </div>
+              <div class="block__title">{{ product.title }}</div>
+            </a>
+          </swiper-slide>
+        </swiper-container>
+
+        <img
+          class="nav-button-prev-cust"
+          [class.disabled]="isBeginning"
+          (click)="navigate('prev')"
+          src="./assets/images/icons/arrow-right.svg"
+          alt="arrow" />
+        <img
+          class="nav-button-next-cust"
+          [class.disabled]="isEnd"
+          (click)="navigate('next')"
+          src="./assets/images/icons/arrow-right.svg"
+          alt="arrow" />
+      </div>
+
+      <a [routerLink]="'/catalog'" class="catalog__btn">
+        <app-button [buttonConfig]="buttonCatalogConfig"></app-button>
+      </a>
+    </div>
+  </div>
+
+  <div class="text-and-img">
+    <app-text-and-img [content]="textAndImgContent"></app-text-and-img>
+  </div>
+  <app-contact-us-form></app-contact-us-form>
+</div>
+
+<app-scroll-btn></app-scroll-btn>
+<div class="block-disabled loader-wrap" *ngIf="!isLoaded">
+  <app-loader></app-loader>
+</div>

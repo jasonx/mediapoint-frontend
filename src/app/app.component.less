@@ -1,0 +1,15 @@
+@import "/src/assets/styles/core/variables.less";
+
+.content {
+  display: flex;
+  background-color: @color-catskill-white;
+
+  &_main {
+    flex: 1;
+  }
+
+  .main-wrap {
+    position: relative;
+    min-height: calc(100vh - var(--header-height));
+  }
+}

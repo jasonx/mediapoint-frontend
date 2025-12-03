@@ -1,0 +1,99 @@
+<div class="auth-descr descr">
+  24/7 online ordering & approvals, fast turnarounds, and white-label delivery under your brand.
+</div>
+
+<form
+  class="form"
+  [formGroup]="form"
+  (ngSubmit)="submitForm()"
+  autocomplete="on">
+  <div class="form_field">
+    <app-field
+      formControlName="firstName"
+      [control]="form.controls['firstName']"
+      [label]="'First name'"
+      [labelColor]="'white'"
+      [type]="FIELD_TYPES.Text"
+      [placeholder]="'First name'"></app-field>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field
+        formControlName="email"
+        [control]="form.controls['email']"
+        [label]="'Email'"
+        [labelColor]="'white'"
+        [type]="FIELD_TYPES.Email"
+        [placeholder]="'Email'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field
+        formControlName="password"
+        [control]="form.controls['password']"
+        [label]="'Password'"
+        [labelColor]="'white'"
+        [type]="FIELD_TYPES.Password"
+        [placeholder]="'Password'"></app-field>
+    </div>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field
+        formControlName="phone"
+        [control]="form.controls['phone']"
+        [label]="'Phone'"
+        [labelColor]="'white'"
+        [type]="FIELD_TYPES.Text"
+        [mask]="phoneMask"
+        [placeholder]="'0000000000'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field
+        formControlName="abn"
+        [control]="form.controls['abn']"
+        [label]="'ABN'"
+        [labelColor]="'white'"
+        [type]="FIELD_TYPES.Number"
+        [placeholder]="'ABN'"></app-field>
+    </div>
+  </div>
+  <div class="form_group radio-btns">
+    <div class="form_radio">
+      <input
+        class="input"
+        type="radio"
+        name="type"
+        [value]="ACCOUNT_TYPE.Resell"
+        [checked]="getIsSelectedType(ACCOUNT_TYPE.Resell)"
+        (change)="selectType(ACCOUNT_TYPE.Resell)" />
+      <label>I resell print</label>
+    </div>
+    <div class="form_radio">
+      <input
+        class="input"
+        type="radio"
+        name="type"
+        [value]="ACCOUNT_TYPE.Business"
+        [checked]="getIsSelectedType(ACCOUNT_TYPE.Business)"
+        (change)="selectType(ACCOUNT_TYPE.Business)" />
+      <label>I need print for myself</label>
+    </div>
+  </div>
+
+  <div *ngIf="errorNotification" class="notification">
+    {{ errorNotification }}
+  </div>
+
+  <div class="submit">
+    <app-button
+      [buttonConfig]="buttonSubmitConfig"
+      [isLoaded]="isLoadedBtn"></app-button>
+  </div>
+</form>
+
+<div class="question">
+  Already have an account?
+  <app-button
+    [buttonConfig]="buttonSignInConfig"
+    [routerLink]="'/authorization/' + AUTHORIZATION.LOGIN"></app-button>
+</div>

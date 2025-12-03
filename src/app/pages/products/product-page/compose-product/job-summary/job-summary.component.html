@@ -1,0 +1,12 @@
+<div class="summary" *ngIf="summary">
+  <h2 class="title-summary">Job Summary</h2>
+
+  <div class="main" *ngIf="summary.completedSteps.length">
+    <div class="main__row row" *ngFor="let step of summary.completedSteps">
+      <div class="main__title">{{ step?.title }}</div>
+      <div class="main__value">{{ step?.valueLabel }}</div>
+    </div>
+  </div>
+
+  <app-price-data [priceDetails]="summary.priceDetails"></app-price-data>
+</div>

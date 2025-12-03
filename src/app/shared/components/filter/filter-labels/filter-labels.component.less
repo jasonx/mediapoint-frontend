@@ -1,0 +1,46 @@
+@import "../../../../../assets/styles/core/variables";
+
+.filter-labels {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-bottom: 24px;
+
+  .label {
+    display: flex;
+    align-items: center;
+    padding: 2.5px 12px;
+    margin-right: 8px;
+    font-size: 12px;
+    color: @color-fun-blue;
+    background-color: @color-zumthor;
+    border: 1px solid @color-link-water;
+    border-radius: 24px;
+
+    &__title {
+      margin-right: 3px;
+      font-weight: 300;
+    }
+
+    &__value {
+      font-weight: 500;
+    }
+
+    &__close {
+      width: 10px;
+      margin-left: 13px;
+      cursor: pointer;
+    }
+  }
+
+  .clear {
+    margin-left: 16px;
+    font-size: 12px;
+
+    &:hover {
+      cursor: pointer;
+      font-weight: 500;
+    }
+  }
+}

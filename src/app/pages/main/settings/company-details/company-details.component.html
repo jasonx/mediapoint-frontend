@@ -1,0 +1,149 @@
+<ng-container *ngIf="isDataLoaded; else loading">
+  <form class="form" [formGroup]="form" autocomplete="off" *ngIf="companyDetails">
+    <div class="block photo">
+      <h3 class="title" *ngIf="!customerId">Company details</h3>
+
+      <div class="field">
+        <!-- accept="application/pdf" -->
+        <input class="file-input" type="file" accept="image/*" (change)="imagePreview($event)" #logoUpload />
+        <div class="logo">
+          <div class="image">
+            <img *ngIf="logoPath" [src]="logoPath" />
+            <!-- <pdf-viewer
+              *ngIf="logoPath"
+              [src]="logoPath"
+              [original-size]="false"
+              [show-all]="false"
+              [zoom]="1"
+              [zoom-scale]="'page-fit'"
+              [render-text]="false"
+              [show-borders]="false"
+              style="
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                pointer-events: none;
+              "></pdf-viewer> -->
+          </div>
+
+          <div class="controls">
+            <div class="description">
+              <p class="text">Format: PNG, JPG, JPEG.</p>
+              <!-- <p class="text" [class.error]="isLogoFormatError">
+                Format: PDF (100 x 100 mm)
+              </p> -->
+              <p class="text" [class.error]="isLogoSizeError">
+                The maximum file size is 5 mb.
+              </p>
+            </div>
+
+            <div class="buttons">
+              <app-button [buttonConfig]="uploadLogoButtonConfig" (clickEvent)="reloadFile()"></app-button>
+              <app-button [buttonConfig]="deleteLogoButtonConfig" (clickEvent)="deleteLogo()"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block info">
+      <h3 class="title" *ngIf="!customerId">Company information</h3>
+
+      <div class="fields">
+        <div class="field">
+          <app-field formControlName="companyName" [control]="form.controls['companyName']" [label]="'Company Name'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Company Name'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field formControlName="website" [control]="form.controls['website']" [label]="'Website'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Website'"></app-field>
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <app-field formControlName="email" [control]="form.controls['email']" [label]="'Company email'"
+            [type]="FIELD_TYPES.Email" [placeholder]="'your@mail.com'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field formControlName="secondaryEmail" [control]="form.controls['secondaryEmail']"
+            [label]="'Secondary email'" [type]="FIELD_TYPES.Email" [placeholder]="'your@mail.com'"></app-field>
+        </div>
+      </div>
+
+      <div class="field">
+        <app-field formControlName="defaultProofEmail" [control]="form.controls['defaultProofEmail']"
+          [label]="'Default proof email'" [type]="FIELD_TYPES.Selector"
+          [options]="companyDetails.defaultProofEmailOptions" [placeholder]="'Choose option'"></app-field>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <app-field formControlName="phone" [control]="form.controls['phone']" [label]="'Phone number'"
+            [type]="FIELD_TYPES.Text" [mask]="phoneMask" [placeholder]="'0000000000'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field formControlName="mainContact" [control]="form.controls['mainContact']" [label]="'Main contact'"
+            [type]="FIELD_TYPES.Selector" [options]="companyDetails.contactOptions"
+            [placeholder]="'Main contact'"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="block address">
+      <h3 class="title" *ngIf="!customerId">Company address</h3>
+
+      <div class="fields">
+        <div class="field">
+          <app-field formControlName="address1" [control]="form.controls['address1']" [label]="'Address Line'"
+            [type]="FIELD_TYPES.SearchByText" [placeholder]="'Address Line'" [isAutocomplete]="false"
+            (inputEvent)="searchAddress($event)" (selectedEvent)="selectAddress($event)"
+            [setOptionsBySearch]="listOfAddressString" [isNotFound]="isNotFound"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field formControlName="address2" [control]="form.controls['address2']" [label]="'Address Line 2'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Address Line 2'"></app-field>
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <app-field formControlName="state" [control]="form.controls['state']" [label]="'State'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'State'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field formControlName="suburb" [control]="form.controls['suburb']" [label]="'Suburb'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Suburb'"></app-field>
+        </div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <app-field formControlName="postcode" [control]="form.controls['postcode']" [label]="'Postcode'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'0000'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field formControlName="abn" [control]="form.controls['abn']" [label]="'ABN'" [type]="FIELD_TYPES.Text"
+            [placeholder]="'ISBE'"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit">
+      <app-button [buttonConfig]="buttonCancelConfig" (clickEvent)="cancel()"></app-button>
+      <app-button [buttonConfig]="buttonSubmitConfig" [isLoaded]="isLoadedBtn" (clickEvent)="submitForm()"></app-button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader-wrap">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

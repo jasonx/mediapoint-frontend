@@ -1,0 +1,48 @@
+<div
+  class="status"
+  [ngClass]="{ selector: isAdmin && statusList.length, open: isOpenMenu }"
+  (clickOutside)="onCloseMenu()">
+  <div class="status-icon" *ngIf="isIcon; else statusLabel">
+    <img
+      (click)="isOpenMenu = !isOpenMenu"
+      src="./assets/images/icons/status.svg"
+      [tooltip]="'Status'"
+      alt="Status" />
+  </div>
+
+  <ng-template #statusLabel>
+    <div
+      class="status-label"
+      [ngClass]="toKebabCase(selectedStatus || savedStatus)"
+      (click)="isOpenMenu = !isOpenMenu">
+      {{ selectedStatus || savedStatus }}
+      <svg
+        class="arrow"
+        width="21"
+        height="20"
+        viewBox="0 0 21 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          class="status-arrow"
+          [ngClass]="toKebabCase(selectedStatus || savedStatus)"
+          d="M14.0219 9.35355C14.2172 9.15829 14.2172 8.84171 14.0219 8.64645C13.8266 8.45118 13.51 8.45118 13.3148 8.64645L14.0219 9.35355ZM10.6683 12L10.3148 12.3536C10.4085 12.4473 10.5357 12.5 10.6683 12.5C10.8009 12.5 10.9281 12.4473 11.0219 12.3536L10.6683 12ZM8.02189 8.64645C7.82663 8.45118 7.51004 8.45118 7.31478 8.64645C7.11952 8.84171 7.11952 9.15829 7.31478 9.35355L8.02189 8.64645ZM13.3148 8.64645L10.3148 11.6464L11.0219 12.3536L14.0219 9.35355L13.3148 8.64645ZM11.0219 11.6464L8.02189 8.64645L7.31478 9.35355L10.3148 12.3536L11.0219 11.6464Z"
+          fill="#111729" />
+      </svg>
+    </div>
+  </ng-template>
+
+  <div class="list" *ngIf="statusList.length">
+    <div
+      class="list__item"
+      [ngClass]="{
+        disabled: item === selectedStatus,
+        'old-status': item === savedStatus
+      }"
+      *ngFor="let item of statusList"
+      (click)="onChangeStatus(item)">
+      <span class="status-point" [ngClass]="toKebabCase(item)"></span>
+      <div class="name">{{ item }}</div>
+    </div>
+  </div>
+</div>

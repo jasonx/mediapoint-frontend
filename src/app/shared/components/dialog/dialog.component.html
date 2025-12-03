@@ -1,0 +1,61 @@
+<div class="wrapper">
+  <div class="header" *ngIf="data.icon" [ngClass]="data.bgColor || 'blue'">
+    <img
+      class="icon"
+      [class]="data.icon.alt.toLowerCase()"
+      [src]="data.icon.src"
+      [alt]="data.icon.alt" />
+  </div>
+
+  <div class="success-icon" *ngIf="data.isSuccess">
+    <img src="./assets/images/gifs/success.gif" alt="success" />
+  </div>
+
+  <div class="body" [ngClass]="{ confirmation: !data.icon }">
+    <div class="content">
+      <h3 class="title">{{ data.title }}</h3>
+      <p class="description" [innerHtml]="data.message"></p>
+
+      <div class="checkbox" *ngIf="data.checkboxText">
+        <app-field
+          [label]="data.checkboxText"
+          [type]="FIELD_TYPES.Checkbox"
+          (inputEvent)="isChecked = !isChecked"></app-field>
+      </div>
+    </div>
+
+    <div class="actions">
+      <div
+        class="btn"
+        *ngIf="informationButtonConfig.text"
+        [ngStyle]="{ order: getBtnIndex(DialogButtonType.Information) }">
+        <app-button
+          [buttonConfig]="informationButtonConfig"
+          (clickEvent)="action(Action.Close)"></app-button>
+      </div>
+
+      <div
+        class="btn"
+        *ngIf="declineButtonConfig.text"
+        [ngStyle]="{ order: getBtnIndex(DialogButtonType.Decline) }">
+        <app-button
+          [buttonConfig]="declineButtonConfig"
+          (clickEvent)="action(Action.Decline)"></app-button>
+      </div>
+
+      <div
+        class="btn"
+        *ngIf="acceptButtonConfig.text"
+        [ngStyle]="{ order: getBtnIndex(DialogButtonType.Accept) }">
+        <app-button
+          [buttonConfig]="acceptButtonConfig"
+          (clickEvent)="action(Action.Accept)"></app-button>
+      </div>
+    </div>
+  </div>
+
+  <img *ngIf="!data.isSuccess" class="close"
+      (click)="action(Action.Decline)"
+      src="./assets/images/icons/close.svg"
+      alt="close" />
+</div>

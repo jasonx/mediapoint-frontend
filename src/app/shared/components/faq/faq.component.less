@@ -1,0 +1,90 @@
+@import "../../../../assets/styles/core/variables";
+
+.faq {
+  .mat-expansion-panel {
+    background-color: transparent;
+
+    &-spacing {
+      margin: 0;
+    }
+
+    &-header {
+      height: 64px;
+      padding: 0 12px 0 0;
+
+      &-title {
+        color: @color-cinder;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: Poppins, sans-serif;
+      }
+
+      .toggle {
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          display: block;
+          height: 1px;
+          width: 12px;
+          background-color: @color-fun-blue;
+          border-radius: 1px;
+          transition: @animate-200ms;
+        }
+
+        &::after {
+          transform: rotate(90deg);
+        }
+      }
+
+      &.mat-expanded {
+        .toggle {
+          &::after {
+            transform: rotate(0deg);
+          }
+        }
+      }
+    }
+
+    &:not(.mat-expanded) {
+      .mat-expansion-panel-header {
+        &:hover:not([aria-disabled="true"]) {
+          background-color: @color-zumthor;
+        }
+      }
+    }
+
+    &:not([class*="mat-elevation-z"]) {
+      box-shadow: none;
+      border-bottom: 1px solid @color-hawkes-blue-3;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .mat-content {
+    align-items: center;
+  }
+}
+
+::ng-deep {
+  .faq {
+    .mat-expansion-panel-body {
+      padding: 0 0 24px;
+    }
+
+    .mat-expansion-panel-content {
+      color: @color-slate-gray;
+      font-family: Poppins, sans-serif;
+    }
+
+    a {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

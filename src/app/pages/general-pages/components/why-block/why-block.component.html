@@ -1,0 +1,13 @@
+<div class="why">
+  <div class="container">
+    <h2 class="why__title title">{{ title }}</h2>
+
+    <div class="blocks">
+      <div class="block" *ngFor="let block of whyData">
+        <img class="block__img" [src]="block.icon" alt="icon" />
+        <div class="block__num">{{ block.num }}</div>
+        <p class="block__text">{{ block.title }}</p>
+      </div>
+    </div>
+  </div>
+</div>

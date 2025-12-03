@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <h3 class="title">Upload new proof</h3>
+  <div class="dropzone">
+    <app-upload
+      [file]="boxLabel"
+      [accept]="'application/pdf,application/vnd.ms-excel'"
+      [isOneStep]="true"
+      (loadedFileEvent)="loadFile($event)"></app-upload>
+  </div>
+
+  <div class="actions">
+    <app-button
+      [buttonConfig]="closeButtonConfig"
+      (clickEvent)="close()"></app-button>
+    <app-button
+      *ngIf="isFile"
+      [buttonConfig]="saveButtonConfig"
+      (clickEvent)="save()">
+    </app-button>
+  </div>
+</div>

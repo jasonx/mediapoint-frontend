@@ -1,0 +1,157 @@
+<div class="company" *ngIf="customersDetails" [class.hide]="!isDataLoaded">
+  <div class="order__back">
+    <app-button [buttonConfig]="buttonBackConfig"></app-button>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-container__main">
+      <div class="app-block">
+        <div class="menu">
+          <app-options-menu
+            [nameItem]="'company'"
+            [listOfOptions]="listOfOptions"
+            [isHover]="false"
+            (deleteEvent)="onDelete()"
+            (editEvent)="onEdit()"></app-options-menu>
+        </div>
+
+        <div class="title-main">
+          {{ customersDetails.companyName }}
+        </div>
+
+        <div class="links">
+          <div class="row">
+            <span>{{ customersDetails.website }} </span>
+            /
+            <span> {{ customersDetails.email }}</span>
+          </div>
+
+          <div class="row">
+            <span>{{ customersDetails.address1 }} </span>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="info__row" *ngIf="customersDetails.mainContact">
+            <div class="info__title">Main Contact:</div>
+            <div class="info__value">{{ customersDetails.mainContact }}</div>
+          </div>
+          <div class="info__row">
+            <div class="info__title">Phone number:</div>
+            <div class="info__value">
+              {{ phoneMask(customersDetails.phone) }}
+            </div>
+          </div>
+          <div class="info__row" *ngIf="customersDetails.secondaryEmail">
+            <div class="info__title">Secondary email:</div>
+            <div class="info__value">
+              {{ customersDetails.secondaryEmail }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-block">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab *ngFor="let tab of tabs" [label]="tab.title">
+            <div class="content">
+              <ng-container [ngSwitch]="tab.title">
+                <app-company-addresses
+                  *ngSwitchCase="tabs[0].title"
+                  (dataLoadedEvent)="
+                    tabs[0].isLoaded = true
+                  "></app-company-addresses>
+
+                <app-company-employees
+                  *ngSwitchCase="tabs[1].title"
+                  (dataLoadedEvent)="
+                    tabs[1].isLoaded = true
+                  "></app-company-employees>
+
+                <app-company-orders
+                  *ngSwitchCase="tabs[2].title"
+                  (dataLoadedEvent)="
+                    tabs[2].isLoaded = true
+                  "></app-company-orders>
+
+                <app-company-invoices
+                  *ngSwitchCase="tabs[3].title"
+                  (dataLoadedEvent)="
+                    tabs[3].isLoaded = true
+                  "></app-company-invoices>
+              </ng-container>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+
+    <div class="grid-container__info">
+      <div class="fixed">
+        <div class="grid-container__sidebar sidebar-list">
+          <div class="title-summary">Order details</div>
+
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Number of orders</div>
+            <div class="sidebar-list__value number">
+              {{ numberMask(customersDetails.ordersCount) }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Orders total $ Value</div>
+            <div class="sidebar-list__value number">
+              {{ customersDetails.ordersSum | currency }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">New Jobs</div>
+            <div class="sidebar-list__value number">
+              {{ numberMask(customersDetails.newJobs) }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Jobs in progress</div>
+            <div class="sidebar-list__value number">
+              {{ numberMask(customersDetails.jobsInProgress) }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Jobs done</div>
+            <div class="sidebar-list__value number">
+              {{ numberMask(customersDetails.completedJobs) }}
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-container__sidebar sidebar-list">
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Type of customer</div>
+            <div class="sidebar-list__value capitalize">
+              {{ fromSnakeCase(customersDetails.type) }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Credit limit</div>
+            <div class="sidebar-list__value">
+              {{ customersDetails.creditLimit | currency }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Credit used</div>
+            <div class="sidebar-list__value">
+              {{ customersDetails.creditUsed | currency }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">Credit available</div>
+            <div class="sidebar-list__value">
+              {{ customersDetails.creditAvailable | currency }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="!isDataLoaded"></app-loader>

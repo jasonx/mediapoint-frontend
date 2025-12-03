@@ -1,0 +1,72 @@
+<div class="notifications" [class.open]="isOpen">
+  <img class="icon" src="/assets/images/icons/menu-notif-icon.svg" alt="notification" />
+  <img (click)="onOpen()" class="icon active" src="/assets/images/icons/menu-notif-icon-active.svg" alt="notifications" />
+
+  <div *ngIf="countNewNotifications" class="badge" (click)="onOpen()">
+    <span class="count">{{ countNewNotifications }}</span>
+  </div>
+
+  <div class="overlay" (click)="onClose()"></div>
+
+  <div class="content drop-block" *ngIf="isOpen">
+    <div class="content_header">
+      <span class="content_header__title"> Notifications </span>
+      <app-button
+        *ngIf="notifications?.length"
+        [buttonConfig]="buttonMarkReadConfig"
+        (clickEvent)="markReadAll()"></app-button>
+    </div>
+
+    <ng-container *ngIf="notifications?.length; else noResults">
+      <div class="content_body">
+        <ul class="list">
+          <li *ngFor="let item of notifications" class="list_item">
+            <div
+              class="wrapper"
+              [class.read]="item.isRead"
+              (click)="onClickNotification(item)">
+              <div class="list_header">
+                <div class="list_header__title">
+                  <img
+                    *ngIf="
+                      item.type === NOTIFICATION_TYPE.Ready ||
+                      item.type === NOTIFICATION_TYPE.Error
+                    "
+                    class="pin"
+                    [src]="
+                      'assets/images/icons/pin-' +
+                      (item.type === NOTIFICATION_TYPE.Ready
+                        ? 'green.svg'
+                        : 'red.svg')
+                    "
+                    alt="&#8226;" />
+                  {{ item.title }}
+                </div>
+                <span class="list_header__date">
+                  {{ getDate(item.createdAt) }}
+                </span>
+              </div>
+              <div class="list__body" [innerHtml]="item.body"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer">
+        <app-button
+          [buttonConfig]="buttonViewAllConfig"
+          (clickEvent)="viewAll()"></app-button>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <div class="no-results">
+        <img src="./assets/images/icons/direct.svg" alt="Notifications" />
+        <div class="no-results__title">You’re all set</div>
+        <div class="no-results__text">
+          We’ll keep updated on any future notification
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="employees">
+  <div class="employees_top">
+    <div class="employees__title title-block">Employees</div>
+    <app-button
+      [buttonConfig]="buttonConfig"
+      (clickEvent)="addEmployee()"></app-button>
+  </div>
+
+  <ng-container *ngIf="dataSource.data.length; else noResults">
+    <div class="table-wrap">
+      <table
+        mat-table
+        matSort
+        class="table"
+        [dataSource]="dataSource"
+        (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="mainContact">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Contact</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.mainContact }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.email }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="typeUser">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>
+            Type of user
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.typeUser }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Data create</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.createdAt | date: 'dd/MM/YY' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <div class="menu">
+              <app-options-menu
+                [nameItem]="'employee'"
+                [listOfOptions]="listOfOptions"
+                (editEvent)="editEmployee(element.id)"
+                (deleteEvent)="onDelete(element.id)"></app-options-menu>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          class="no-hover"></tr>
+      </table>
+
+      <mat-paginator
+        *ngIf="isDisplayPaginator"
+        [length]="totalItems"
+        [pageSize]="params.perPage"
+        [pageSizeOptions]="[5, 10, 20]"
+        [pageIndex]="params.currentPage - 1"
+        (page)="onChangePage($event)"></mat-paginator>
+    </div>
+  </ng-container>
+
+  <ng-template #noResults>
+    <app-no-results
+      [noResultsText]="'There are no employees here yet'"></app-no-results>
+  </ng-template>
+</div>

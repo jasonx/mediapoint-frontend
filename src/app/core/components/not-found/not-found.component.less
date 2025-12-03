@@ -1,0 +1,25 @@
+@import "/src/assets/styles/core/variables.less";
+
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: calc(100vh - var(--header-height));
+  background: url("../../../../assets/images/not-found-bg.png") 0 0/100% no-repeat;
+
+  &__text {
+    margin-bottom: 16px;
+    font-size: 24px;
+  }
+
+  &__num {
+    margin-bottom: 28px;
+    color: @color-fun-blue;
+    font-weight: 700;
+    font-size: 298px;
+    line-height: 230px;
+    -webkit-text-stroke: 6px @color-white;
+    text-shadow: 0 2px 15px #9d9d9d;
+  }
+}

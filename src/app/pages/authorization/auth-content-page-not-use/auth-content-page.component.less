@@ -1,0 +1,64 @@
+@import '/src/assets/styles/core/content-general.less';
+
+.auth-content {
+  .title {
+    margin-bottom: 48px;
+  }
+
+  .benefits {
+    padding: 96px 0;
+
+    &_blocks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      .block {
+        width: calc(100% / 3 - 16px);
+
+        &__img {
+          width: 100%;
+          margin-bottom: 16px;
+        }
+
+        &__tetx {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .what-we-do {
+    padding: 96px 0;
+    background-color: @color-fun-blue;
+    color: @color-white;
+
+    &__blocks {
+      display: flex;
+      gap: 24px;
+
+      .block {
+        flex: 1;
+        padding: 16px 24px;
+        background-color: @color-chathams-blue;
+
+        &__num {
+          margin-bottom: 8px;
+          font-size: 42px;
+          font-weight: 700;
+          line-height: 54.6px;
+        }
+
+        &__text {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .faq {
+    padding: 96px 0;
+  }
+}

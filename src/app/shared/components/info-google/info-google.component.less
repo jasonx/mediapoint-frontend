@@ -1,0 +1,35 @@
+@import "/src/assets/styles/core/variables.less";
+
+.info {
+  margin-top: 80px;
+
+  &_google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+
+    .rating {
+      font-size: 20px;
+      font-weight: 600;
+      color: #f1f3f4cc;
+    }
+
+    .stars {
+      margin: 0 20px 0 8px;
+    }
+  }
+
+  &__text {
+    text-align: center;
+
+    &-1 {
+      color: @color-white;
+      margin-bottom: 4px;
+    }
+
+    &-2 {
+      color: #bbc7e1;
+    }
+  }
+}

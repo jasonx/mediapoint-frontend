@@ -1,0 +1,150 @@
+@import "../../../../../assets/styles/core/variables";
+
+.invoice {
+  &_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 17px;
+  }
+
+  .status-label {
+    margin-left: 8px;
+  }
+
+  .app-block {
+    padding: 16px 24px;
+  }
+
+  .main {
+    margin-bottom: 24px;
+    padding: 24px 16px;
+    background: @color-zumthor;
+    border-radius: 6px;
+
+    &__title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    &_row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 56px;
+
+      &__title {
+        margin-bottom: 12px;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+
+    .date {
+      &_row {
+        display: flex;
+        margin-bottom: 4px;
+      }
+
+      &__title {
+        margin-right: 43px;
+        color: @color-slate-gray;
+      }
+
+      &__value {
+        margin: 0 0 0 auto;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: .015em;
+      }
+    }
+
+    .address {
+      text-align: right;
+      line-height: 140%;
+    }
+
+    .address-to {
+      line-height: 140%;
+    }
+  }
+
+  .summary {
+    .title-block {
+      margin-bottom: 16px;
+    }
+
+    .table {
+      border-spacing: 0;
+
+      &__header {
+        background-color: @color-periwinkle;
+
+        th {
+          padding: 7px 35px;
+          text-align: left;
+          font-size: 12px;
+          font-weight: 500;
+          border-bottom: 1px solid @color-link-water;
+        }
+      }
+
+      &__row {
+        td {
+          padding: 13px 35px;
+          color: @color-slate-gray;
+          font-size: 13px;
+          border-bottom: 1px solid @color-link-water;
+          white-space: nowrap;
+        }
+
+        &:last-child {
+          td {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  .table-simple {
+    max-width: calc(100vw - 735px);
+  }
+
+  .pdf {
+    min-width: 400px;
+    margin-top: 24px;
+  }
+
+  .price {
+    margin-top: 45px;
+
+    .button {
+      margin-top: 22px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .invoice {
+    .table-simple {
+      max-width: calc(100vw - 644px);
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .invoice {
+    .summary {
+      .table {
+        &__header th {
+          padding: 3px 24px;
+        }
+
+        &__row td {
+          padding: 13px 24px;
+        }
+      }
+    }
+  }
+}

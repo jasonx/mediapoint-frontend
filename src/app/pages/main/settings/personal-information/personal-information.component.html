@@ -1,0 +1,85 @@
+<ng-container *ngIf="isDataLoaded; else loading">
+  <form class="form" [formGroup]="form" autocomplete="off">
+    <div class="block info">
+      <h3 class="title">Personal information</h3>
+      <div class="fields">
+        <div class="field">
+          <app-field
+            formControlName="firstName"
+            [control]="form.controls['firstName']"
+            [label]="'Name'"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'Name'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field
+            formControlName="lastName"
+            [control]="form.controls['lastName']"
+            [label]="'Surname'"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'Surname'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field
+            formControlName="contactEmail"
+            [control]="form.controls['contactEmail']"
+            [label]="'Contact email'"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'Contact e-mail'"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field
+            formControlName="additionalContactEmail"
+            [control]="form.controls['additionalContactEmail']"
+            [label]="'Additional contact email'"
+            [type]="FIELD_TYPES.Text"
+            [placeholder]="'Additional contact email'"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="block security">
+      <h3 class="title">Security</h3>
+      <div class="fields">
+        <div class="field">
+          <app-field
+            formControlName="password"
+            [control]="form.controls['password']"
+            [label]="'New password'"
+            [type]="FIELD_TYPES.Password"
+            [placeholder]="'New password'"
+            (inputEvent)="addNewPass()"></app-field>
+        </div>
+
+        <div class="field">
+          <app-field
+            formControlName="passwordConfirmation"
+            [control]="form.controls['passwordConfirmation']"
+            [label]="'Repeat new password'"
+            [type]="FIELD_TYPES.Password"
+            [placeholder]="'Repeat new password'"></app-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit">
+      <app-button
+        [buttonConfig]="buttonCancelConfig"
+        (clickEvent)="cancel()"></app-button>
+
+      <app-button
+        [buttonConfig]="buttonSubmitConfig"
+        [isLoaded]="isLoadedBtn"
+        (clickEvent)="submitForm()"></app-button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #loading>
+  <div class="loader-wrap">
+    <app-loader></app-loader>
+  </div>
+</ng-template>

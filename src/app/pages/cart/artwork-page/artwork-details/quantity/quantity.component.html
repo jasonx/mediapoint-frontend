@@ -1,0 +1,12 @@
+<div class="quantity" [ngClass]="{error: errorMessage, disabled: isDisabled}">
+    <div class="quantity__text">Quantity</div>
+    <div class="quantity__counter">
+      <div class="counter__btn" [class.disabled]="artwork.quantity === 1" (click)="onReduceQuantity()">-</div>
+      <input #input class="counter__input" type="number" [value]="artwork.quantity"
+        (input)="onChangeQuantity(input.value)" (keydown)="blockNegative($event)" [readonly]="isDisabled" />
+      <div class="counter__btn" [class.disabled]="!isAbilityToIncreaseQuontity" (click)="onIncreaseQuantity()">+</div>
+    </div>
+    <button class="btn circle circle-red" (click)="deleteArtwork()">
+      <img src="./assets/images/icons/trash-red.svg" alt="Delete" />
+    </button>
+</div>

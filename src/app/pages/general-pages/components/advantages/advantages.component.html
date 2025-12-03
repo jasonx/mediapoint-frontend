@@ -1,0 +1,14 @@
+<div class="advantages">
+  <div class="container">
+    <div class="blocks">
+      <div class="block" *ngFor="let block of data">
+        <div class="block__icon">
+          <img [src]="'/assets/images/advantages/' + block.icon" alt="icon" />
+        </div>
+        <p class="block__text">{{ block.title }}</p>
+      </div>
+    </div>
+  </div>
+
+  <img class="advantages__bg" src="/assets/images/advantages/advantages-bg.svg" alt="advantages" />
+</div>

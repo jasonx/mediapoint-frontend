@@ -1,0 +1,66 @@
+@import "../../../../../assets/styles/core/variables";
+
+.confirm {
+  width: 730px;
+  padding: 32px;
+
+  &__title {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin-bottom: 24px;
+    text-align: center;
+    color: @color-slate-gray;
+  }
+
+  .block-title {
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 130%;
+  }
+
+  .block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 16px;
+    border: 1px solid @color-hawkes-blue;
+    border-radius: 8px;
+
+    &__id {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 130%;
+    }
+
+    &__statuses {
+      display: flex;
+      align-items: center;
+
+      .arrow {
+        margin: -4px 10px 0;
+        font-size: 22px;
+      }
+    }
+  }
+
+  .order,
+  .jobs {
+    width: 100%;
+    max-width: 522px;
+    margin: 0 auto 24px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    column-gap: 8px;
+  }
+}

@@ -1,0 +1,66 @@
+<div class="application">
+  <div class="container">
+    <h2 class="application__title">Mediapoint Job Application</h2>
+    <div class="application__subtitle subtitle">
+      Thanks for taking an interest in our roles. Simply fill out your details below, upload your Resume and our team
+      will review ASAP. Good luck!
+    </div>
+
+    <div class="application__form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submitForm()" autocomplete="on">
+        <div class="form_group">
+          <div class="form_field">
+            <app-field formControlName="firstName" [control]="form.controls['firstName']" [label]="'First name'"
+              [type]="FIELD_TYPES.Text" [placeholder]="'First name'"></app-field>
+          </div>
+          <div class="form_field">
+            <app-field formControlName="lastName" [control]="form.controls['lastName']" [label]="'Last name'"
+              [type]="FIELD_TYPES.Text" [placeholder]="'Last name'"></app-field>
+          </div>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="email" [control]="form.controls['email']" [label]="'Email'"
+            [type]="FIELD_TYPES.Email" [placeholder]="'Email'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="phoneNumber" [control]="form.controls['phoneNumber']" [label]="'Phone number'"
+            [type]="FIELD_TYPES.Text" [placeholder]="'Phone number'" [mask]="phoneMask"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="role" [control]="form.controls['role']"
+            [label]="'What job role would you like to apply for?'" [type]="FIELD_TYPES.Text"
+            [placeholder]="'Print, Finishing, Customer Service Etc'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="time" [control]="form.controls['time']"
+            [label]="'How long would it take for you to drive to our Derrimut Facility?'" [type]="FIELD_TYPES.Text"
+            [placeholder]="'eg 20 mins'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="day" [control]="form.controls['day']"
+            [label]="'What day’s and times are you looking to work?'" [type]="FIELD_TYPES.Text"
+            [placeholder]="'EG Mon - Fri mornings or anytime'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="rate" [control]="form.controls['rate']"
+            [label]="'What rate of pay are you looking to earn?'" [type]="FIELD_TYPES.Text"
+            [placeholder]="'$ per hour'"></app-field>
+        </div>
+        <div class="form_field">
+          <app-field formControlName="employment" [control]="form.controls['employment']"
+            [label]="'Are you looking for Full-Time, Part-Time or Casual employment?'" [type]="FIELD_TYPES.Text"
+            [placeholder]="'Eg Full-Time '"></app-field>
+        </div>
+        <div class="file">
+          <app-upload [text]="'Upload your resume here'" [isShowRequirement]="false" [maxSize]="10" [file]="file"
+            [accept]="'application/pdf,application/vnd.ms-excel'" (loadedFileEvent)="loadFile($event)"
+            (deleteFileEvent)="deleteFile()"></app-upload>
+        </div>
+
+        <div class="submit">
+          <app-button [buttonConfig]="buttonSubmitConfig" [isLoaded]="isLoadedBtn"></app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+@import "../../../../assets/styles/core/variables";
+
+.customers {
+  .info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 9px;
+
+    .selected-item {
+      margin-right: 21px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    .buttons {
+      display: flex;
+
+      img {
+        margin-right: 10px;
+        will-change: transform;
+        transition: @animate-300ms;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .menu {
+    width: 24px;
+  }
+}

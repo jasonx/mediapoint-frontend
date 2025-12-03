@@ -1,0 +1,37 @@
+<div class="combined-widgets">
+  <ng-container *ngIf="getPropertiesByType([WidgetsType.RadioImage]).length">
+    <app-radio-image
+      [properties]="getPropertiesByType([WidgetsType.RadioImage])"
+      [widgetKey]="widgetKey"
+      [isCombinedWidget]="true"
+      (changeEvent)="changeData($event)"></app-radio-image>
+  </ng-container>
+  <ng-container
+    *ngIf="
+      getPropertiesByType([WidgetsType.NumericInput, WidgetsType.SelectedValue])
+        .length
+    ">
+    <app-numeric-input
+      [properties]="
+        getPropertiesByType([
+          WidgetsType.NumericInput,
+          WidgetsType.SelectedValue
+        ])
+      "
+      [widgetKey]="widgetKey"
+      [isCombinedWidget]="true"
+      (changeEvent)="changeData($event)"></app-numeric-input>
+  </ng-container>
+</div>
+
+<div class="error-block" *ngIf="errorText">
+  <app-notification-block
+    [type]="NOTIFICATION_TYPE.Error"
+    [text]="errorText"></app-notification-block>
+</div>
+
+<div class="widgets_btn">
+  <app-button
+    [buttonConfig]="buttonNextConfig"
+    (clickEvent)="saveData()"></app-button>
+</div>

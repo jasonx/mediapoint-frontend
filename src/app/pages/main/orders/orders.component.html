@@ -1,0 +1,377 @@
+<div class="orders wrap">
+  <div class="title-main">Orders</div>
+
+  <div class="top">
+    <div class="top__search">
+      <app-search
+        [placeholder]="'Type PO number, Job number or any other data...'"
+        (searchEvent)="searchByText($event)"></app-search>
+    </div>
+
+    <div class="top_tabs" *ngIf="selectedTab">
+      <app-tabs
+        [tabs]="filterTypeTabs"
+        [selectedTab]="selectedTab"
+        (selectEvent)="changeFilterType($event)"></app-tabs>
+    </div>
+
+    <div class="top__filter">
+      <app-filter
+        [setFilterConfig]="filterConfig"
+        (searchEvent)="searchByFilters($event)"></app-filter>
+    </div>
+  </div>
+
+  <app-filter-labels
+    [setFilterLabels]="filterLabels"
+    (clearLabelsEvent)="searchByFilters($event)">
+  </app-filter-labels>
+
+  <div class="selected-block" *ngIf="selection.selected.length">
+    <div class="selected-item">
+      Selected items: {{ selection.selected.length }}
+    </div>
+    <div class="buttons">
+      <app-status
+        [isIcon]="true"
+        [statusArray]="orderStatusArray"
+        [selectedMaxId]="selectedStatusId"
+        (changeEvent)="changeOrderStatus($event)"></app-status>
+    </div>
+  </div>
+
+  <ng-container *ngIf="isDataLoaded; else loading">
+    <ng-container *ngIf="dataSource.data.length; else noResults">
+      <div class="table-wrap">
+        <table
+          *ngIf="isFilteredByOrder; else jobsTable"
+          mat-table
+          matSort
+          multiTemplateDataRows
+          class="table orders"
+          [class.admin]="isAdmin"
+          [dataSource]="dataSource"
+          (matSortChange)="sortData($event)">
+          <ng-container matColumnDef="empty">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element"></td>
+          </ng-container>
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <div class="checkbox-wrap">
+                <mat-checkbox
+                  (click)="$event.stopPropagation()"
+                  (change)="$event ? onToggleCheckbox(row.id) : null"
+                  [checked]="selection.isSelected(row.id)">
+                </mat-checkbox>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Order number
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <a
+                class="hover"
+                [routerLink]="generalUrl + '/order/' + element.id">
+                #{{ element.id }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="artwork">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <img class="artwork"
+                  [src]="element.jobs[0].artworks[0]?.previewUrl"
+                  alt="artwork" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customer">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Customer</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.customer }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="accepted">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Accepted</th>
+            <td mat-cell *matCellDef="let element">
+              {{ getDate(element.accepted) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dispatchEta">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Dispatch ETA
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ getDate(element.dispatchEta) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalPrice">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+              Total price
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.totalPrice | currency }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">
+              <span
+                class="status-label"
+                [ngClass]="toKebabCase(element.status)">
+                {{ element.status }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="menu">
+            <th mat-header-cell *matHeaderCellDef class="small"></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="menu">
+                <app-options-menu
+                  [nameItem]="'order'"
+                  [listOfOptions]="getListOfOptions(element.isXmlAvailable)"
+                  (exportEvent)="onExportXML(element.id)"
+                  (reprocessEvent)="onReprocess(element.id)"></app-options-menu>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expand">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              aria-label="row actions"
+              class="small">
+              &nbsp;
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <img
+                class="arrow"
+                src="./assets/images/icons/arrow-down.svg"
+                [class.open]="isExpanded(element)"
+                alt="Expand" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="expandedDetail">
+            <td
+              mat-cell
+              *matCellDef="let element"
+              [attr.colspan]="displayedColumns.length">
+              <div
+                class="expanded_details"
+                [@detailExpand]="
+                  isExpanded(element) ? 'expanded' : 'collapsed'
+                ">
+                <table class="table jobs-table">
+                  <tr class="table__header">
+                    <th></th>
+                    <th>Job number</th>
+                    <th>Type of print</th>
+                    <th>Quantity</th>
+                    <th>Accepted</th>
+                    <th>Job entered</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th>Job Status</th>
+                    <th></th>
+                  </tr>
+                  <tr
+                    *ngFor="let job of element.jobs"
+                    class="table__row"
+                    (mouseup)="goToDetailsPage($event, element.id, './order')">
+                    <td class="td_icons">
+                      <div class="icons">
+                        <div class="icon-wrap" *ngIf="job.errorArtwork">
+                          <img
+                            class="icon"
+                            src="./assets/images/icons/warning-red.svg"
+                            [tooltip]="'Artwork error'"
+                            alt="Error" />
+                        </div>
+                        <div class="icon-wrap">
+                          <img
+                            class="icon icon-product"
+                            [src]="job.productIcon"
+                            [tooltip]="job.productName"
+                            alt="Product" />
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ job.id }}</td>
+                    <td>{{ job.productName }}</td>
+                    <td>{{ numberMask(job.quantity) }}</td>
+                    <td>{{ getDate(job.accepted) }}</td>
+                    <td>{{ getDate(job.jobEntered) }}</td>
+                    <td>{{ job.price | currency }}</td>
+                    <td>
+                      <img
+                        class="artwork"
+                        [src]="job.artworks[0]?.previewUrl"
+                        (click)="displayArtwork(job.artworks)"
+                        alt="artwork" />
+                    </td>
+                    <td>
+                      <span
+                        class="status-label"
+                        [ngClass]="toKebabCase(job.status)">
+                        {{ job.status }}
+                      </span>
+                    </td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{
+              selected: selection.isSelected(row.id),
+              open: isExpanded(row),
+              last: dataSource.data[dataSource.data.length - 1] === row
+            }"
+            (click)="setExpandedElement($event, row)"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['expandedDetail']"
+            class="expanded-row"></tr>
+        </table>
+
+        <ng-template #jobsTable>
+          <table
+            mat-table
+            matSort
+            class="table jobs"
+            [dataSource]="dataSource"
+            (matSortChange)="sortData($event)">
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element" class="td_icons">
+                <div class="icons">
+                  <img
+                    *ngIf="element.errorArtwork"
+                    class="icon"
+                    src="./assets/images/icons/warning-red.svg"
+                    [tooltip]="'Artwork error'"
+                    alt="Error" />
+                  <img
+                    class="icon icon-product"
+                    [src]="element.productIcon"
+                    [tooltip]="element.productName"
+                    alt="Product" />
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                Job number
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.id }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="productName">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                Type of print
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.productName }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                Quantity
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ numberMask(element.quantity) }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="size">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>Size</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.size }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="accepted">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                Accepted
+              </th>
+              <td mat-cell *matCellDef="let element">
+                {{ getDate(element.accepted) }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.price | currency }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                Job Status
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span
+                  class="status-label"
+                  [ngClass]="toKebabCase(element.status)">
+                  {{ element.status }}
+                </span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              (mouseup)="goToDetailsPage($event, row.orderId, './order')"></tr>
+          </table>
+        </ng-template>
+
+        <mat-paginator
+          *ngIf="isDisplayPaginator"
+          [length]="totalItems"
+          [pageSize]="params.perPage"
+          [pageSizeOptions]="[5, 10, 20]"
+          [pageIndex]="params.currentPage - 1"
+          (page)="onChangePage($event)"></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <app-no-results
+        [isSearch]="isSearch"
+        [noResultsText]="'You don\'t have orders yet'"></app-no-results>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

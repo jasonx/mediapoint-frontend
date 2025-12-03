@@ -1,0 +1,174 @@
+<div class="artwork-details">
+  <ng-container *ngIf="generalData; else loading">
+    <header class="header">
+      <div class="block">
+        <a class="header_logo" routerLink="/">
+          <img src="./assets/images/logo.svg" alt="Mediapoint" />
+        </a>
+
+        <div class="header_info">
+          <div class="header_info__title">{{ generalData.productName }}</div>
+          <div class="header_info__quantity">
+            Total Quantity: {{ generalData.totalQuantity }}
+          </div>
+          <div class="header_info__size">
+            Required size: {{ generalData.labelSize }}
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="header_assign">
+          <span class="header_assign__text">{{ isUnlimited ? 'Quantity' : 'Kinds' }} Assigned:</span>
+          <span class="header_assign__num-1"
+            [class.invalid]="isUnlimited ? quantityAssigned !== generalData.totalQuantity : numberOfSavedKinds !== generalData.numberOfKinds ">
+            {{ isUnlimited ? quantityAssigned : numberOfSavedKinds }}
+          </span>
+          /
+          <span class="header_assign__num-2">
+            {{ isUnlimited ? generalData.totalQuantity : generalData.numberOfKinds }}
+          </span>
+        </div>
+
+        <div class="btn">
+          <app-button [buttonConfig]="buttonCompleteConfig" (clickEvent)="complete()"></app-button>
+        </div>
+        <div class="btn">
+          <app-notifications></app-notifications>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap" #wrap>
+      <div class="main">
+        <a routerLink="/cart/artwork" class="breadcrumbs">
+        <img src="./assets/images/icons/arrow-back.svg" alt="arrow" />
+          Back
+        </a>
+
+        <div class="content_wrap">
+          <ng-container *ngIf="!isDoubleSided">
+            <div class="content">
+              <div class="cards">
+                <div class="card" *ngFor="let artwork of artworks">
+                  <ng-container *ngIf="artwork.fileName; else emptyCard">
+                    <app-artwork-card
+                      [artwork]="artwork"
+                      [jobId]="jobId"
+                      [isUnlimited]="isUnlimited"
+                      [isAbilityToIncreaseQuontity]="isAbilityToIncreaseQuontity"
+                      (changeQuantityEvent)="changeQuantity($event)"
+                      (deleteEvent)="deleteArtwork($event)"></app-artwork-card>
+                  </ng-container>
+
+                    <ng-template #emptyCard>
+                      <div class="empty-card">
+                        <app-upload-big-file [id]="artwork.id" (loadedFileEvent)="fileDownloaded($event)" [accept]="accept"></app-upload-big-file>
+                      </div>
+                    </ng-template>
+                </div>
+              </div>
+
+              <div class="content_btn" *ngIf="isShowAddBtn">
+                <app-button [buttonConfig]="buttonKindConfig" (clickEvent)="addKind()"></app-button>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="isDoubleSided">
+            <div class="content double">
+              <div class="cards" *ngFor="let card of doubleArtworks; let last = last" [class.last]="last">
+                <div class="card_wrap">
+                  <div class="card__side">Front</div>
+
+                  <ng-container *ngIf="card[0].fileName; else emptyCardFront">
+                    <app-artwork-card
+                      [artwork]="card[0]"
+                      [jobId]="jobId"
+                      [isDoubleCard]="true"
+                      (deleteEvent)="deleteArtwork($event)">
+                    </app-artwork-card>
+                  </ng-container>
+                  
+                  <ng-template #emptyCardFront>
+                    <div class="empty-card card">
+                      <app-upload-big-file [id]="card[0].id" (loadedFileEvent)="fileDownloaded($event)" [accept]="accept"></app-upload-big-file>
+                    </div>
+                  </ng-template>
+                </div>
+
+                <div class="card_wrap">
+                  <div class="card__side">Rear</div>
+                
+                  <ng-container *ngIf="card[1].fileName; else emptyCardRear">
+                    <app-artwork-card 
+                      [artwork]="card[1]"
+                      [jobId]="jobId"
+                      [isDoubleCard]="true"
+                      (deleteEvent)="deleteArtwork($event)">
+                    </app-artwork-card>
+                  </ng-container>
+                  
+                  <ng-template #emptyCardRear>
+                    <div class="empty-card card">
+                      <app-upload-big-file [id]="card[1].id" (loadedFileEvent)="fileDownloaded($event)" [accept]="accept"></app-upload-big-file>
+                    </div>
+                  </ng-template>
+                </div>
+
+                <div class="card_right" *ngIf="isShowQuantity(card)">
+                  <app-quantity
+                    [artwork]="card[0]"
+                    [isDisabled]="!isUnlimited"
+                    [isAbilityToIncreaseQuontity]="isAbilityToIncreaseQuontity"
+                    (changeQuantityEvent)="changeQuantity($event)"
+                    (deleteEvent)="deleteArtwork(card[0].id, card[1].id)"></app-quantity>
+                </div>
+              </div>
+
+              <div class="content_btn" *ngIf="isShowAddBtnDouble">
+                <app-button [buttonConfig]="buttonKindConfig" (clickEvent)="addDoubleKind()"></app-button>
+              </div>
+            </div>
+          </ng-container>
+
+          <div *ngIf="isShowBulkEdit" class="footer">
+            <div class="footer__text">Bulk edit assets</div>
+            <div class="improvement-buttons">
+              <div *ngIf="isError" class="btn" (click)="onTrimbox()">
+                <img class="btn-icon" src="./assets/images/icons/trimbox.svg" alt="trimbox" />
+                Autofix trimbox
+              </div>
+              <div *ngIf="isError" class="btn" (click)="onScale()">
+                <img class="btn-icon" src="./assets/images/icons/scale.svg" alt="scale" />
+                Auto scale
+              </div>
+              <div *ngIf="isError" class="btn" (click)="onRotate()">
+                <img class="btn-icon" src="./assets/images/icons/rotate.svg" alt="rotate" />
+                Rotate
+              </div>
+              <div class="btn" (click)="onDownload()">
+                <img class="btn-icon" src="./assets/images/icons/download-2.svg" alt="download" />
+                Download
+              </div>
+              <div class="btn" (click)="onResetAll()">
+                <img class="btn-icon" src="./assets/images/icons/trash-black-2.svg" alt="trash" />
+                Reset
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="loader-wrap" *ngIf="isLoading">
+          <div class="loader">
+            <app-loader></app-loader>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+</div>

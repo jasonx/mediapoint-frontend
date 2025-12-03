@@ -1,0 +1,141 @@
+<div class="enter-address">
+  <form class="form" [formGroup]="form">
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressCompanyName"
+          [control]="form.controls['newAddressCompanyName']"
+          [label]="'Company name'"
+          [type]="FIELD_TYPES.Text"></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="contactName"
+          [control]="form.controls['contactName']"
+          [label]="'Contact name'"
+          [type]="FIELD_TYPES.Text"></app-field>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressAddress1"
+          [control]="form.controls['newAddressAddress1']"
+          [label]="'Street address 1'"
+          [type]="FIELD_TYPES.SearchByText"
+          [isAutocomplete]="false"
+          (inputEvent)="searchAddress($event)"
+          (selectedEvent)="selectAddress($event)"
+          [setOptionsBySearch]="listOfAddressString"
+          [isNotFound]="isNotFound"></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressAddress2"
+          [control]="form.controls['newAddressAddress2']"
+          [label]="'Street address 2'"
+          [type]="FIELD_TYPES.Text"></app-field>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressState"
+          [control]="form.controls['newAddressState']"
+          [label]="'State'"
+          [type]="FIELD_TYPES.Text"
+          [isDisabled]="true"
+          [tooltipText]="
+            'To change this field, go back to the previous step'
+          "></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressPostcode"
+          [control]="form.controls['newAddressPostcode']"
+          [label]="'Postcode'"
+          [type]="FIELD_TYPES.Text"
+          [isDisabled]="true"
+          [tooltipText]="
+            'To change this field, go back to the previous step'
+          "></app-field>
+      </div>
+    </div>
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressSuburb"
+          [control]="form.controls['newAddressSuburb']"
+          [label]="'Suburb'"
+          [type]="FIELD_TYPES.Text"
+          [isDisabled]="true"
+          [tooltipText]="
+            'To change this field, go back to the previous step'
+          "></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="newAddressType"
+          [control]="form.controls['newAddressType']"
+          [label]="'Address type'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="ADDRESS_TYPE_OPTIONS"
+          [isDisabled]="true"
+          [tooltipText]="'To change this field, go back to the previous step'"
+          [noOptionsText]="'No address types'"></app-field>
+      </div>
+    </div>
+    <div class="delivery-field">
+      <app-field
+        formControlName="phone"
+        [control]="form.controls['phone']"
+        [label]="'Phone number'"
+        [type]="FIELD_TYPES.Text"
+        [mask]="phoneMask"></app-field>
+    </div>
+    <div class="form__row">
+      <div class="delivery-field">
+        <app-field
+          formControlName="dispatchEmail"
+          [control]="form.controls['dispatchEmail']"
+          [label]="'Dispatch email'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="AVAILABLE_DISPATCH_EMAIL"
+          [tooltipText]="deliveryDetails.dispatchEmailDescription || ''"
+          [noOptionsText]="'No emails'"></app-field>
+      </div>
+      <div class="delivery-field">
+        <app-field
+          formControlName="dispatchEmail2"
+          [control]="form.controls['dispatchEmail2']"
+          [label]="'Dispatch email 2'"
+          [type]="FIELD_TYPES.Selector"
+          [options]="AVAILABLE_DISPATCH_EMAIL"
+          [tooltipText]="deliveryDetails.dispatchEmail2Description || ''"
+          [noOptionsText]="'No emails'"></app-field>
+      </div>
+    </div>
+    <div class="delivery-field">
+      <app-field
+        formControlName="addLogoToConsignmentLogo"
+        [control]="form.controls['addLogoToConsignmentLogo']"
+        [label]="'Add My Logo To Consignment Label'"
+        [type]="FIELD_TYPES.Selector"
+        [options]="addLogoOptions"></app-field>
+    </div>
+    <div class="delivery-checkbox">
+      <app-field
+        formControlName="authorityToLeave"
+        [control]="form.controls['authorityToLeave']"
+        [label]="'Authority to leave'"
+        [type]="FIELD_TYPES.Checkbox"></app-field>
+    </div>
+    <div class="delivery-field">
+      <app-field
+        formControlName="deliveryInstruction"
+        [control]="form.controls['deliveryInstruction']"
+        [label]="'Special Delivery Instructions'"
+        [type]="FIELD_TYPES.Textarea"></app-field>
+    </div>
+  </form>
+</div>

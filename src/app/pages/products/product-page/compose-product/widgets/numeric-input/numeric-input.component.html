@@ -1,0 +1,50 @@
+<div class="widget numeric-input" [class.total-quantity]="isShowTotalQuantity">
+  <form class="form" [formGroup]="form">
+    <div class="form-group" *ngFor="let property of activeProperties">
+      <app-field
+        [formControlName]="property.key"
+        [control]="form.controls[property.key]"
+        [label]="getTitle(property)"
+        [type]="
+          property.type === WidgetsType.SelectedValue
+            ? FIELD_TYPES.Selector
+            : FIELD_TYPES.Text
+        "
+        [options]="property.values || []"
+        [mask]="
+          property.type === WidgetsType.SelectedValue ? null : NUMBER_MASK
+        "
+        [placeholder]="property.title"
+        [dimension]="property.measure"
+        [isDisabled]="isUnlimited && property.key === WidgetsKey.Kind"></app-field>
+    </div>
+
+    <div class="form-group" *ngIf="isShowTotalQuantity">
+      <app-field
+        formControlName="totalQuantity"
+        [control]="form.controls['totalQuantity']"
+        [label]="'Total quantity'"
+        [type]="FIELD_TYPES.Text"
+        [mask]="NUMBER_MASK"
+        [placeholder]="'Total quantity'"
+        [isDisabled]="true"></app-field>
+    </div>
+  </form>
+</div>
+
+<div class="error-block" *ngIf="errorText">
+  <app-notification-block
+    [type]="NotificationType.Error"
+    [text]="errorText"></app-notification-block>
+</div>
+<div class="error-block" *ngIf="warningText">
+  <app-notification-block
+    [type]="NotificationType.Warning"
+    [text]="warningText"></app-notification-block>
+</div>
+
+<div class="widgets_btn" *ngIf="!isCombinedWidget">
+  <app-button
+    [buttonConfig]="buttonNextConfig"
+    (clickEvent)="saveData()"></app-button>
+</div>

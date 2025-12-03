@@ -1,0 +1,31 @@
+<div class="grid-container__sidebar attachments" *ngIf="isShowAttachmentBlock">
+  <div class="title-summary">Attachments</div>
+
+  <app-pdf-block
+    *ngIf="companyLogoPdf"
+    [file]="companyLogoPdf"
+    [svg]="'pdf-file-red.svg'"
+    [customClass]="'list'"></app-pdf-block>
+  <app-pdf-block
+    *ngIf="supportDocumentPdf"
+    [file]="supportDocumentPdf"
+    [svg]="'pdf-file-red.svg'"
+    [customClass]="'list'"></app-pdf-block>
+  <app-pdf-block
+    *ngIf="pickupLabelPdf"
+    [file]="pickupLabelPdf"
+    [svg]="'pdf-file-red.svg'"
+    [customClass]="'list'"></app-pdf-block>
+
+  <div class="button-wrap">
+    <app-button
+      [buttonConfig]="printBtnConfig"
+      (clickEvent)="print()"></app-button>
+  </div>
+
+  <!-- <pdf-viewer
+    *ngIf="printPdf"
+    [src]="printPdf.url"
+    [original-size]="false"
+    (after-load-complete)="onLoaded($event)"></pdf-viewer> -->
+</div>

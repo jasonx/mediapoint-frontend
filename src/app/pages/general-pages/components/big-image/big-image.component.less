@@ -1,0 +1,50 @@
+@import '/src/assets/styles/core/content-general.less';
+
+.big-image {
+  position: relative;
+  padding: 96px 0;
+
+  &_top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    text-align: left;
+  }
+
+  &__subtitle {
+    margin-bottom: 0;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  &__img {
+    position: relative;
+    right: 0;
+    display: block;
+    margin: 0 0 0 auto;
+    width: calc(100% - (100% - 1300px + 60px) / 2);
+    max-width: calc(100% - 30px);
+    height: 80vh;
+    object-fit: cover;
+  }
+
+  &.center {
+    .big-image {
+      &_top {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 80px;
+      }
+
+      &__title,
+      &__subtitle {
+        text-align: center;
+      }
+    }
+  }
+}

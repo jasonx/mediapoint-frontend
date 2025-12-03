@@ -1,0 +1,81 @@
+<div class="addresses">
+  <div class="addresses_top">
+    <div class="addresses__title title-block">Addresses</div>
+    <app-button
+      [buttonConfig]="buttonConfig"
+      (clickEvent)="addAddress()"></app-button>
+  </div>
+
+  <ng-container *ngIf="dataSource.data.length; else noResults">
+    <div class="table-wrap">
+      <table
+        mat-table
+        matSort
+        class="table"
+        [dataSource]="dataSource"
+        (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="companyName">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Company</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.companyName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contactName">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Contact</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.contactName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let element">
+            {{ phoneMask(element.phone) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="address1">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef>
+            Address Line
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.address1 }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <div class="menu">
+              <app-options-menu
+                [nameItem]="'address'"
+                [listOfOptions]="listOfOptions"
+                (deleteEvent)="onDelete(element)"
+                (editEvent)="onEdit(element)"></app-options-menu>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          class="no-hover"></tr>
+      </table>
+
+      <mat-paginator
+        *ngIf="isDisplayPaginator"
+        [length]="totalItems"
+        [pageSize]="params.perPage"
+        [pageSizeOptions]="[5, 10, 20]"
+        [pageIndex]="params.currentPage - 1"
+        (page)="onChangePage($event)"></mat-paginator>
+    </div>
+  </ng-container>
+
+  <ng-template #noResults>
+    <app-no-results
+      [noResultsText]="'There are no addresses here yet'"></app-no-results>
+  </ng-template>
+</div>

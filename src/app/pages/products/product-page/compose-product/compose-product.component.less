@@ -1,0 +1,137 @@
+@import "/src/assets/styles/core/variables.less";
+
+.compose-product {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  column-gap: 32px;
+  min-height: 433px;
+
+  .main {
+    flex: 1;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .summary {
+    width: 360px;
+    padding: 32px 24px;
+    background: url("../../../../../assets/images/compose-product/price-bg.png") 0 0 / 100% 100% no-repeat;
+
+    &_buttons {
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+      gap: 8px;
+    }
+  }
+
+  &:not(.edit-modal) {
+    padding: 40px 100px 40px 48px;
+    margin: 0 -100px 0 -48px;
+    background-color: @color-catskill-white-2;
+    border-top: 1px solid @color-athens-gray-2;
+    border-bottom: 1px solid @color-athens-gray-2;
+  }
+
+  &.edit-modal {
+    .fixed {
+      top: 0;
+    }
+  }
+}
+
+:host {
+  .compose-product {
+    .mat-accordion {
+      .panel {
+        &__title {
+          margin-right: 12px;
+          font-size: 16px;
+          font-weight: 600;
+          transition: @animate-200ms;
+        }
+
+        &__value {
+          padding: 1px 12px;
+          background-color: @color-salomie-2;
+          border: 1px solid @color-cream-can;
+          border-radius: 16px;
+          font-size: 12px;
+          font-weight: 300;
+          transition: @animate-200ms;
+        }
+
+        &_content {
+          &__descr {
+            margin-bottom: 24px;
+            color: @color-slate-gray;
+          }
+        }
+      }
+
+      .mat-expansion-panel {
+        border-radius: 6px !important;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 7px #ecf1f5;
+
+        &.mat-expanded {
+          overflow: visible;
+        }
+
+        &:not(.mat-expanded) {
+          &:hover {
+            box-shadow: 0 2px 5px @color-ghost;
+          }
+        }
+
+        &-header {
+          height: 55px;
+          color: @color-cinder;
+          font-family: Poppins, sans-serif;
+          background: @color-white !important;
+
+          &.mat-expanded {
+            pointer-events: none;
+
+            .panel {
+              &__title {
+                margin: 24px 0 4px;
+                font-size: 20px;
+                line-height: 30px;
+              }
+
+              &__value {
+                opacity: 0;
+              }
+            }
+
+            .toggle {
+              display: none;
+            }
+          }
+        }
+
+        &-content {
+          color: @color-cinder;
+          font-family: Poppins, sans-serif;
+        }
+
+        &-body {
+          padding: 0 24px 24px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .compose-product,
+  .compose-product:not(.edit-modal) {
+    padding: 40px 32px;
+    margin: 0 -32px;
+  }
+}

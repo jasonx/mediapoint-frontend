@@ -1,0 +1,109 @@
+@import (less) "/src/assets/styles/core/variables.less";
+
+::ng-deep {
+  .ng2-pdf-viewer-container {
+    overflow: hidden !important;
+  }
+}
+
+.block {
+  margin-bottom: 48px;
+
+  .title {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.field {
+  margin-bottom: 32px;
+  position: relative;
+  transition: @animate-300ms;
+
+  &__name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: .015em;
+  }
+
+  &__errors {
+    position: absolute;
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 100%;
+    color: @color-punch;
+  }
+
+  .logo {
+    display: flex;
+    column-gap: 16px;
+
+    .image {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid @color-hawkes-blue-3;
+
+      img {
+        width: 88px;
+        height: 88px;
+        object-fit: cover;
+      }
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .description {
+        margin-bottom: 14px;
+
+        .text {
+          margin: 0;
+          font-size: 12px;
+          line-height: 18px;
+          letter-spacing: .015em;
+          color: #90a3bf;
+          transition: .2s ease-in;
+
+          &.error {
+            color: @color-punch;
+          }
+        }
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+        column-gap: 16px;
+      }
+    }
+  }
+}
+
+.fields {
+  display: flex;
+  column-gap: 32px;
+
+  .field {
+    flex-grow: 1;
+  }
+}
+
+.submit {
+  padding-top: 16px;
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;
+}
+
+.file-input {
+  display: none;
+}

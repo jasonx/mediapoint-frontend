@@ -1,0 +1,72 @@
+<div class="auth-descr descr">
+  To complete the registration, please fill in your details
+</div>
+
+<form class="form" [formGroup]="form" (ngSubmit)="submitForm()" autocomplete="off">
+  <div class="form_group">
+    <div class="form_field">
+      <app-field formControlName="firstName" [control]="form.controls['firstName']" [label]="'First name'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'First name'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field formControlName="lastName" [control]="form.controls['lastName']" [label]="'Last name'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'Last name'"></app-field>
+    </div>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field formControlName="companyName" [control]="form.controls['companyName']" [label]="'Company'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'Type your company'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field formControlName="address1" [control]="form.controls['address1']" [label]="'Address line 1'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.SearchByText" [isNotFound]="isNotFound"
+        [placeholder]="'Type address line 1'" [isAutocomplete]="false" (inputEvent)="searchAddress($event)"
+        (selectedEvent)="selectAddress($event)" [setOptionsBySearch]="listOfAddtessString"></app-field>
+    </div>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field formControlName="address2" [control]="form.controls['address2']" [label]="'Address line 2'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'Type address line 2'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field formControlName="suburb" [control]="form.controls['suburb']" [label]="'Suburb'" [labelColor]="'white'"
+        [type]="FIELD_TYPES.Text" [placeholder]="'Type your suburb'"></app-field>
+    </div>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field formControlName="state" [control]="form.controls['state']" [label]="'State'" [labelColor]="'white'"
+        [type]="FIELD_TYPES.Text" [placeholder]="'Type your state'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field formControlName="postcode" [control]="form.controls['postcode']" [label]="'Postcode'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Number" [placeholder]="'Type your postcode'"></app-field>
+    </div>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field formControlName="phone" [control]="form.controls['phone']" [label]="'Phone'" [labelColor]="'white'"
+        [type]="FIELD_TYPES.Text" [mask]="phoneMask" [placeholder]="'0000000000'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field formControlName="website" [control]="form.controls['website']" [label]="'Website'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Text" [placeholder]="'Type your website'"></app-field>
+    </div>
+  </div>
+  <div class="form_group">
+    <div class="form_field">
+      <app-field formControlName="email" [control]="form.controls['email']" [label]="'Account email address'"
+        [labelColor]="'white'" [type]="FIELD_TYPES.Email" [placeholder]="'Type email'"></app-field>
+    </div>
+    <div class="form_field">
+      <app-field formControlName="abn" [control]="form.controls['abn']" [label]="'ABN'" [labelColor]="'white'"
+        [type]="FIELD_TYPES.Number" [placeholder]="'ABN'"></app-field>
+    </div>
+  </div>
+
+  <div class="submit">
+    <app-button [buttonConfig]="buttonSubmitConfig" [isLoaded]="isLoadedBtn"></app-button>
+  </div>
+</form>

@@ -1,0 +1,65 @@
+@import '../../../../assets/styles/core/variables';
+
+.testimonial {
+  width: 100%;
+  padding: 24px;
+  background-color: @color-white;
+  border-radius: 6px;
+
+  &_top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+
+    &__avatar {
+      width: 48px;
+      height: 48px;
+      margin-right: 12px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    &_info {
+      &__name {
+        margin-bottom: 8px;
+        font-size: 16px;
+        line-height: 18px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .rating {
+    display: flex;
+    column-gap: 4px;
+  }
+
+  &_content {
+    color: @color-slate-gray;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+
+    &.expanded {
+      -webkit-line-clamp: unset;
+    }
+  }
+
+  .btn-more {
+    background: no-repeat;
+    border: none;
+    color: @color-persian-blue;
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+}

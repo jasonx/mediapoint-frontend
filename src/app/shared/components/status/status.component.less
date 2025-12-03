@@ -1,0 +1,89 @@
+@import "../../../../assets/styles/core/variables";
+
+.status {
+  position: relative;
+
+  &-label {
+    display: flex;
+    align-items: center;
+    transition: @animate-300ms;
+  }
+
+  &-icon {
+    display: flex;
+  }
+
+  .list {
+    position: absolute;
+    left: 0;
+    min-width: 200px;
+    margin-top: 7px;
+    padding: 12px 10px;
+    background-color: @color-ebony;
+    box-shadow: 0 1px 4px @color-mercury;
+    border-radius: 6px;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 998;
+
+    &__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 7px 7px 7px 16px;
+      color: @color-white;
+      font-weight: 300;
+      border-radius: 4px;
+      text-transform: capitalize;
+      white-space: nowrap;
+      transition: @animate-300ms;
+
+      &.disabled {
+        pointer-events: none;
+        opacity: .3;
+      }
+
+      &.old-status {
+        opacity: .5;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background: @color-persian-blue;
+      }
+
+      .status-point {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 6px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &:not(.selector) {
+    pointer-events: none;
+
+    .arrow {
+      display: none;
+    }
+  }
+
+  &.selector {
+    cursor: pointer;
+  }
+
+  &.open {
+    .arrow {
+      transform: rotate(180deg);
+    }
+
+    .list {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

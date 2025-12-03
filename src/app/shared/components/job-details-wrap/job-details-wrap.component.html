@@ -1,0 +1,43 @@
+<div class="details">
+  <div class="top">
+    <div class="top_left">
+      <div class="top__title">Job #{{ job.id }}</div>
+      <app-status
+        *ngIf="job.status"
+        [data]="job"
+        [statusArray]="jobStatusArray"
+        (changeEvent)="changeJobStatus($event)"></app-status>
+    </div>
+
+    <div class="top_info">
+      <div class="price" *ngIf="price">{{ price | currency }}</div>
+      <app-options-menu
+        *ngIf="isShowMenu"
+        [nameItem]="'job'"
+        [listOfOptions]="listOfOptions"
+        [isHover]="false"
+        (editEvent)="onEdit()"
+        (deleteEvent)="onDelete()"
+        (duplicateEvent)="onDuplicate()"></app-options-menu>
+
+      <img
+        *ngIf="isShowDeleteBtn"
+        class="top__delete btn-delete"
+        (click)="onDelete()"
+        src="./assets/images/icons/trash.svg"
+        alt="Delete" />
+    </div>
+  </div>
+
+  <div class="content">
+    <app-details-list
+      [title]="'Job details'"
+      [listData]="job.jobDetails"></app-details-list>
+  </div>
+  <div class="content" *ngIf="isArtworks">
+    <app-artworks
+      [jobId]="job.id"
+      [jobStatus]="job.status"
+      [artworks]="job.artworks || []"></app-artworks>
+  </div>
+</div>

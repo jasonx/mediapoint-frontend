@@ -1,0 +1,45 @@
+@import "../../../../assets/styles/core/variables";
+
+.details {
+  .subtitle {
+    padding-bottom: 9.5px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: .015em;
+    border-bottom: 1px solid @color-zumthor;
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 34px;
+  }
+
+  .item {
+    width: calc(50% - 17px);
+    margin-bottom: 16px;
+
+    &__title {
+      margin-bottom: 4px;
+      font-size: 12px;
+      line-height: 18px;
+      letter-spacing: .015em;
+    }
+
+    &__value {
+      color: @color-slate-gray;
+
+      &-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+
+  .copy {
+    height: 20px;
+  }
+}

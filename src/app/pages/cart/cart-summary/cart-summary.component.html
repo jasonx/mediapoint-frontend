@@ -1,0 +1,81 @@
+<div class="cart-summary sidebar-wrap">
+  <h2 class="cart-summary__title">Summary</h2>
+
+  <div class="main">
+    <div class="main__row row">
+      <div class="main__title">Production Time</div>
+      <div class="main__value">
+        {{ data.productionTime }}
+      </div>
+    </div>
+    <div class="main__row row" *ngIf="isDeliveryType">
+      <div class="main__title">Est Shipping Time</div>
+      <div class="main__value">
+        {{
+          data.estimationShippingTime && data.estimationShippingTime !== 'N/A'
+            ? data.estimationShippingTime +
+              ' - ' +
+              (+data.estimationShippingTime + 1) +
+              ' days'
+            : 'N/A'
+        }}
+      </div>
+    </div>
+    <div class="main__row row" *ngIf="isDeliveryType">
+      <div class="main__title">Postcode Suburb</div>
+      <div class="main__value">
+        {{
+          data.addressDetails
+            ? data.addressDetails.postcode +
+                ', ' +
+                data.addressDetails.suburb || 'N/A'
+            : 'N/A'
+        }}
+      </div>
+    </div>
+    <div class="main__row row">
+      <div class="main__title">Shipping Method</div>
+      <div class="main__value">
+        {{ shippingMethod }}
+      </div>
+    </div>
+
+    <ng-container *ngIf="data.packages && data.packages.length">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Packages </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="panel">
+            <div class="panel_rows">
+              <div class="panel_row" *ngFor="let package of data.packages">
+                <span>Qty: {{ package.quantity }}</span>
+                <span
+                  >{{ package.length }}x{{ package.width }}x{{
+                    package.depth
+                  }}
+                  mm</span
+                >
+                <span>{{ package.weight }} kg.</span>
+              </div>
+            </div>
+          </div>
+          <div class="panel__text">
+            Package sizes are estimates and can vary in size and weight.
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </ng-container>
+  </div>
+
+  <app-price-data [priceDetails]="data.priceDetails"></app-price-data>
+
+  <div class="pdf" *ngIf="file">
+    <app-pdf-block [file]="file" [isDownloadBtn]="true"></app-pdf-block>
+  </div>
+
+  <div class="cart-summary_buttons button-wrap">
+    <ng-content></ng-content>
+  </div>
+</div>

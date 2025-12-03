@@ -1,0 +1,49 @@
+@import '/src/assets/styles/core/variables.less';
+
+.category {
+  padding: 32px 100px 120px 48px;
+
+  .breadcrumbs {
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    margin-bottom: 24px;
+    font-size: 30px;
+    line-height: 45px;
+    font-weight: 500;
+  }
+
+  &_blocks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    column-gap: 40px;
+    row-gap: 32px;
+    margin-bottom: 112px;
+  }
+
+  .block {
+    width: calc(33.3% - 27px);
+  }
+
+  &_info {
+    display: flex;
+    column-gap: 40px;
+  }
+}
+
+::ng-deep {
+  .info {
+    h2 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 31.2px;
+    }
+
+    p {
+      color: @color-slate-gray;
+    }
+  }
+}

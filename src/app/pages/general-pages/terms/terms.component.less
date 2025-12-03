@@ -1,0 +1,60 @@
+@import "/src/assets/styles/core/content-general.less";
+
+.terms {
+    padding: 60px 0 90px;
+
+    h1 {
+        font-size: 36px;
+        line-height: 40px;
+        font-weight: 500;
+        text-align: center;
+        max-width: 813px;
+        margin: 0 auto 60px;
+    }
+
+    h2 {
+        margin: 30px 0 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    h3 {
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+
+    ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .internal-list {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+
+    ol {
+        &>li {
+            margin-bottom: 24px;
+        }
+
+        li {
+            &::marker {
+                font-weight: 500;
+                font-size: 1.5em;
+            }
+        }
+    }
+
+    .paragraph {
+        text-align: justify;
+        hyphens: auto;
+        margin-bottom: 36px;
+    }
+
+    .updated {
+        display: block;
+        margin-top: 67px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,72 @@
+@import "variables";
+
+.grid-container {
+  display: flex;
+  align-items: flex-start;
+
+  &__main {
+    flex: 1;
+    margin-right: 40px;
+  }
+
+  &__sidebar {
+    width: 360px;
+    padding: 24px;
+    .app-block;
+
+    .sidebar-wrap {
+      max-height: calc(100vh - 315px);
+      overflow: auto;
+
+      .button-wrap {
+        position: sticky;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 16px;
+        padding-top: 8px;
+        background: @color-white;
+      }
+    }
+
+    &.receipt {
+      border-radius: 0;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px #d2e2f3;
+
+      &::after,
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 25px;
+      }
+
+      &::after {
+        top: -10px;
+        background: url("../../../assets/images/compose-product/ticket-top.png") 0/100% no-repeat;
+      }
+
+      &::before {
+        bottom: -10px;
+        background: url("../../../assets/images/compose-product/ticket-bottom.png") 0/100% no-repeat;
+      }
+    }
+  }
+}
+
+.app-block {
+  background-color: @color-white;
+  box-shadow: 0 2px 2px @color-mercury;
+  border-radius: 6px;
+}
+
+@media screen and (max-width: @screen-lg) {
+  .grid-container {
+    &__main {
+      margin-right: 30px;
+    }
+  }
+}

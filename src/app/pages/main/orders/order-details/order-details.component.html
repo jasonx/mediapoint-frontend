@@ -1,0 +1,191 @@
+<div class="order" [class.hide]="!isAllDataLoaded" *ngIf="orderData">
+  <div class="breadcrumbs">
+    <app-breadcrumbs [breadcrumbsData]="breadcrumbs"></app-breadcrumbs>
+  </div>
+
+  <div class="top">
+    <div class="title-main">Order #{{ orderId }}</div>
+
+    <ng-container *ngIf="isAdmin; else statusLabel">
+      <app-copy-btn [text]="orderId"></app-copy-btn>
+    </ng-container>
+
+    <ng-template #statusLabel>
+      <app-status
+        [data]="orderData"
+        [statusArray]="orderStatusArray"></app-status>
+    </ng-template>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-container__main">
+      <div class="app-block">
+        <div class="title-block" *ngIf="!isFreightFirst">Order description</div>
+
+        <app-job-details-wrap
+          *ngFor="let job of orderData.jobs"
+          [job]="job"
+          [price]="job.price"
+          [isDeliveryType]="isDeliveryType"
+          [isShowMenu]="!isAdmin"
+          (duplicateEvent)="duplicateJob($event)"
+          (deleteEvent)="deleteJob($event)"></app-job-details-wrap>
+
+        <div class="pdf" *ngIf="file">
+          <app-pdf-block [file]="file" [isDownloadBtn]="true"></app-pdf-block>
+        </div>
+      </div>
+
+      <div class="app-block freight" [class.first]="isFreightFirst">
+        <div class="title-block">Freight</div>
+
+        <app-details-list
+          [listData]="orderData.freightDetails"
+          [isShowCopyBtn]="isAdmin"></app-details-list>
+
+        <div class="track" *ngIf="isTrackingNumber">
+          <form class="form" [formGroup]="form">
+            <div class="field">
+              <app-field
+                formControlName="deliveryTracking"
+                [control]="form.controls['deliveryTracking']"
+                [label]="'Tracking Number'"
+                [type]="FIELD_TYPES.Text"></app-field>
+            </div>
+          </form>
+
+          <div class="button-wrap">
+            <app-button
+              [buttonConfig]="saveTrackingNumberBtnConfig"
+              [isLoaded]="isSaveBtnLoaded"
+              (clickEvent)="saveTrackingNumber()"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container__sidebar receipt fixed">
+      <div class="sidebar-wrap">
+        <div class="sidebar_block sidebar-list">
+          <div class="sidebar__title">Date of processing</div>
+
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">
+              <img src="./assets/images/icons/calendar.svg" alt="calendar" />
+              Accepted
+            </div>
+            <div class="sidebar-list__value">
+              {{ getDate(orderData.dateOfProcessing.accepted) }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">
+              <img src="./assets/images/icons/calendar.svg" alt="calendar" />
+              Job entered
+            </div>
+            <div class="sidebar-list__value">
+              {{ getDate(orderData.dateOfProcessing.jobEntered) }}
+            </div>
+          </div>
+          <div class="sidebar-list_row">
+            <div class="sidebar-list__title">
+              <img src="./assets/images/icons/calendar.svg" alt="calendar" />
+              Dispatch ETA
+            </div>
+            <div class="sidebar-list__value">
+              {{ getDate(orderData.dateOfProcessing.dispatchEta) }}
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="!isAdmin; else adminOrderSidebar">
+          <div class="sidebar_block sidebar-list">
+            <div class="sidebar__title">Order details</div>
+
+            <div class="sidebar-list_row">
+              <div class="sidebar-list__title">
+                <img src="./assets/images/icons/delivery.svg" alt="delivery" />
+                Delivery tracking
+              </div>
+              <a class="sidebar-list__link" target="_blank">{{
+                orderData.orderDetails.deliveryTracking
+              }}</a>
+              <span *ngIf="!orderData.orderDetails.deliveryTracking">—</span>
+            </div>
+            <div class="sidebar-list_row">
+              <div class="sidebar-list__title">
+                <img src="./assets/images/icons/user-black.svg" alt="user" />
+                Created by
+              </div>
+              <div class="sidebar-list__value">
+                {{ orderData.orderDetails.createdBy }}
+              </div>
+            </div>
+            <div class="sidebar-list_row">
+              <div class="sidebar-list__title">
+                <img
+                  src="./assets/images/icons/delivery-box.svg"
+                  alt="delivery-box" />
+                PO number
+              </div>
+              <div class="sidebar-list__value">
+                {{ orderData.orderDetails.poNumber || ' — ' }}
+              </div>
+            </div>
+            <div class="sidebar-list_row">
+              <div class="sidebar-list__title">
+                <img src="./assets/images/icons/weight.svg" alt="weight" />
+                Weight
+              </div>
+              <div class="sidebar-list__value">
+                {{ orderData.orderDetails.weight || ' — ' }}
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar_block price">
+            <app-price-data
+              [priceDetails]="orderData.priceDetails"></app-price-data>
+          </div>
+
+          <div class="button-wrap" *ngIf="isShowCancelBtn">
+            <app-button
+              [buttonConfig]="cancelButtonConfig"
+              (clickEvent)="openCancelModal()"></app-button>
+          </div>
+        </ng-container>
+
+        <ng-template #adminOrderSidebar>
+          <app-attachments
+            [orderId]="orderId"
+            (loaded)="isFilesLoaded = $event"></app-attachments>
+
+          <div class="sidebar_block sidebar-list">
+            <div class="sidebar__title">Order status</div>
+
+            <div class="sidebar-status">
+              <app-status
+                [data]="orderData"
+                [statusArray]="orderStatusArray"
+                (changeEvent)="changeOrderStatus($event)"></app-status>
+            </div>
+          </div>
+
+          <div class="sidebar_block price">
+            <app-price-data
+              [title]="'Order summary'"
+              [priceDetails]="orderData.priceDetails"></app-price-data>
+          </div>
+
+          <div class="button-wrap">
+            <app-button
+              [buttonConfig]="confirmButtonConfig"
+              (clickEvent)="confirmChanges()"></app-button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-loader *ngIf="!isAllDataLoaded"></app-loader>

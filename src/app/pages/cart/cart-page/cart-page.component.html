@@ -181,7 +181,7 @@
                     <div class="service">
                       {{ option.carrierServiceDisplayName }}
                     </div>
-                    <div class="price">
+                    <div class="price" [class.free]="option.priceDisplay === 0">
                       {{ option.priceDisplay | currency }}
                     </div>
                   </div>

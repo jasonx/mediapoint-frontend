@@ -224,6 +224,14 @@ export class CartPageComponent implements OnInit {
     this.addressType = this.cartData?.addressDetails?.addressType;
     this.compiledAddress = this.cartData?.addressDetails?.compiledAddress;
 
+    // Clear delivery methods if address is not set (e.g., after job edit)
+    if (!this.compiledAddress) {
+      this.deliveryMethods = [];
+      this.selectedDeliveryMethod = {} as IDeliveryMethod;
+      this.listOfAddress = [];
+      this.listOfAddressString = [];
+    }
+
     if (this.isDeliveryDataValid && !this.file) {
       this.getCartPdf();
     }

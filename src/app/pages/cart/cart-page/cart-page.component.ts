@@ -63,6 +63,7 @@ export class CartPageComponent implements OnInit {
   selectedDeliveryMethod: IDeliveryMethod = {} as IDeliveryMethod;
   searchSubject = new Subject<string>();
   file: File | null = null;
+  sortBy: 'fastest' | 'cheapest' = 'fastest';
 
   get buttonCreateConfig(): IButtonConfig {
     return {
@@ -164,7 +165,7 @@ export class CartPageComponent implements OnInit {
         })
       )
       .subscribe((data) => {
-        this.deliveryMethods = data;
+        this.deliveryMethods = this.sortDeliveryMethods(data);
         this.isMethodLoading = false;
 
         const selectedMethod = data.find((d) => d.carrierServiceId === this.cartData?.shippingMethodId);
@@ -177,6 +178,32 @@ export class CartPageComponent implements OnInit {
           this.getCartPdf();
         }
       });
+  }
+
+  onSortChange(sortType: 'fastest' | 'cheapest'): void {
+    if (this.sortBy === sortType) {
+      return;
+    }
+    this.sortBy = sortType;
+    this.deliveryMethods = this.sortDeliveryMethods(this.deliveryMethods);
+  }
+
+  sortDeliveryMethods(methods: IDeliveryMethod[]): IDeliveryMethod[] {
+    return [...methods].sort((a, b) => {
+      if (this.sortBy === 'fastest') {
+        // Sort by delivery days first, then by price
+        if (a.totalDays !== b.totalDays) {
+          return a.totalDays - b.totalDays;
+        }
+        return a.priceDisplay - b.priceDisplay;
+      } else {
+        // Sort by price first, then by delivery days
+        if (a.priceDisplay !== b.priceDisplay) {
+          return a.priceDisplay - b.priceDisplay;
+        }
+        return a.totalDays - b.totalDays;
+      }
+    });
   }
 
   initDeliveryData(): void {

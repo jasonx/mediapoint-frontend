@@ -135,7 +135,23 @@
             *ngIf="
               (!isPickupType && deliveryMethods.length) || isMethodLoading
             ">
-            <h2 class="title-main">Delivery Method</h2>
+            <div class="delivery-header">
+              <h2 class="title-main">Delivery Method</h2>
+              <div class="sort-toggle">
+                <button
+                  class="sort-btn"
+                  [class.active]="sortBy === 'fastest'"
+                  (click)="onSortChange('fastest')">
+                  Fastest
+                </button>
+                <button
+                  class="sort-btn"
+                  [class.active]="sortBy === 'cheapest'"
+                  (click)="onSortChange('cheapest')">
+                  Cheapest
+                </button>
+              </div>
+            </div>
 
             <ng-container *ngIf="deliveryMethods.length; else methodLoading">
               <div class="radio-options">

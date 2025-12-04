@@ -96,23 +96,19 @@
               delivery
             </div>
 
-            <div class="delivery_options">
+            <div class="radio-options address-type-options">
               <div
-                class="option-card"
-                [class.selected]="addressType === type"
-                *ngFor="
-                  let type of [ADDRESS_TYPE.Residential, ADDRESS_TYPE.Business]
-                "
+                class="option"
+                [class.checked]="addressType === type"
+                *ngFor="let type of [ADDRESS_TYPE.Residential, ADDRESS_TYPE.Business]"
                 (click)="onSelectAddress(type)">
-                <div class="option-card_img">
-                  <img [src]="'./assets/images/no-img.png'" [alt]="type" />
-                </div>
-
-                <div class="option-card_content">
-                  <div class="option-card__title capitalize">
-                    {{ type }} Address
-                  </div>
-                </div>
+                <input
+                  class="radio-btn"
+                  type="radio"
+                  name="address-type"
+                  [value]="type"
+                  [checked]="addressType === type" />
+                <div class="name capitalize">{{ type }} Address</div>
               </div>
             </div>
 

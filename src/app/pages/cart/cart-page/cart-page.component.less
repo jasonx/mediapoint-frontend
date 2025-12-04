@@ -247,6 +247,23 @@
     }
 
     .radio-options {
+      &.address-type-options {
+        display: flex;
+        gap: 16px;
+
+        .option {
+          flex: 1;
+          max-width: 50%;
+          justify-content: flex-start;
+          border: 1px solid @color-hawkes-blue-3;
+          padding: 16px;
+
+          &.checked {
+            border-color: @color-persian-blue;
+          }
+        }
+      }
+
       .radio-btn {
         position: relative;
         z-index: 9;

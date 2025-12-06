@@ -46,12 +46,31 @@
     &.proof-approved,
     &.prepress-ready,
     &.print-ready,
+    &.printing,
+    &.laminate,
+    &.cutting,
+    &.hand-work,
+    &.qa-ready,
     &.finishing-ready,
     &.ready-for-pickup,
+    &.pickup-ready,
+    &.dispatch-ready,
     &.dispatched {
       color: @color-chambray;
       background-color: @color-french-pass;
       fill: @color-chambray;
+    }
+
+    &.holding {
+      color: @color-russet;
+      background-color: @color-macaroni-and-cheese;
+      fill: @color-russet;
+    }
+
+    &.order-accepted {
+      color: @color-green-pea;
+      background-color: @color-algae-green;
+      fill: @color-green-pea;
     }
 
     &.awaiting-delivery-information,

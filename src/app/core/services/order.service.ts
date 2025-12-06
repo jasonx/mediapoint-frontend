@@ -279,9 +279,8 @@ export class OrderService {
             cluster: 'mt1',
             wsHost: environment.wsHost,
             wsPort: 6001,
-            wssPort: 6001,
             forceTLS: false,
-            enabledTransports: ['ws', 'wss'],
+            enabledTransports: ['ws'],
             channelAuthorization: {
               transport: 'ajax',
               endpoint: environment.pusher_url + '/broadcasting/auth',

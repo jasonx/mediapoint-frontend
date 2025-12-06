@@ -34,19 +34,9 @@ export class NavigationComponent {
       icon: 'addressIcon',
     },
     {
-      link: NAVIGATIONS.MY_PRODUCTS,
-      title: 'My products',
-      icon: 'productsIcon',
-    },
-    {
       link: NAVIGATIONS.INVOICES,
       title: 'Invoices',
       icon: 'invoicesIcon',
-    },
-    {
-      link: NAVIGATIONS.API_LINK,
-      title: 'API Link',
-      icon: 'linkIcon',
     },
   ];
 
